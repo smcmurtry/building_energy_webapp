@@ -3,49 +3,49 @@
 
 <style>
 body {
-        font: 10px sans-serif;
-        margin:50px 0px; padding:0px;
-       /* text-align:center; */
-    }
-    
-    #tags { 
-        width: 670px; 
-        text-align:left;
-    }
+  font: 10px sans-serif;
+  margin:50px 0px; padding:0px;
+  /* text-align:center; */
+}
 
-    #Content, #container, #footnote {
-        width:800px;
-        margin:0px auto;
-        text-align:left;
-        padding:15px;
-        /* border:1px dashed #333;  comment this out */
-        
-    }
+#tags { 
+  width: 670px; 
+  text-align:left;
+}
 
-    .ui-widget {
-        text-align:left;
-    }
+#Content, #container, #footnote {
+  width:800px;
+  margin:0px auto;
+  text-align:left;
+  padding:15px;
+  /* border:1px dashed #333;  comment this out */
 
-    #map-and-list {
-        width: 800px;
-        height: 500px;
-        overflow: hidden;
-        margin: 0px auto;
-    }
+}
 
-    #map_canvas {
-        width: 70%;
-        height: 100%;
-    }
+.ui-widget {
+  text-align:left;
+}
 
-    #sensorList {
-        white-space: nowrap; 
-        text-align: left;
-        width: 30%; 
-        height: 100%; 
-        overflow-y: scroll;
-        float: left;
-    }
+#map-and-list {
+  width: 800px;
+  height: 500px;
+  overflow: hidden;
+  margin: 0px auto;
+}
+
+#map_canvas {
+  width: 70%;
+  height: 100%;
+}
+
+#sensorList {
+  white-space: nowrap; 
+  text-align: left;
+  width: 30%; 
+  height: 100%; 
+  overflow-y: scroll;
+  float: left;
+}
 
 
 .pct-rank {
@@ -56,8 +56,8 @@ body {
 }
 
 .report-div {
-   width:70%; 
-   float:left;
+ width:70%; 
+ float:left;
 
 }
 
@@ -73,7 +73,7 @@ body {
 
 .sub-report-div {
   width:100%;
-  height: 400px;
+  height: 250px;
 }
 
 .axis text {
@@ -111,183 +111,188 @@ label {
 .chart {float: right;}
 </style>
 
-  <script src="d3.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization"></script>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+<script src="d3.min.js"></script>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
 
 <script>
 // from http://stackoverflow.com/questions/19640055/multiple-markers-google-map-api-v3-from-array-of-addresses-and-avoid-over-query
 var infowindow = null;
+var master, dim_city, dim_operation_type, dists; 
 do_something();
 
-d3.csv("dim_city.csv", function(DimCity) { 
- d3.csv("dim_organization.csv", function(DimOrganization) { 
-     var org_array = [];
-     for (var i = DimOrganization.length - 1; i >= 0; i--) {
-      org_array.push(DimOrganization[i].organization);
-     };
-     $(function() {$( "#tags" ).autocomplete({ source: org_array }); });
-     $('.default-value').each( function () {
-      var $t = $(this),
-         default_value = this.value;
-         $t.css('color', '#929292');
-         $t.focus(function () {
-             if (this.value == default_value) {
-                 this.value = '';
-                 $t.css('color', 'black');
-             }
-         });
-         $t.blur(function () {
-             if ($.trim(this.value) == '') {
-                 $t.css('color', '#929292');
-                 this.value = default_value;
-             }
-              });
-          });
+d3.csv("dim_city.csv", function(DimCity) {
+  dim_city = DimCity;
+  d3.csv("dim_organization.csv", function(DimOrganization) { 
+   var org_array = [];
+   for (var i = DimOrganization.length - 1; i >= 0; i--) {
+    org_array.push(DimOrganization[i].organization);
+  };
+  $(function() {$( "#tags" ).autocomplete({ source: org_array }); });
+  $('.default-value').each( function () {
+    var $t = $(this),
+    default_value = this.value;
+    $t.css('color', '#929292');
+    $t.focus(function () {
+     if (this.value == default_value) {
+       this.value = '';
+       $t.css('color', 'black');
+     }
+   });
+    $t.blur(function () {
+     if ($.trim(this.value) == '') {
+       $t.css('color', '#929292');
+       this.value = default_value;
+     }
+   });
+  });
 
-     d3.csv("dim_operation_type.csv", function(DimOperationType) { 
-      d3.csv("master_short.csv", function(Master) {
-          dists = get_dists(Master);
+  d3.csv("dim_operation_type.csv", function(DimOperationType) {
+    dim_operation_type = DimOperationType;
+    d3.csv("master_short.csv", function(Master) {
+      master = master;
+      dists = get_dists(Master);
 
-          $(function() {
-              $( "input[type=submit], a, button" )
-                .button()
-                .click(function( event ) {
-                  event.preventDefault();
-                  var nameInput = document.getElementById('tags');
-                  var org = nameInput.value;
-                  var dim_organization_row = DimOrganization.filter(function( obj ) { return obj.organization == org; });
+      $(function() {
+        $( "input[type=submit], a, button" )
+        .button()
+        .click(function( event ) {
+          event.preventDefault();
+          var nameInput = document.getElementById('tags');
+          var org = nameInput.value;
+          var dim_organization_row = DimOrganization.filter(function( obj ) { return obj.organization == org; });
                   var dim_org_id = dim_organization_row[0].dim_organization; // should be only one result
                   var rows = Master.filter(function( obj ) { return obj.dim_organization == dim_org_id; });
                   do_everything(rows, Master, DimCity, DimOperationType, dists);
 
-
-
-              });
-          });
+                });
       });
-     });
- });
+    });
+  });
+});
 });
 
 
 function do_something(){
-    $(document).ready(function () {
-        var myOptions = {
-            zoom: 1,
-            center: new google.maps.LatLng(0, 0),
-            mapTypeId: 'terrain'
-        };
-        var map = new google.maps.Map($('#map_canvas')[0], myOptions);
-    });
+  $(document).ready(function () {
+    var myOptions = {
+      zoom: 1,
+      center: new google.maps.LatLng(0, 0),
+      mapTypeId: 'terrain'
+    };
+    var map = new google.maps.Map($('#map_canvas')[0], myOptions);
+  });
 }
 
 function do_everything(rows, Master, DimCity, DimOperationType, dists){
 
-    $(document).ready(function () {
+  $(document).ready(function () {
 
-        $('#map_canvas').empty();
-        $("#sensorList").empty();
+    $('#map_canvas').empty();
+    $("#sensorList").empty();
 
-        var myOptions = {
-            zoom: 1,
-            center: new google.maps.LatLng(0, 0),
-            mapTypeId: 'terrain'
-        };
-      var map = new google.maps.Map($('#map_canvas')[0], myOptions);
-    	var latlngbounds = new google.maps.LatLngBounds();
-    	
-    	infowindow = new google.maps.InfoWindow({
-    		content: "holding..."
-    	});
+    var myOptions = {
+      zoom: 1,
+      center: new google.maps.LatLng(0, 0),
+      mapTypeId: 'terrain'
+    };
+    var map = new google.maps.Map($('#map_canvas')[0], myOptions);
+    var latlngbounds = new google.maps.LatLngBounds();
 
-        var pinImage = new google.maps.MarkerImage('grey_pin.png'); 
-        var markers = {};
-        for (var x = 0; x < rows.length; x++) {
-            var sensorId = rows[x].index;
-            $("#sensorList").append($('<div>', { id : sensorId })
-            .addClass("sensorListItem")
-            );
-            /* Adds visibile checkbox */
-            $("#"+sensorId).append($('<input>', { id : sensorId + "VisibleCheckbox", type:"checkbox", name: sensorId + "VisibleCheckbox"}));
-            $("#"+sensorId).append( rows[x].operation_name );
-        	var latlng = new google.maps.LatLng(rows[x].lat, rows[x].lng);
-        	latlngbounds.extend(latlng);
-            var marker = new google.maps.Marker({
-                position: latlng,
-                map: map,
-                title: rows[x].operation_name,
-                icon: pinImage,
-                zIndex: 1,
-                index: rows[x].index,
-                opacity: 0.5
-            });
-            markers[sensorId+"VisibleCheckbox"] = marker;
-        	google.maps.event.addListener(marker, 'click', function(e) {
-        		infowindow.setContent(this.title);
-        		infowindow.open(map, this);
-        		if (this.zIndex == 1) {
+    infowindow = new google.maps.InfoWindow({
+      content: "holding..."
+    });
+
+    var pinImage = new google.maps.MarkerImage('grey_pin.png'); 
+    var markers = {};
+    for (var x = 0; x < rows.length; x++) {
+      var sensorId = rows[x].index;
+      $("#sensorList").append($('<div>', { id : sensorId })
+        .addClass("sensorListItem")
+        );
+      /* Adds visibile checkbox */
+      $("#"+sensorId).append($('<input>', { id : sensorId + "VisibleCheckbox", type:"checkbox", name: sensorId + "VisibleCheckbox"}));
+      $("#"+sensorId).append( rows[x].operation_name );
+      var latlng = new google.maps.LatLng(rows[x].lat, rows[x].lng);
+      latlngbounds.extend(latlng);
+      var marker = new google.maps.Marker({
+        position: latlng,
+        map: map,
+        title: rows[x].operation_name,
+        icon: pinImage,
+        zIndex: 1,
+        index: rows[x].index,
+        opacity: 0.5
+      });
+      markers[sensorId+"VisibleCheckbox"] = marker;
+      google.maps.event.addListener(marker, 'click', function(e) {
+        infowindow.setContent(this.title);
+        infowindow.open(map, this);
+        if (this.zIndex == 1) {
                     // not yet selected. if zIndex == 2, selected=True
-        			this.setIcon("green_pin.png");
-        			this.setZIndex(2);
+                    this.setIcon("green_pin.png");
+                    this.setZIndex(2);
                     this.setOpacity(1.0);
                     $("#"+this.index+"VisibleCheckbox").prop('checked', true);
-        		} else {
+                    // start of report stuff
+                    var row_index = 1*this.index;
+                    var row = Master.filter(function( obj ) { return obj.index == row_index; })[0];
+                    var city_row = DimCity.filter(function( obj ) { return obj.dim_City == row.dim_City; })[0];
+                    var operation_type_row = DimOperationType.filter(function( obj ) { return obj.dim_operation_type == row.dim_operation_type; })[0];
+                    var dist = dists[row.dim_operation_type];
+                    generateReport(row, city_row, operation_type_row, dist);
+                    // end of report stuff
+
+                  } else {
                     // not yet deselected
-        			this.setIcon(pinImage);
-        			this.setZIndex(1);
+                    this.setIcon("grey_pin.png");
+                    this.setZIndex(1);
                     $("#"+this.index+"VisibleCheckbox").prop('checked', false);
                     this.setOpacity(0.5)
-        		}
+                    $( "#sub-report-" + this.index ).remove();
 
-            // start of report stuff
-            var row_index = 1*this.index;
-            var row = Master.filter(function( obj ) { return obj.index == row_index; })[0];
-            var city_row = DimCity.filter(function( obj ) { return obj.dim_City == row.dim_City; })[0];
-            var operation_type_row = DimOperationType.filter(function( obj ) { return obj.dim_operation_type == row.dim_operation_type; })[0];
-            var dist = dists[row.dim_operation_type];
+                  }
 
-            clean_dist = [];
-            for (var i = dist.length - 1; i >= 0; i--) {
-                clean_dist.push(1.0*dist[i])
-            };
-            generateReport(row, city_row, operation_type_row, clean_dist);
-            //$(".main-report-div").after($('#footnote'));
 
-            // end of report stuff
 
-        	});
-        }
+          });
+}
 
-        map.setCenter(latlngbounds.getCenter());
-        map.fitBounds(latlngbounds); 
+map.setCenter(latlngbounds.getCenter());
+map.fitBounds(latlngbounds); 
 
         // listen for checkbox change
         $('input:checkbox').change(
-            function(){
-                sId = $(this)[0].id;
-                m = markers[sId]
-                if (m.zIndex == 1) {
+          function(){
+            sId = $(this)[0].id;
+            m = markers[sId]
+            if (m.zIndex == 1) {
                     // not yet selected. if zIndex == 2, selected=True
                     m.setIcon("green_pin.png");
                     m.setZIndex(2);
                     m.setOpacity(1.0)
-                } else {
+                  } else {
                     // not yet deselected
-                    m.setIcon(pinImage);
+                    m.setIcon("grey_pin.png");
                     m.setZIndex(1);  
                     m.setOpacity(0.5)
-                } 
-        });
-    });
+                    // //$( "#sub-report-" + m.getIndex() ).remove();
+                    // console.log(m.getIndex());
+                    // console.log(sId);
+                    // console.log(this);
+                    // console.log($(this)[0].id);
+
+                  } 
+                });
+});
 }
 
 function generateReport(row, city_row, operation_type_row, clean_dist) {
-  $( ".main-report-div" ).append( '<div class="sub-report-div"></div>' );
+  $( ".main-report-div" ).append( '<div class="sub-report-div" id="sub-report-' + row.index + '"></div>' );
 
-  $( ".sub-report-div" ).append( '<div id="report-' + row.index +'"></div>' );
+  $( "#sub-report-" + row.index ).append( '<div id="report-' + row.index +'"></div>' );
 
   $( "#report-" + row.index ).append( get_table(row, city_row, operation_type_row) );
   $( "#report-" + row.index ).append( get_pct_rank(row, 'pct-rank-' + row.index) )
@@ -299,8 +304,8 @@ function get_table(row, city_row, operation_type_row) {
   var table = '';
   table += '<div class="report-div">'
   table += '<table cellspacing="10">' //border-spacing:10px;">';
-    table += '<col width="30%">'
-    table += '<col width="70%">'
+  table += '<col width="30%">'
+  table += '<col width="70%">'
 
   table += '<tr>'
   table += '<td colspan="2"><h2>' + row.operation_name + '</h2></td>'
@@ -331,9 +336,9 @@ function get_table(row, city_row, operation_type_row) {
 };
 
 function get_pct_rank(row, div_id) {
-    var val = row.en_intensity_ekWh_sqft_pct_rank;
-    var rank_text = '';
-    if (val <= 50.) { rank_text += 'top ' + Math.ceil(val).toString() + '%' } 
+  var val = row.en_intensity_ekWh_sqft_pct_rank;
+  var rank_text = '';
+  if (val <= 50.) { rank_text += 'top ' + Math.ceil(val).toString() + '%' } 
     else { rank_text += 'bottom ' + Math.ceil(100. - val).toString() + '%' };
   var span = '';
   span += '<div class="pct-rank" id="' + div_id + '">'
@@ -351,7 +356,7 @@ function get_dists(Master) {
     if ( !dists.hasOwnProperty(Master[i].dim_operation_type) ) {
       dists[Master[i].dim_operation_type] = [Master[i].en_intensity_ekWh_sqft];
     } else {
-      dists[Master[i].dim_operation_type].push(Master[i].en_intensity_ekWh_sqft);
+      dists[Master[i].dim_operation_type].push(1.0*Master[i].en_intensity_ekWh_sqft);
     }
   };
   return dists
@@ -365,72 +370,72 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
       width = 275 - margin.left - margin.right, // 800 was 960
       height = 150 - margin.top - margin.bottom;
 
-  var x = d3.scale.linear()
+      var x = d3.scale.linear()
       .domain([0, 100.]) //100., d3.max(values)])
-      .range([0, width]);
+.range([0, width]);
 
   // Generate a histogram using twenty uniformly-spaced bins.
   var data = d3.layout.histogram()
-      .bins(x.ticks(20))
-      (values);
+  .bins(x.ticks(20))
+  (values);
 
   var y = d3.scale.linear()
-      .domain([0, d3.max(data, function(d) { return d.y; })])
-      .range([height, 0]);
+  .domain([0, d3.max(data, function(d) { return d.y; })])
+  .range([height, 0]);
 
   var xAxis = d3.svg.axis()
-      .scale(x)
-      .ticks(6)
-      .orient("bottom");
+  .scale(x)
+  .ticks(6)
+  .orient("bottom");
 
   var yAxis = d3.svg.axis()
-      .scale(y)
-      .ticks(4)
-      .orient("left");
+  .scale(y)
+  .ticks(4)
+  .orient("left");
 
   var svg = d3.select(div_tag).append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-     .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   // Add an x-axis label.
   svg.append("text")
-    .attr("class", "x label")
-    .attr("text-anchor", "end")
-    .attr("x", width)
-    .attr("y", height + 30)
-    .text("Energy Use Intensity (ekWh/sqft)");
+  .attr("class", "x label")
+  .attr("text-anchor", "end")
+  .attr("x", width)
+  .attr("y", height + 30)
+  .text("Energy Use Intensity (ekWh/sqft)");
 
   // Add a y-axis label.
   svg.append("text")
-    .attr("class", "y label")
-    .attr("text-anchor", "end")
-    .attr("y", -33)
-    .attr("x", 6)
+  .attr("class", "y label")
+  .attr("text-anchor", "end")
+  .attr("y", -33)
+  .attr("x", 6)
     //.attr("dy", ".75em")
     .attr("transform", "rotate(-90)")
     .text("# of Buildings");
 
-  var bar = svg.selectAll(".bar")
-      .data(data)
+    var bar = svg.selectAll(".bar")
+    .data(data)
     .enter().append("g")
-      .attr("class", "bar")
-      .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+    .attr("class", "bar")
+    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
 
-  bar.append("rect")
-      .attr("x", 1)
-      .attr("width", x(data[0].dx) - 1)
-      .attr("height", function(d) { return height - y(d.y); });
+    bar.append("rect")
+    .attr("x", 1)
+    .attr("width", x(data[0].dx) - 1)
+    .attr("height", function(d) { return height - y(d.y); });
 
-  svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
+    svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
 
-  svg.append("g")
-      .attr("class", "y axis")
-      .call(yAxis);
+    svg.append("g")
+    .attr("class", "y axis")
+    .call(yAxis);
 
   svg.append("line")          // attach a line
     .style("stroke", "red")  // colour the line
@@ -439,25 +444,25 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
     .attr("y1", y(0))      // y position of the first end of the line
     .attr("x2", x(one_en_intensity_ekWh_sqft))     // x position of the second end of the line
     .attr("y2", 0);
-};
+  };
 
-</script>
+  </script>
 
-<body>
-<h1 id="container">Public Building Energy Consumption in Ontario</h1>
+  <body>
+    <h1 id="container">Public Building Energy Consumption in Ontario</h1>
 
-<div class="ui-widget" id="container">
-    <input id="tags" onkeydown="if (event.keyCode == 13) document.getElementById('go-button').click()" value="Enter an organization name here..." class="default-value"a>
-    <input type="submit" value="Go" id="go-button" >
-</div>
+    <div class="ui-widget" id="container">
+      <input id="tags" onkeydown="if (event.keyCode == 13) document.getElementById('go-button').click()" value="Enter an organization name here..." class="default-value"a>
+      <input type="submit" value="Go" id="go-button" >
+    </div>
 
-<div id="map-and-list">
-    <div id="sensorList"></div>
-    <div id="map_canvas"></div>
-</div>
+    <div id="map-and-list">
+      <div id="sensorList"></div>
+      <div id="map_canvas"></div>
+    </div>
 
-<div class="main-report-div"></div>
+    <div class="main-report-div"></div>
 
-</body>
+  </body>
 
-</html>
+  </html>

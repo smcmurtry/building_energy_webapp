@@ -76,13 +76,8 @@ d3.csv("dim_city.csv", function(DimCity) {
 			    var row = org_rows[2];
 			    var city_row = DimCity.filter(function( obj ) { return obj.dim_City == row.dim_City; })[0];
 			    var operation_type_row = DimOperationType.filter(function( obj ) { return obj.dim_operation_type == row.dim_operation_type; })[0];
-
 				var dist = dists[row.dim_operation_type];
-				clean_dist = [];
-			    for (var i = dist.length - 1; i >= 0; i--) {
-			    	clean_dist.push(1.0*dist[i])
-			    };
-			    generateReport(row, city_row, operation_type_row, clean_dist);
+			    generateReport(row, city_row, operation_type_row, dist);
 			});
 		});
 	});
@@ -153,7 +148,7 @@ function get_dists(Master) {
     if ( !dists.hasOwnProperty(Master[i].dim_operation_type) ) {
       dists[Master[i].dim_operation_type] = [Master[i].en_intensity_ekWh_sqft];
     } else {
-      dists[Master[i].dim_operation_type].push(Master[i].en_intensity_ekWh_sqft);
+      dists[Master[i].dim_operation_type].push(1.0*Master[i].en_intensity_ekWh_sqft);
     }
   };
   return dists
