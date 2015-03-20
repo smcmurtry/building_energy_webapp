@@ -2,133 +2,156 @@
 <html>
 
 <style>
-#map_canvas {
-    width: 500px;
-    height: 500px;
-}
-.map-list { white-space: nowrap; }
+    #map-and-list {
+        width: 800px;
+        height: 500px;
+        overflow: hidden;
+        margin: 0px auto;
+    }
+
+    #map_canvas {
+        width: 70%;
+        height: 100%;
+    }
+
+    #sensorList {
+        white-space: nowrap; 
+        text-align: left;
+        width: 30%; 
+        height: 100%; 
+        overflow-y: scroll;
+        float: left;
+    }
 </style>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization"></script>
-
+<script src="d3.min.js"></script>
 <script>
 // from http://stackoverflow.com/questions/19640055/multiple-markers-google-map-api-v3-from-array-of-addresses-and-avoid-over-query
 var infowindow = null;
 
-$(document).ready(function () {
-    var map;
-    var elevator;
-    var myOptions = {
-        zoom: 1,
-        center: new google.maps.LatLng(0, 0),
-        mapTypeId: 'terrain'
-    };
-    map = new google.maps.Map($('#map_canvas')[0], myOptions);
-	var latlngbounds = new google.maps.LatLngBounds();
-	
-	infowindow = new google.maps.InfoWindow({
-		content: "holding..."
-	});
-
-    var coords =  [[5322, 44.305107700000008, -78.304429099999993, 'Armour Road - PCCP'],
-     [5323, 44.304798100000006, -78.303329500000004, 'Armour Road - PW'],
-     [5324, 44.308007200000006, -78.3184313, 'Bensfort Road Bridge Lights'],
-     [5325, 44.5562592, -78.347221400000024, 'Buckhorn Bridge Beacon'],
-     [5326, 44.585807799999998, -78.369895900000003, 'Buckhorn Depot - PW'],
-     [5327, 44.308792100000012, -77.9565506, 'Causeway Bridge Lights'],
-     [5328, 44.307962700000004, -78.316862499999999, 'County Court House'],
-     [5329, 44.308007200000006, -78.3184313, 'CR 1 and Chemong Road'],
-     [5330, 44.151519800000003, -78.444259599999995, 'CR 10 & CR 21'],
-     [5331, 44.308007200000006, -78.3184313, 'CR 10 & Sherbrooke Street'],
-     [5332, 44.2030563, -78.386321999999979, 'CR 18 (Ward/Wilcox) Lights'],
-     [5333, 44.3360786, -78.348358200000007, 'CR 18 and CR 19'],
-     [5334, 44.240490000000001, -78.161888099999999, 'CR 2 and CR 34'],
-     [5335, 44.416259799999999, -78.2954407, 'CR 23 and CR 18'],
-     [5336, 44.556869499999998, -78.348266600000002, 'CR 23 and CR 36'],
-     [5337, 44.308007200000006, -78.3184313, 'CR 29 and CR 18'],
-     [5338, 44.395069100000001, -78.285713200000004, 'CR 29 and CR 23'],
-     [5341, 44.758491499999998, -78.084281900000022, 'EMS Apsley'],
-     [5342, 44.426460200000001, -78.268424699999997, 'EMS Lakefield'],
-     [5343, 44.381839800000002, -77.974189799999976, 'EMS Norwood'],
-     [5344, 44.459075900000002, -77.904609700000023, 'Havelock Depot'],
-     [5345, 44.307334900000001, -78.318840000000023, 'Jail'],
-     [5346, 44.5309302, -78.225937599999995, 'Lakefield Stop Lights'],
-     [5347, 44.418258700000003, -78.286598200000014, 'Lakefield Street Lights'],
-     [5348, 44.274339700000006, -78.169506999999996, 'Lang Pioneer Village'],
-     [5349, 44.145069799999987, -78.439840199999978, 'Millbrook Depot'],
-     [5350, 44.343883499999997, -77.975173999999996, 'Smith-Centreline Depot'],
-     [5351, 44.274349200000003, -78.169708299999996, 'Weaver Shop']];
-
-    var pinImage = new google.maps.MarkerImage("http://www.googlemapsmarkers.com/v1/999999/")
-
-    var markers = {};
-    for (var x = 0; x < coords.length; x++) {
-        var sensorId = coords[x][0];
-        $("#sensorList").append($('<div>', { id : sensorId })
-        .addClass("sensorListItem")
-        );
-        /* Adds visibile checkbox */
-        $("#"+sensorId).append($('<input>', { id : sensorId + "VisibleCheckbox", type:"checkbox", name: sensorId + "VisibleCheckbox"}));
-        $("#"+sensorId).append( coords[x][3] );
-    	var latlng = new google.maps.LatLng(coords[x][1], coords[x][2]);
-    	latlngbounds.extend(latlng);
-        var marker = new google.maps.Marker({
-            position: latlng,
-            map: map,
-            title: coords[x][3],
-            icon: pinImage,
-            zIndex: 1,
-            index: coords[x][0],
-            opacity: 0.5
-        });
-        markers[sensorId+"VisibleCheckbox"] = marker;
-    	google.maps.event.addListener(marker, 'click', function(e) {
-    		infowindow.setContent(this.title);
-    		infowindow.open(map, this);
-    		if (this.zIndex == 1) {
-                // not yet selected. if zIndex == 2, selected=True
-    			this.setIcon("http://www.googlemapsmarkers.com/v1/009900/");
-    			this.setZIndex(2);
-                this.setOpacity(1.0);
-                $("#"+this.index+"VisibleCheckbox").prop('checked', true);
-    		} else {
-                // not yet deselected
-    			this.setIcon(pinImage);
-    			this.setZIndex(1);
-                $("#"+this.index+"VisibleCheckbox").prop('checked', false);
-                this.setOpacity(0.5)
-    		}
-    		});
-    }
-
-    map.setCenter(latlngbounds.getCenter());
-    map.fitBounds(latlngbounds); 
-
-    // listen for checkbox change
-    $('input:checkbox').change(
-        function(){
-            sId = $(this)[0].id;
-            m = markers[sId]
-            if (m.zIndex == 1) {
-                // not yet selected. if zIndex == 2, selected=True
-                m.setIcon("http://www.googlemapsmarkers.com/v1/009900/");
-                m.setZIndex(2);
-                m.setOpacity(1.0)
-            } else {
-                // not yet deselected
-                m.setIcon(pinImage);
-                m.setZIndex(1);  
-                m.setOpacity(0.5)
-            } 
-    });
+var master;
+d3.csv("master_short.csv", function(Master) {
+    master = Master;
+    do_everything(Master);
 });
+
+function do_everything(){
+
+    $(document).ready(function () {
+        var map;
+        var myOptions = {
+            zoom: 1,
+            center: new google.maps.LatLng(0, 0),
+            mapTypeId: 'terrain'
+        };
+        map = new google.maps.Map($('#map_canvas')[0], myOptions);
+    	var latlngbounds = new google.maps.LatLngBounds();
+    	
+    	infowindow = new google.maps.InfoWindow({
+    		content: "holding..."
+    	});
+        var rows = master.filter(function( obj ) { return obj.dim_organization == 10; });
+        
+        var coords =  [[5322, 44.305107700000008, -78.304429099999993, 'Armour Road - PCCP'],
+         [5323, 44.304798100000006, -78.303329500000004, 'Armour Road - PW'],
+         [5324, 44.308007200000006, -78.3184313, 'Bensfort Road Bridge Lights'],
+         [5325, 44.5562592, -78.347221400000024, 'Buckhorn Bridge Beacon'],
+         [5326, 44.585807799999998, -78.369895900000003, 'Buckhorn Depot - PW'],
+         [5327, 44.308792100000012, -77.9565506, 'Causeway Bridge Lights'],
+         [5328, 44.307962700000004, -78.316862499999999, 'County Court House'],
+         [5329, 44.308007200000006, -78.3184313, 'CR 1 and Chemong Road'],
+         [5330, 44.151519800000003, -78.444259599999995, 'CR 10 & CR 21'],
+         [5331, 44.308007200000006, -78.3184313, 'CR 10 & Sherbrooke Street'],
+         [5332, 44.2030563, -78.386321999999979, 'CR 18 (Ward/Wilcox) Lights'],
+         [5333, 44.3360786, -78.348358200000007, 'CR 18 and CR 19'],
+         [5334, 44.240490000000001, -78.161888099999999, 'CR 2 and CR 34'],
+         [5335, 44.416259799999999, -78.2954407, 'CR 23 and CR 18'],
+         [5336, 44.556869499999998, -78.348266600000002, 'CR 23 and CR 36'],
+         [5337, 44.308007200000006, -78.3184313, 'CR 29 and CR 18'],
+         [5338, 44.395069100000001, -78.285713200000004, 'CR 29 and CR 23'],
+         [5341, 44.758491499999998, -78.084281900000022, 'EMS Apsley'],
+         [5342, 44.426460200000001, -78.268424699999997, 'EMS Lakefield'],
+         [5343, 44.381839800000002, -77.974189799999976, 'EMS Norwood'],
+         [5344, 44.459075900000002, -77.904609700000023, 'Havelock Depot'],
+         [5345, 44.307334900000001, -78.318840000000023, 'Jail'],
+         [5346, 44.5309302, -78.225937599999995, 'Lakefield Stop Lights'],
+         [5347, 44.418258700000003, -78.286598200000014, 'Lakefield Street Lights'],
+         [5348, 44.274339700000006, -78.169506999999996, 'Lang Pioneer Village'],
+         [5349, 44.145069799999987, -78.439840199999978, 'Millbrook Depot'],
+         [5350, 44.343883499999997, -77.975173999999996, 'Smith-Centreline Depot'],
+         [5351, 44.274349200000003, -78.169708299999996, 'Weaver Shop']];
+
+        var pinImage = new google.maps.MarkerImage('grey_pin.png'); 
+
+        var markers = {};
+        for (var x = 0; x < rows.length; x++) {
+            var sensorId = rows[x].index;
+            $("#sensorList").append($('<div>', { id : sensorId })
+            .addClass("sensorListItem")
+            );
+            /* Adds visibile checkbox */
+            $("#"+sensorId).append($('<input>', { id : sensorId + "VisibleCheckbox", type:"checkbox", name: sensorId + "VisibleCheckbox"}));
+            $("#"+sensorId).append( rows[x].operation_name );
+        	var latlng = new google.maps.LatLng(rows[x].lat, rows[x].lng);
+        	latlngbounds.extend(latlng);
+            var marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                title: rows[x].operation_name,
+                icon: pinImage,
+                zIndex: 1,
+                index: rows[x].index,
+                opacity: 0.5
+            });
+            markers[sensorId+"VisibleCheckbox"] = marker;
+        	google.maps.event.addListener(marker, 'click', function(e) {
+        		infowindow.setContent(this.title);
+        		infowindow.open(map, this);
+        		if (this.zIndex == 1) {
+                    // not yet selected. if zIndex == 2, selected=True
+        			this.setIcon("green_pin.png");
+        			this.setZIndex(2);
+                    this.setOpacity(1.0);
+                    $("#"+this.index+"VisibleCheckbox").prop('checked', true);
+        		} else {
+                    // not yet deselected
+        			this.setIcon(pinImage);
+        			this.setZIndex(1);
+                    $("#"+this.index+"VisibleCheckbox").prop('checked', false);
+                    this.setOpacity(0.5)
+        		}
+        		});
+        }
+
+        map.setCenter(latlngbounds.getCenter());
+        map.fitBounds(latlngbounds); 
+
+        // listen for checkbox change
+        $('input:checkbox').change(
+            function(){
+                sId = $(this)[0].id;
+                m = markers[sId]
+                if (m.zIndex == 1) {
+                    // not yet selected. if zIndex == 2, selected=True
+                    m.setIcon("green_pin.png");
+                    m.setZIndex(2);
+                    m.setOpacity(1.0)
+                } else {
+                    // not yet deselected
+                    m.setIcon(pinImage);
+                    m.setZIndex(1);  
+                    m.setOpacity(0.5)
+                } 
+        });
+    });
+}
 
 </script>
 
 <body>
-<div style="width: 100%; overflow: hidden;">
-<!-- Scroll bar present and enabled -->        
-    <div style="width: 200px; height: 500px; overflow-y: scroll; float: left;" id="sensorList" class="map-list"></div>
+<div id="map-and-list">
+    <div id="sensorList"></div>
     <div id="map_canvas"></div>
 </div>
 
