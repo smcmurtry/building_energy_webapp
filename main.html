@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Public Building Energy Consumption</title>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization"></script>
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+  <style>
+
+	body {
+		font: 10px sans-serif;
+		margin:50px 0px; padding:0px;
+		text-align:center;
+	}
+	
+	#tags { 
+		width: 670px; 
+		text-align:left;
+	}
+
+	#Content, #container, #footnote {
+		width:800px;
+		margin:0px auto;
+		text-align:left;
+		padding:15px;
+		border:1px dashed #333; /* comment this out */
+		
+	}
+
+	.ui-widget {
+		text-align:left;
+	}
+
+	#map-and-list {
+		width: 800px;
+		height: 500px;
+		overflow: hidden;
+		margin: 0px auto;
+	}
+
+	#map_canvas {
+	    width: 70%;
+	    height: 100%;
+	}
+
+	.place-list {
+		white-space: nowrap; 
+		text-align: left;
+		width: 30%; 
+		height: 100%; 
+		overflow-y: scroll;
+		float: left;
+		border:1px dashed #333; /* comment this out */
+
+	}
+
+	
+</style>
+<script>
+
+var infowindow = null;
+$(document).ready(function () {
+
+var pinImage = new google.maps.MarkerImage("http://www.googlemapsmarkers.com/v1/999999/")
+var map, elevator, myOptions, latlngbounds, markers;
+
+function initialize_map() {
+	markers = {};
+	myOptions = {
+	    zoom: 1,
+	    center: new google.maps.LatLng(0, 0),
+	    mapTypeId: 'terrain'
+	};
+	latlngbounds = new google.maps.LatLngBounds();
+	map = new google.maps.Map($('#map_canvas')[0], myOptions);
+	infowindow = new google.maps.InfoWindow({
+		content: "holding..."
+	});
+	$("#sensorList").empty();
+};
+
+$('input:checkbox').change(
+function(){
+	console.log('hi!');
+    sId = $(this).index.id;
+    m = markers[sId]
+    console.log(sId);
+    if (m.zIndex == 1) {
+        // not yet selected. if zIndex == 2, selected=True
+        m.setIcon("http://www.googlemapsmarkers.com/v1/009900/");
+        m.setZIndex(2);
+        m.setOpacity(1.0);
+    } else {
+        // not yet deselected
+        m.setIcon(pinImage);
+        m.setZIndex(1);  
+        m.setOpacity(0.5);
+  }
+});
+
+
+function plot_map_points(rows) {
+	//initialize_map();
+	markers = {};
+	myOptions = {
+	    zoom: 1,
+	    center: new google.maps.LatLng(0, 0),
+	    mapTypeId: 'terrain'
+	};
+	latlngbounds = new google.maps.LatLngBounds();
+	map = new google.maps.Map($('#map_canvas')[0], myOptions);
+	infowindow = new google.maps.InfoWindow({
+		content: "holding..."
+	});
+	$("#sensorList").empty();
+    for (var x = 0; x < rows.length; x++) {
+        var sensorId = rows[x].index;
+        $("#sensorList").append($('<div>', { id : sensorId })
+        .addClass("sensorListItem")
+        );
+        /* Adds visibile checkbox */
+        $("#"+sensorId).append($('<input>', { id : sensorId + "VisibleCheckbox", type:"checkbox", name: sensorId + "VisibleCheckbox"}));
+        $("#"+sensorId).append( rows[x].operation_name );
+    	
+    	var latlng = new google.maps.LatLng(rows[x].lat, rows[x].lng);
+    	latlngbounds.extend(latlng);
+        var marker = new google.maps.Marker({
+            position: latlng,
+            map: map,
+            title: rows[x].operation_name,
+            icon: pinImage,
+            zIndex: 1,
+            index: rows[x].index,
+            opacity: 0.5
+        });
+        markers[sensorId+"VisibleCheckbox"] = marker;
+		google.maps.event.addListener(marker, 'click', function(e) {
+    		infowindow.setContent(this.title);
+			infowindow.open(map, this);
+			if (this.zIndex == 1) {
+                // not yet selected. if zIndex == 2, selected=True
+				this.setIcon("http://www.googlemapsmarkers.com/v1/009900/");
+				this.setZIndex(2);
+                this.setOpacity(1.0);
+                $("#"+this.index+"VisibleCheckbox").prop('checked', true);
+			} else {
+                // not yet deselected
+				this.setIcon(pinImage);
+				this.setZIndex(1);
+                $("#"+this.index+"VisibleCheckbox").prop('checked', false);
+                this.setOpacity(0.5)
+			}
+  		});
+	}
+	map.setCenter(latlngbounds.getCenter());
+	map.fitBounds(latlngbounds); 
+};
+
+
+d3.csv("data_2/dim_city.csv", function(DimCity) { 
+	d3.csv("data_2/dim_organization.csv", function(DimOrganization) { 
+		var org_array = [];
+		for (var i = DimOrganization.length - 1; i >= 0; i--) {
+			org_array.push(DimOrganization[i].organization);
+		};
+	    $(function() {$( "#tags" ).autocomplete({ source: org_array }); });
+	    $('.default-value').each( function () {
+	    	var $t = $(this),
+		    default_value = this.value;
+		    $t.css('color', '#929292');
+		    $t.focus(function () {
+		        if (this.value == default_value) {
+		            this.value = '';
+		            $t.css('color', 'black');
+		        }
+		    });
+		    $t.blur(function () {
+		        if ($.trim(this.value) == '') {
+		            $t.css('color', '#929292');
+		            this.value = default_value;
+		        }
+   		 });
+
+     }
+     );});
+
+		d3.csv("data_2/dim_operation_type.csv", function(DimOperationType) { 
+			d3.csv("data_2/master_short.csv", function(Master) {
+				$(function() {
+				    $( "input[type=submit], a, button" )
+				      .button()
+				      .click(function( event ) {
+				        event.preventDefault();
+				        var nameInput = document.getElementById('tags');
+				        var org = nameInput.value;
+						var dim_organization_row = DimOrganization.filter(function( obj ) { return obj.organization == org; });
+			    		var dim_org_id = dim_organization_row[0].dim_organization; // should be only one result
+			    		var org_rows = Master.filter(function( obj ) { return obj.dim_organization == dim_org_id; });
+						markers = {};
+						myOptions = {
+						    zoom: 1,
+						    center: new google.maps.LatLng(0, 0),
+						    mapTypeId: 'terrain'
+						};
+						latlngbounds = new google.maps.LatLngBounds();
+						map = new google.maps.Map($('#map_canvas')[0], myOptions);
+						infowindow = new google.maps.InfoWindow({
+							content: "holding..."
+						});
+						$("#sensorList").empty();
+
+				        plot_map_points(org_rows);
+				      });
+				});
+			});
+		});
+	});
+});
+});
+
+</script>
+</head>
+<body>
+<h1 id="container">Public Building Energy Consumption in Ontario</h1>
+
+<div class="ui-widget" id="container">
+  <input id="tags" onkeydown="if (event.keyCode == 13) document.getElementById('go-button').click()" value="Enter an organization name here..." class="default-value"a>
+	<input type="submit" value="Go" id="go-button" >
+</div>
+
+<div id="map-and-list">
+    <div id="sensorList" class="place-list"></div>
+    <div id="map_canvas"></div>
+</div>
+
+<div id="footnote">
+<p>
+This work uses utility data for 2012, and was made possible by the Government of Ontario's <a href="https://www.ontario.ca/open-data">Open Data Catalogue</a>.
+</p>
+<p>
+For the raw data that this app is based on, <a href="https://www.ontario.ca/data/energy-use-and-greenhouse-gas-emissions-broader-public-sector">click here</a>.
+</p>
+<p>
+Created by Stephen McMurtry, (c) 2015. 
+
+</p>
+<p>
+print page
+</p>
+</div>
+
+</body>
+</html>
