@@ -5,7 +5,7 @@
 body {
         font: 10px sans-serif;
         margin:50px 0px; padding:0px;
-        text-align:center;
+       /* text-align:center; */
     }
     
     #tags { 
@@ -18,7 +18,7 @@ body {
         margin:0px auto;
         text-align:left;
         padding:15px;
-        border:1px dashed #333; /* comment this out */
+        /* border:1px dashed #333;  comment this out */
         
     }
 
@@ -52,16 +52,28 @@ body {
   width:25%;
   text-align:right;
   float:right;
+
 }
 
 .report-div {
    width:70%; 
    float:left;
+
+}
+
+.pct-rank, .report-div {
+  height: 250px;
 }
 
 .main-report-div {
-  width:1100px; 
+  width:800px; 
   margin:0 auto;
+
+}
+
+.sub-report-div {
+  width:100%;
+  height: 400px;
 }
 
 .axis text {
@@ -231,20 +243,19 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
         		}
 
             // start of report stuff
-            console.log(this);
             var row_index = 1*this.index;
-            console.log(row_index);
             var row = Master.filter(function( obj ) { return obj.index == row_index; })[0];
             var city_row = DimCity.filter(function( obj ) { return obj.dim_City == row.dim_City; })[0];
             var operation_type_row = DimOperationType.filter(function( obj ) { return obj.dim_operation_type == row.dim_operation_type; })[0];
             var dist = dists[row.dim_operation_type];
-            console.log(row);
 
             clean_dist = [];
             for (var i = dist.length - 1; i >= 0; i--) {
                 clean_dist.push(1.0*dist[i])
             };
             generateReport(row, city_row, operation_type_row, clean_dist);
+            //$(".main-report-div").after($('#footnote'));
+
             // end of report stuff
 
         	});
@@ -274,13 +285,14 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
 }
 
 function generateReport(row, city_row, operation_type_row, clean_dist) {
-  var sub_report_id = row.index;
-  var chart_div_id = 'chart-' + sub_report_id;
-  $( ".main-report-div" ).append( '<div id="report-' + sub_report_id +'"></div>' );
-  $( "#report-" + sub_report_id ).append( get_table(row, city_row, operation_type_row) );
-  $( "#report-" + sub_report_id ).append( get_pct_rank(row) )
-  $( "#report-" + sub_report_id ).append( '<div id="' + chart_div_id + '" class="chart"></div>' )
-    plot_hist(clean_dist, row.en_intensity_ekWh_sqft, '#' + chart_div_id)
+  $( ".main-report-div" ).append( '<div class="sub-report-div"></div>' );
+
+  $( ".sub-report-div" ).append( '<div id="report-' + row.index +'"></div>' );
+
+  $( "#report-" + row.index ).append( get_table(row, city_row, operation_type_row) );
+  $( "#report-" + row.index ).append( get_pct_rank(row, 'pct-rank-' + row.index) )
+  $( "#pct-rank-" + row.index ).append( '<div id="chart-' + row.index + '" class="chart"></div>' )
+  plot_hist(clean_dist, row.en_intensity_ekWh_sqft, '#chart-' + row.index);
 };
 
 function get_table(row, city_row, operation_type_row) {
@@ -318,13 +330,13 @@ function get_table(row, city_row, operation_type_row) {
   return table
 };
 
-function get_pct_rank(row) {
+function get_pct_rank(row, div_id) {
     var val = row.en_intensity_ekWh_sqft_pct_rank;
     var rank_text = '';
     if (val <= 50.) { rank_text += 'top ' + Math.ceil(val).toString() + '%' } 
     else { rank_text += 'bottom ' + Math.ceil(100. - val).toString() + '%' };
   var span = '';
-  span += '<div class="pct-rank">'
+  span += '<div class="pct-rank" id="' + div_id + '">'
   span += '<table style="border-spacing:10px;">';
   span += '<tr><td><h2>' + rank_text + '</h2></td></tr>'
   span += '<tr><td>of energy efficiency for this type of building in Ontario.</td></tr>'
@@ -445,22 +457,6 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
 </div>
 
 <div class="main-report-div"></div>
-
-<div id="footnote">
-<p>
-This work uses utility data for 2012, and was made possible by the Government of Ontario's <a href="https://www.ontario.ca/open-data">Open Data Catalogue</a>.
-</p>
-<p>
-For the raw data that this app is based on, <a href="https://www.ontario.ca/data/energy-use-and-greenhouse-gas-emissions-broader-public-sector">click here</a>.
-</p>
-<p>
-Created by Stephen McMurtry, (c) 2015. 
-
-</p>
-<p>
-print page
-</p>
-</div>
 
 </body>
 
