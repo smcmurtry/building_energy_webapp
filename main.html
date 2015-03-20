@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
   <title>Public Building Energy Consumption</title>
   <script src="d3.min.js"></script>
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -34,8 +32,8 @@
 	}
 
 	#map-and-list {
-		width: 100%; //800px;
-		height: 100%; //500px;
+		width: 800px;
+		height: 500px;
 		overflow: hidden;
 		margin: 0px auto;
 	}
@@ -43,9 +41,10 @@
 	#map_canvas {
 	    width: 70%;
 	    height: 100%;
+	    border:1px dashed #333; /* comment this out */
 	}
 
-	.place-list {
+    #sensorList {
 		white-space: nowrap; 
 		text-align: left;
 		width: 30%; 
@@ -57,134 +56,148 @@
 	}
 </style>
 <script>
+
 var infowindow = null;
+do_something();
 
-$(document).ready(function () {
+// d3.csv("dim_city.csv", function(DimCity) { 
+// 	d3.csv("dim_organization.csv", function(DimOrganization) { 
+// 	 	// var org_array = [];
+// 	 	// for (var i = DimOrganization.length - 1; i >= 0; i--) {
+// 	 	// 	org_array.push(DimOrganization[i].organization);
+// 	 	// };
+// 	  //   $(function() {$( "#tags" ).autocomplete({ source: org_array }); });
+// 	  //   $('.default-value').each( function () {
+// 	  //   	var $t = $(this),
+// 		 //    default_value = this.value;
+// 		 //    $t.css('color', '#929292');
+// 		 //    $t.focus(function () {
+// 		 //        if (this.value == default_value) {
+// 		 //            this.value = '';
+// 		 //            $t.css('color', 'black');
+// 		 //        }
+// 		 //    });
+// 		 //    $t.blur(function () {
+// 		 //        if ($.trim(this.value) == '') {
+// 		 //            $t.css('color', '#929292');
+// 		 //            this.value = default_value;
+// 		 //        }
+//    // 		 	});
+//    //    	});
 
-	d3.csv("dim_city.csv", function(DimCity) { 
-		d3.csv("dim_organization.csv", function(DimOrganization) { 
-		 	var org_array = [];
-		 	for (var i = DimOrganization.length - 1; i >= 0; i--) {
-		 		org_array.push(DimOrganization[i].organization);
-		 	};
-		    $(function() {$( "#tags" ).autocomplete({ source: org_array }); });
-		    $('.default-value').each( function () {
-		    	var $t = $(this),
-			    default_value = this.value;
-			    $t.css('color', '#929292');
-			    $t.focus(function () {
-			        if (this.value == default_value) {
-			            this.value = '';
-			            $t.css('color', 'black');
-			        }
-			    });
-			    $t.blur(function () {
-			        if ($.trim(this.value) == '') {
-			            $t.css('color', '#929292');
-			            this.value = default_value;
-			        }
-	   		 	});
-	      	});
+// 		// d3.csv("dim_operation_type.csv", function(DimOperationType) { 
+// 		// 	d3.csv("master_short.csv", function(Master) {
+// 		// 		do_something();
+// 		// 		$(function() {
+// 		// 		    $( "input[type=submit], a, button" )
+// 		// 		      .button()
+// 		// 		      .click(function( event ) {
+// 		// 		        event.preventDefault();
+// 		// 		        var nameInput = document.getElementById('tags');
+// 		// 		        var org = nameInput.value;
+// 		// 				var dim_organization_row = DimOrganization.filter(function( obj ) { return obj.organization == org; });
+// 		// 	    		var dim_org_id = dim_organization_row[0].dim_organization; // should be only one result
+// 		// 	    		var rows = Master.filter(function( obj ) { return obj.dim_organization == dim_org_id; });
+// 		// 	    		console.log(rows);
+// 		// 	    		do_everything(rows);
+// 		// 			});
+// 		// 	    });
+// 		// 	});
+// 		// });
+// 	});
+// });
 
-			d3.csv("dim_operation_type.csv", function(DimOperationType) { 
-				d3.csv("master_short.csv", function(Master) {
-					$(function() {
-					    $( "input[type=submit], a, button" )
-					      .button()
-					      .click(function( event ) {
-					        event.preventDefault();
-					        var nameInput = document.getElementById('tags');
-					        var org = nameInput.value;
-							var dim_organization_row = DimOrganization.filter(function( obj ) { return obj.organization == org; });
-				    		var dim_org_id = dim_organization_row[0].dim_organization; // should be only one result
-				    		var rows = Master.filter(function( obj ) { return obj.dim_organization == dim_org_id; });
-						});
-						// start of map stuff
-					    var pinImage = new google.maps.MarkerImage("http://www.googlemapsmarkers.com/v1/999999/") // 'grey_pin.png'
-					    var myOptions = {
-					        zoom: 1,
-					        center: new google.maps.LatLng(0, 0),
-					        mapTypeId: 'terrain'
-					    };
-					    var map = new google.maps.Map($('#map_canvas')[0], myOptions);
-						var latlngbounds = new google.maps.LatLngBounds();
-						
-						infowindow = new google.maps.InfoWindow({
-							content: "holding..."
-						});
-						console.log("hi!");
+function do_something(){
+    $(document).ready(function () {
+        var myOptions = {
+            zoom: 1,
+            center: new google.maps.LatLng(0, 0),
+            mapTypeId: 'terrain'
+        };
+        var map = new google.maps.Map($('#map_canvas')[0], myOptions);
+    });
+}
 
-					    var markers = {};
-					    for (var x = 0; x < rows.length; x++) {
-					        var sensorId = rows[x].index;
-					        $("#sensorList").append($('<div>', { id : sensorId })
-					        .addClass("sensorListItem")
-					        );
-					        /* Adds visibile checkbox */
-					        $("#"+sensorId).append($('<input>', { id : sensorId + "VisibleCheckbox", type:"checkbox", name: sensorId + "VisibleCheckbox"}));
-					        $("#"+sensorId).append( rows[x].operation_name );
-					    	var latlng = new google.maps.LatLng(rows[x].lat, rows[x].lng);
-					    	latlngbounds.extend(latlng);
-					        var marker = new google.maps.Marker({
-					            position: latlng,
-					            map: map,
-					            title: rows[x].operation_name,
-					            icon: pinImage,
-					            zIndex: 1,
-					            index: rows[x].index,
-					            opacity: 0.5
-					        });
-					        markers[sensorId+"VisibleCheckbox"] = marker;
-					    	google.maps.event.addListener(marker, 'click', function(e) {
-					    		infowindow.setContent(this.title);
-					    		infowindow.open(map, this);
-					    		if (this.zIndex == 1) {
-					                // not yet selected. if zIndex == 2, selected=True
-					    			this.setIcon("http://www.googlemapsmarkers.com/v1/009900/");
-					    			this.setZIndex(2);
-					                this.setOpacity(1.0);
-					                $("#"+this.index+"VisibleCheckbox").prop('checked', true);
-					    		} else {
-					                // not yet deselected
-					    			this.setIcon(pinImage);
-					    			this.setZIndex(1);
-					                $("#"+this.index+"VisibleCheckbox").prop('checked', false);
-					                this.setOpacity(0.5)
-					    		}
-					    		});
-					    }
+function do_everything(rows){
 
-					    //map.setCenter(latlngbounds.getCenter());
-					    //map.fitBounds(latlngbounds); 
+    $(document).ready(function () {
+        var myOptions = {
+            zoom: 1,
+            center: new google.maps.LatLng(0, 0),
+            mapTypeId: 'terrain'
+        };
+        var map = new google.maps.Map($('#map_canvas')[0], myOptions);
+    	var latlngbounds = new google.maps.LatLngBounds();
+    	
+    	infowindow = new google.maps.InfoWindow({
+    		content: "holding..."
+    	});
 
-					    // listen for checkbox change
-					    $('input:checkbox').change(
-					        function(){
-					            sId = $(this)[0].id;
-					            m = markers[sId]
-					            if (m.zIndex == 1) {
-					                // not yet selected. if zIndex == 2, selected=True
-					                m.setIcon("http://www.googlemapsmarkers.com/v1/009900/");
-					                m.setZIndex(2);
-					                m.setOpacity(1.0)
-					            } else {
-					                // not yet deselected
-					                m.setIcon(pinImage);
-					                m.setZIndex(1);  
-					                m.setOpacity(0.5)
-					            } 
-					    });
-					    // end of map stuff
+        var pinImage = new google.maps.MarkerImage('grey_pin.png'); 
+        var markers = {};
+        for (var x = 0; x < rows.length; x++) {
+            var sensorId = rows[x].index;
+            $("#sensorList").append($('<div>', { id : sensorId })
+            .addClass("sensorListItem")
+            );
+            /* Adds visibile checkbox */
+            $("#"+sensorId).append($('<input>', { id : sensorId + "VisibleCheckbox", type:"checkbox", name: sensorId + "VisibleCheckbox"}));
+            $("#"+sensorId).append( rows[x].operation_name );
+        	var latlng = new google.maps.LatLng(rows[x].lat, rows[x].lng);
+        	latlngbounds.extend(latlng);
+            var marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                title: rows[x].operation_name,
+                icon: pinImage,
+                zIndex: 1,
+                index: rows[x].index,
+                opacity: 0.5
+            });
+            markers[sensorId+"VisibleCheckbox"] = marker;
+        	google.maps.event.addListener(marker, 'click', function(e) {
+        		infowindow.setContent(this.title);
+        		infowindow.open(map, this);
+        		if (this.zIndex == 1) {
+                    // not yet selected. if zIndex == 2, selected=True
+        			this.setIcon("green_pin.png");
+        			this.setZIndex(2);
+                    this.setOpacity(1.0);
+                    $("#"+this.index+"VisibleCheckbox").prop('checked', true);
+        		} else {
+                    // not yet deselected
+        			this.setIcon(pinImage);
+        			this.setZIndex(1);
+                    $("#"+this.index+"VisibleCheckbox").prop('checked', false);
+                    this.setOpacity(0.5)
+        		}
+        		});
+        }
 
-				      });
-					
-				});
-			});
-		});
-	});
-});
+        map.setCenter(latlngbounds.getCenter());
+        map.fitBounds(latlngbounds); 
+
+        // listen for checkbox change
+        $('input:checkbox').change(
+            function(){
+                sId = $(this)[0].id;
+                m = markers[sId]
+                if (m.zIndex == 1) {
+                    // not yet selected. if zIndex == 2, selected=True
+                    m.setIcon("green_pin.png");
+                    m.setZIndex(2);
+                    m.setOpacity(1.0)
+                } else {
+                    // not yet deselected
+                    m.setIcon(pinImage);
+                    m.setZIndex(1);  
+                    m.setOpacity(0.5)
+                } 
+        });
+    });
+}
+
 </script>
-</head>
 <body>
 <h1 id="container">Public Building Energy Consumption in Ontario</h1>
 
@@ -194,7 +207,7 @@ $(document).ready(function () {
 </div>
 
 <div id="map-and-list">
-    <div id="sensorList" class="place-list"></div>
+    <div id="sensorList"></div>
     <div id="map_canvas"></div>
 </div>
 

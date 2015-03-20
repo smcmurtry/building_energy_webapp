@@ -101,7 +101,6 @@ d3.csv("dim_city.csv", function(DimCity) {
                   var dim_organization_row = DimOrganization.filter(function( obj ) { return obj.organization == org; });
                   var dim_org_id = dim_organization_row[0].dim_organization; // should be only one result
                   var rows = Master.filter(function( obj ) { return obj.dim_organization == dim_org_id; });
-                  console.log(rows);
                   do_everything(rows);
               });
           });
@@ -122,22 +121,24 @@ function do_something(){
     });
 }
 
-function do_everything(master){
+function do_everything(rows){
 
     $(document).ready(function () {
+
+        $('#map_canvas').empty();
+        $("#sensorList").empty();
         var myOptions = {
             zoom: 1,
             center: new google.maps.LatLng(0, 0),
             mapTypeId: 'terrain'
         };
-        var map = new google.maps.Map($('#map_canvas')[0], myOptions);
+      var map = new google.maps.Map($('#map_canvas')[0], myOptions);
     	var latlngbounds = new google.maps.LatLngBounds();
     	
     	infowindow = new google.maps.InfoWindow({
     		content: "holding..."
     	});
 
-        var rows = master.filter(function( obj ) { return obj.dim_organization == 10; });
         var pinImage = new google.maps.MarkerImage('grey_pin.png'); 
         var markers = {};
         for (var x = 0; x < rows.length; x++) {
