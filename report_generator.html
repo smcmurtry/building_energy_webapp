@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ f<!DOCTYPE html>
 <html>
 <style>
 	body {
@@ -12,10 +12,10 @@
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script>
 
-d3.csv("data_2/dim_city.csv", function(DimCity) { 
-	d3.csv("data_2/dim_organization.csv", function(DimOrganization) { 
-		d3.csv("data_2/dim_operation_type.csv", function(DimOperationType) { 
-			d3.csv("data_2/master_short.csv", function(Master) { 
+d3.csv("dim_city.csv", function(DimCity) { 
+	d3.csv("dim_organization.csv", function(DimOrganization) { 
+		d3.csv("dim_operation_type.csv", function(DimOperationType) { 
+			d3.csv("master_short.csv", function(Master) { 
 			    var org = "County of Peterborough";
 			    var dim_organization_row = DimOrganization.filter(function( obj ) { return obj.organization == org; });
 			    var dim_org_id = dim_organization_row[0].dim_organization; // should be only one result

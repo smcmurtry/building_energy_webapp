@@ -42,10 +42,10 @@ label {
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script>
-d3.csv("data_2/dim_city.csv", function(DimCity) { 
-	d3.csv("data_2/dim_organization.csv", function(DimOrganization) { 
-		d3.csv("data_2/dim_operation_type.csv", function(DimOperationType) { 
-			d3.csv("data_2/master_short.csv", function(Master) { 
+d3.csv("dim_city.csv", function(DimCity) { 
+	d3.csv("dim_organization.csv", function(DimOrganization) { 
+		d3.csv("dim_operation_type.csv", function(DimOperationType) { 
+			d3.csv("master_short.csv", function(Master) { 
 			    dists = get_dists(Master);
 				var data = dists[30].slice(0, 10000)
 				new_data = [];
