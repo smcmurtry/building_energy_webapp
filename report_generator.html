@@ -7,6 +7,40 @@
 		padding:0px;
 	}
 
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.label, .y.label {font: 8px sans-serif;}
+
+
+.y.axis line {
+  stroke: #000; 
+}
+.x.axis path, .y.axis path {
+  display: none;
+}
+
+.bar {
+  fill: grey;
+  fill-opacity: 1.;
+}
+
+label {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.chart {float: right;}
+
 </style>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -16,6 +50,9 @@ d3.csv("dim_city.csv", function(DimCity) {
 	d3.csv("dim_organization.csv", function(DimOrganization) { 
 		d3.csv("dim_operation_type.csv", function(DimOperationType) { 
 			d3.csv("master_short.csv", function(Master) { 
+
+			    dists = get_dists(Master);
+
 			    var org = "County of Peterborough";
 			    var dim_organization_row = DimOrganization.filter(function( obj ) { return obj.organization == org; });
 			    var dim_org_id = dim_organization_row[0].dim_organization; // should be only one result
@@ -23,16 +60,28 @@ d3.csv("dim_city.csv", function(DimCity) {
 			    var row = org_rows[2];
 			    var city_row = DimCity.filter(function( obj ) { return obj.dim_City == row.dim_City; })[0];
 			    var operation_type_row = DimOperationType.filter(function( obj ) { return obj.dim_operation_type == row.dim_operation_type; })[0];
-			    generateReport(row, city_row, operation_type_row);
+
+				var dist = dists[row.dim_operation_type]
+				clean_dist = [];
+			    for (var i = dist.length - 1; i >= 0; i--) {
+			    	clean_dist.push(1.0*dist[i])
+			    };
+			    generateReport(row, city_row, operation_type_row, clean_dist);
 			});
 		});
 	});
 });
 
-function generateReport(row, city_row, operation_type_row) {
+function generateReport(row, city_row, operation_type_row, clean_dist) {
 	//$( "#report-1" ).append( '<h2>' + row.operation_name + "</h2>" )
 	$( "#report-1" ).append( get_table(row, city_row, operation_type_row) );
 	$( "#report-1" ).append( get_pct_rank(row) )
+	$( "#report-1" ).append( '<div id="chart-1" class="chart"></div>' )
+
+    var one_en_intensity_ekWh_sqft = 13.;
+    plot_hist(clean_dist, one_en_intensity_ekWh_sqft, "#chart-1")
+
+
 };
 
 function get_table(row, city_row, operation_type_row) {
@@ -84,6 +133,102 @@ function get_pct_rank(row) {
 	span += '</table>'
 	span += '</div>'
 	return span
+};
+
+function get_dists(Master) {
+  var dists = {};
+  for (var i = Master.length - 1; i >= 0; i--) {
+    if ( !dists.hasOwnProperty(Master[i].dim_operation_type) ) {
+      dists[Master[i].dim_operation_type] = [Master[i].en_intensity_ekWh_sqft];
+    } else {
+      dists[Master[i].dim_operation_type].push(Master[i].en_intensity_ekWh_sqft);
+    }
+  };
+  return dists
+};
+
+function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
+  // A formatter for counts.
+  var formatCount = d3.format(",.0f");
+
+  var margin = {top: 10, right: 30, bottom: 50, left: 50},
+      width = 275 - margin.left - margin.right, // 800 was 960
+      height = 150 - margin.top - margin.bottom;
+
+  var x = d3.scale.linear()
+      .domain([0, 100.]) //100., d3.max(values)])
+      .range([0, width]);
+
+  // Generate a histogram using twenty uniformly-spaced bins.
+  var data = d3.layout.histogram()
+      .bins(x.ticks(20))
+      (values);
+
+  var y = d3.scale.linear()
+      .domain([0, d3.max(data, function(d) { return d.y; })])
+      .range([height, 0]);
+
+  var xAxis = d3.svg.axis()
+      .scale(x)
+      .ticks(6)
+      .orient("bottom");
+
+  var yAxis = d3.svg.axis()
+      .scale(y)
+      .ticks(4)
+      .orient("left");
+
+  var svg = d3.select(div_tag).append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+     .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  // Add an x-axis label.
+  svg.append("text")
+    .attr("class", "x label")
+    .attr("text-anchor", "end")
+    .attr("x", width)
+    .attr("y", height + 30)
+    .text("Energy Use Intensity (ekWh/sqft)");
+
+  // Add a y-axis label.
+  svg.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "end")
+    .attr("y", -33)
+    .attr("x", 6)
+    //.attr("dy", ".75em")
+    .attr("transform", "rotate(-90)")
+    .text("# of Buildings");
+
+  var bar = svg.selectAll(".bar")
+      .data(data)
+    .enter().append("g")
+      .attr("class", "bar")
+      .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+
+  bar.append("rect")
+      .attr("x", 1)
+      .attr("width", x(data[0].dx) - 1)
+      .attr("height", function(d) { return height - y(d.y); });
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+
+  svg.append("line")          // attach a line
+    .style("stroke", "red")  // colour the line
+    .attr('stroke-width', 3)
+    .attr("x1", x(one_en_intensity_ekWh_sqft))     // x position of the first end of the line
+    .attr("y1", y(0))      // y position of the first end of the line
+    .attr("x2", x(one_en_intensity_ekWh_sqft))     // x position of the second end of the line
+    .attr("y2", 0);
 };
 
 </script>
