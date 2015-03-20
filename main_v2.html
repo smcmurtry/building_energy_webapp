@@ -46,6 +46,57 @@ body {
         overflow-y: scroll;
         float: left;
     }
+
+
+.pct-rank {
+  width:25%;
+  text-align:right;
+  float:right;
+}
+
+.report-div {
+   width:70%; 
+   float:left;
+}
+
+.main-report-div {
+  width:1100px; 
+  margin:0 auto;
+}
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.label, .y.label {font: 8px sans-serif;}
+
+
+.y.axis line {
+  stroke: #000; 
+}
+.x.axis path, .y.axis path {
+  display: none;
+}
+
+.bar {
+  fill: grey;
+  fill-opacity: 1.;
+}
+
+label {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.chart {float: right;}
 </style>
 
   <script src="d3.min.js"></script>
@@ -86,6 +137,8 @@ d3.csv("dim_city.csv", function(DimCity) {
 
      d3.csv("dim_operation_type.csv", function(DimOperationType) { 
       d3.csv("master_short.csv", function(Master) {
+          dists = get_dists(Master);
+
           $(function() {
               $( "input[type=submit], a, button" )
                 .button()
@@ -96,7 +149,10 @@ d3.csv("dim_city.csv", function(DimCity) {
                   var dim_organization_row = DimOrganization.filter(function( obj ) { return obj.organization == org; });
                   var dim_org_id = dim_organization_row[0].dim_organization; // should be only one result
                   var rows = Master.filter(function( obj ) { return obj.dim_organization == dim_org_id; });
-                  do_everything(rows);
+                  do_everything(rows, Master, DimCity, DimOperationType, dists);
+
+
+
               });
           });
       });
@@ -116,7 +172,7 @@ function do_something(){
     });
 }
 
-function do_everything(rows){
+function do_everything(rows, Master, DimCity, DimOperationType, dists){
 
     $(document).ready(function () {
 
@@ -173,7 +229,25 @@ function do_everything(rows){
                     $("#"+this.index+"VisibleCheckbox").prop('checked', false);
                     this.setOpacity(0.5)
         		}
-        		});
+
+            // start of report stuff
+            console.log(this);
+            var row_index = 1*this.index;
+            console.log(row_index);
+            var row = Master.filter(function( obj ) { return obj.index == row_index; })[0];
+            var city_row = DimCity.filter(function( obj ) { return obj.dim_City == row.dim_City; })[0];
+            var operation_type_row = DimOperationType.filter(function( obj ) { return obj.dim_operation_type == row.dim_operation_type; })[0];
+            var dist = dists[row.dim_operation_type];
+            console.log(row);
+
+            clean_dist = [];
+            for (var i = dist.length - 1; i >= 0; i--) {
+                clean_dist.push(1.0*dist[i])
+            };
+            generateReport(row, city_row, operation_type_row, clean_dist);
+            // end of report stuff
+
+        	});
         }
 
         map.setCenter(latlngbounds.getCenter());
@@ -199,6 +273,162 @@ function do_everything(rows){
     });
 }
 
+function generateReport(row, city_row, operation_type_row, clean_dist) {
+  var sub_report_id = row.index;
+  var chart_div_id = 'chart-' + sub_report_id;
+  $( ".main-report-div" ).append( '<div id="report-' + sub_report_id +'"></div>' );
+  $( "#report-" + sub_report_id ).append( get_table(row, city_row, operation_type_row) );
+  $( "#report-" + sub_report_id ).append( get_pct_rank(row) )
+  $( "#report-" + sub_report_id ).append( '<div id="' + chart_div_id + '" class="chart"></div>' )
+    plot_hist(clean_dist, row.en_intensity_ekWh_sqft, '#' + chart_div_id)
+};
+
+function get_table(row, city_row, operation_type_row) {
+  var table = '';
+  table += '<div class="report-div">'
+  table += '<table cellspacing="10">' //border-spacing:10px;">';
+    table += '<col width="30%">'
+    table += '<col width="70%">'
+
+  table += '<tr>'
+  table += '<td colspan="2"><h2>' + row.operation_name + '</h2></td>'
+  table += '</tr>' 
+
+  table += '<tr>'
+  table += '<td><b>Address</b></td>'
+  table += '<td>' + row.Address + '<br>' + city_row.City + ', ON<br>' + row.Zip.slice(0, 3) + ' ' + row.Zip.slice(3, 6) + '</td>' 
+  table += '</tr>' 
+
+  table += '<tr>'
+  table += '<td><b>Building Type</b></td>'
+  table += '<td>' + operation_type_row.operation_type + '</td>'
+  table += '</tr>' 
+
+  table += '<tr>'
+  table += '<td><b>Energy Consumption</b></td>'
+  table += '<td>' + d3.round(row.en_intensity_ekWh_sqft, 1) + ' ekWh/sqft</td>'
+  table += '</tr>' 
+
+  table += '<tr>'
+  table += '<td><b>Average energy consumption for this type of building</b></td>'
+  table += '<td>' + d3.round(operation_type_row.mean_en_intensity_ekWh_sqft, 1) + ' ekWh/sqft</td>'
+  table += '</tr>' 
+
+  table += '</table></div>'
+  return table
+};
+
+function get_pct_rank(row) {
+    var val = row.en_intensity_ekWh_sqft_pct_rank;
+    var rank_text = '';
+    if (val <= 50.) { rank_text += 'top ' + Math.ceil(val).toString() + '%' } 
+    else { rank_text += 'bottom ' + Math.ceil(100. - val).toString() + '%' };
+  var span = '';
+  span += '<div class="pct-rank">'
+  span += '<table style="border-spacing:10px;">';
+  span += '<tr><td><h2>' + rank_text + '</h2></td></tr>'
+  span += '<tr><td>of energy efficiency for this type of building in Ontario.</td></tr>'
+  span += '</table>'
+  span += '</div>'
+  return span
+};
+
+function get_dists(Master) {
+  var dists = {};
+  for (var i = Master.length - 1; i >= 0; i--) {
+    if ( !dists.hasOwnProperty(Master[i].dim_operation_type) ) {
+      dists[Master[i].dim_operation_type] = [Master[i].en_intensity_ekWh_sqft];
+    } else {
+      dists[Master[i].dim_operation_type].push(Master[i].en_intensity_ekWh_sqft);
+    }
+  };
+  return dists
+};
+
+function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
+  // A formatter for counts.
+  var formatCount = d3.format(",.0f");
+
+  var margin = {top: 10, right: 30, bottom: 50, left: 50},
+      width = 275 - margin.left - margin.right, // 800 was 960
+      height = 150 - margin.top - margin.bottom;
+
+  var x = d3.scale.linear()
+      .domain([0, 100.]) //100., d3.max(values)])
+      .range([0, width]);
+
+  // Generate a histogram using twenty uniformly-spaced bins.
+  var data = d3.layout.histogram()
+      .bins(x.ticks(20))
+      (values);
+
+  var y = d3.scale.linear()
+      .domain([0, d3.max(data, function(d) { return d.y; })])
+      .range([height, 0]);
+
+  var xAxis = d3.svg.axis()
+      .scale(x)
+      .ticks(6)
+      .orient("bottom");
+
+  var yAxis = d3.svg.axis()
+      .scale(y)
+      .ticks(4)
+      .orient("left");
+
+  var svg = d3.select(div_tag).append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+     .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  // Add an x-axis label.
+  svg.append("text")
+    .attr("class", "x label")
+    .attr("text-anchor", "end")
+    .attr("x", width)
+    .attr("y", height + 30)
+    .text("Energy Use Intensity (ekWh/sqft)");
+
+  // Add a y-axis label.
+  svg.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "end")
+    .attr("y", -33)
+    .attr("x", 6)
+    //.attr("dy", ".75em")
+    .attr("transform", "rotate(-90)")
+    .text("# of Buildings");
+
+  var bar = svg.selectAll(".bar")
+      .data(data)
+    .enter().append("g")
+      .attr("class", "bar")
+      .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+
+  bar.append("rect")
+      .attr("x", 1)
+      .attr("width", x(data[0].dx) - 1)
+      .attr("height", function(d) { return height - y(d.y); });
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+
+  svg.append("line")          // attach a line
+    .style("stroke", "red")  // colour the line
+    .attr('stroke-width', 3)
+    .attr("x1", x(one_en_intensity_ekWh_sqft))     // x position of the first end of the line
+    .attr("y1", y(0))      // y position of the first end of the line
+    .attr("x2", x(one_en_intensity_ekWh_sqft))     // x position of the second end of the line
+    .attr("y2", 0);
+};
+
 </script>
 
 <body>
@@ -213,6 +443,8 @@ function do_everything(rows){
     <div id="sensorList"></div>
     <div id="map_canvas"></div>
 </div>
+
+<div class="main-report-div"></div>
 
 <div id="footnote">
 <p>
