@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="jquery-ui-1.11.4.custom/jquery-ui.css">
 
 <style>
 body {
-  font: 10px sans-serif;
+  font: 18px helvetica neue;
   margin:50px 0px; padding:0px;
   /* text-align:center; */
 }
 
 #tags { 
-  width: 670px; 
+  width: 910px; 
   text-align:left;
 }
 
-#Content, #container, #footnote {
-  width:800px;
+#Content, #search-div, #footnote, #title {
+  width:1000px;
   margin:0px auto;
   text-align:left;
   padding:15px;
-  /* border:1px dashed #333;  comment this out */
-
+  border:1px dashed #333;  /*comment this out */
 }
 
 .ui-widget {
@@ -27,38 +27,37 @@ body {
 }
 
 #map-and-list {
-  width: 800px;
+  width: 1000px;
   height: 500px;
   overflow: hidden;
   margin: 0px auto;
 }
 
 #map_canvas {
-  width: 70%;
+  width: 65%;
   height: 100%;
+  float: right;
 }
 
 #sensorList {
   white-space: nowrap; 
   text-align: left;
-  width: 30%; 
-  height: 100%; 
+  width: 34%; 
+  height: 99%; 
   overflow-y: scroll;
   float: left;
+  border:1px #333; /*  comment this out */
 }
-
 
 .pct-rank {
   width:25%;
   text-align:right;
   float:right;
-
 }
 
 .report-div {
  width:70%; 
  float:left;
-
 }
 
 .pct-rank, .report-div {
@@ -68,12 +67,12 @@ body {
 .main-report-div {
   width:800px; 
   margin:0 auto;
-
 }
 
-.sub-report-div {
+.main-report-div.sub-report-div {
   width:100%;
   height: 250px;
+  border:1px #333; /*  comment this out */
 }
 
 .axis text {
@@ -88,7 +87,6 @@ body {
 }
 
 .x.label, .y.label {font: 8px sans-serif;}
-
 
 .y.axis line {
   stroke: #000; 
@@ -109,16 +107,19 @@ label {
 }
 
 .chart {float: right;}
+
 </style>
 
 <script src="d3.min.js"></script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
 
 <script>
+// <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js">
+// <script src="jquery-ui-1.11.4.custom/jquery-ui.js">
 // from http://stackoverflow.com/questions/19640055/multiple-markers-google-map-api-v3-from-array-of-addresses-and-avoid-over-query
+
 var infowindow = null;
 var master, dim_city, dim_operation_type, dists; 
 do_something();
@@ -150,13 +151,15 @@ d3.csv("dim_city.csv", function(DimCity) {
   });
 
   d3.csv("dim_operation_type.csv", function(DimOperationType) {
+      $(".mlink").removeClass();
+
     dim_operation_type = DimOperationType;
     d3.csv("master_short.csv", function(Master) {
       master = master;
       dists = get_dists(Master);
 
       $(function() {
-        $( "input[type=submit], a, button" )
+        $( "input[id=go-button]" )
         .button()
         .click(function( event ) {
           event.preventDefault();
@@ -166,7 +169,6 @@ d3.csv("dim_city.csv", function(DimCity) {
                   var dim_org_id = dim_organization_row[0].dim_organization; // should be only one result
                   var rows = Master.filter(function( obj ) { return obj.dim_organization == dim_org_id; });
                   do_everything(rows, Master, DimCity, DimOperationType, dists);
-
                 });
       });
     });
@@ -174,12 +176,12 @@ d3.csv("dim_city.csv", function(DimCity) {
 });
 });
 
-
 function do_something(){
+
   $(document).ready(function () {
     var myOptions = {
-      zoom: 1,
-      center: new google.maps.LatLng(0, 0),
+      zoom: 5,
+      center: new google.maps.LatLng(49.3,-85.0),
       mapTypeId: 'terrain'
     };
     var map = new google.maps.Map($('#map_canvas')[0], myOptions);
@@ -244,7 +246,6 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
                     var dist = dists[row.dim_operation_type];
                     generateReport(row, city_row, operation_type_row, dist);
                     // end of report stuff
-
                   } else {
                     // not yet deselected
                     this.setIcon("grey_pin.png");
@@ -252,11 +253,7 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
                     $("#"+this.index+"VisibleCheckbox").prop('checked', false);
                     this.setOpacity(0.5)
                     $( "#sub-report-" + this.index ).remove();
-
                   }
-
-
-
           });
 }
 
@@ -278,12 +275,6 @@ map.fitBounds(latlngbounds);
                     m.setIcon("grey_pin.png");
                     m.setZIndex(1);  
                     m.setOpacity(0.5)
-                    // //$( "#sub-report-" + m.getIndex() ).remove();
-                    // console.log(m.getIndex());
-                    // console.log(sId);
-                    // console.log(this);
-                    // console.log($(this)[0].id);
-
                   } 
                 });
 });
@@ -405,7 +396,7 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
   .attr("text-anchor", "end")
   .attr("x", width)
   .attr("y", height + 30)
-  .text("Energy Use Intensity (ekWh/sqft)");
+  .text("Energy Consumption (ekWh/sqft)");
 
   // Add a y-axis label.
   svg.append("text")
@@ -449,9 +440,9 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
   </script>
 
   <body>
-    <h1 id="container">Public Building Energy Consumption in Ontario</h1>
+    <h1 id="title">Public Building Energy Consumption in Ontario</h1>
 
-    <div class="ui-widget" id="container">
+    <div class="ui-widget" id="search-div">
       <input id="tags" onkeydown="if (event.keyCode == 13) document.getElementById('go-button').click()" value="Enter an organization name here..." class="default-value"a>
       <input type="submit" value="Go" id="go-button" >
     </div>
@@ -462,6 +453,21 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
     </div>
 
     <div class="main-report-div"></div>
+
+  <div id="footnote">
+  <p>
+  This work uses utility data for 2012, and was made possible by the Government of Ontario's <a class="my-link" href="https://www.ontario.ca/open-data">Open Data Catalogue</a>.
+  </p>
+  <p>
+  For the raw data that this app is based on, <a class='my-link' href="https://www.ontario.ca/data/energy-use-and-greenhouse-gas-emissions-broader-public-sector">click here</a>.
+  </p>
+  <p>
+  Created by Stephen McMurtry, (c) 2015. 
+  </p>
+  <p>
+  print page
+  </p>
+  </div>
 
   </body>
 
