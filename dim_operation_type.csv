@@ -1,32 +1,32 @@
-,dim_operation_type,operation_type,mean_en_intensity_ekWh_sqft,n_buildings
-0,25,Police stations and associated offices and facilities,37.26873593140065,219.0
-1,0,Facilities related to the pumping of sewage,2204.812380247501,1246.0
-2,1,Parking garage,4.4078543045794945,5.0
-3,2,Public libraries,24.58819965303054,589.0
-4,3,Facilities related to the treatment of sewage,1892.2646533296013,359.0
-5,4,Student recreational facilities and athletic facilities,37.32963137811739,73.0
-6,5,Other,1165.3517128093056,675.0
-7,6,Classrooms and related facilities,33.4672353337409,300.0
-8,7,"Gyms and indoor courts for playing tennis, basketball or other sports",36.69241165336303,87.0
-9,8,Community centres,26.158035399654125,1137.0
-10,9,Parking garages,8059.689261127879,57.0
-11,10,"Storage facilities where equipment or vehicles are maintained, repaired or stored",34.37024178654696,1304.0
-12,16,Indoor ice rinks,33.24733197408674,394.0
-13,12,Administrative offices and related facilities,35.19043593537831,723.0
-14,13,Schools,30.966222837276327,4832.0
-15,14,Art galleries,35.638522108839986,30.0
-16,15,Indoor sports arenas,32.334745130819236,105.0
-17,17,Indoor swimming pools,91.63811483127515,135.0
-18,18,Student residences,25.592470201261133,75.0
-19,19,Auditoriums,27.2436906566999,21.0
-20,20,Facilities related to the pumping of water,215.37344990543744,990.0
-21,21,"Administrative offices and related facilities, including municipal council chambers",77.92854401938004,1299.0
-22,22,Indoor recreational facilities,90.06689000965812,378.0
-23,23,Facilities related to the treatment of water,345.728007359847,385.0
-24,24,Laboratories,38.78842410653305,175.0
-25,11,Performing arts facilities,27.28177555243461,45.0
-26,26,Cultural facilities,25.683408806817237,571.0
-27,27,Ambulance stations and associated offices and facilities,29.48012564115006,281.0
-28,28,Library,27.07276393853343,82.0
-29,29,Fire stations and associated offices and facilities,391.12431111250646,1123.0
-30,30,Facilities used for hospital purposes,60.20181903134229,283.0
+,dim_operation_type,operation_type,mean_en_intensity_ekWh_sqft,n_buildings,median_en_intensity_ekWh_sqft
+0,25,Police stations and associated offices and facilities,37.26873593140065,219.0,27.7339320656787
+1,0,Facilities related to the pumping of sewage,2204.812380247501,1246.0,0.0
+2,1,Parking garage,4.4078543045794945,5.0,2.7185759501698303
+3,2,Public libraries,24.58819965303054,589.0,21.103769259605397
+4,3,Facilities related to the treatment of sewage,1892.2646533296013,359.0,0.0
+5,4,Student recreational facilities and athletic facilities,37.32963137811739,73.0,30.65299017345989
+6,5,Other,1165.3517128093056,675.0,26.531850821981397
+7,6,Classrooms and related facilities,33.4672353337409,300.0,27.044097194373897
+8,7,"Gyms and indoor courts for playing tennis, basketball or other sports",36.69241165336303,87.0,33.3812947629387
+9,8,Community centres,26.158035399654125,1137.0,19.807258695
+10,9,Parking garages,8059.689261127879,57.0,15.447250587763099
+11,10,"Storage facilities where equipment or vehicles are maintained, repaired or stored",34.37024178654696,1304.0,21.4334189339393
+12,16,Indoor ice rinks,33.24733197408674,394.0,29.71198957496945
+13,12,Administrative offices and related facilities,35.19043593537831,723.0,26.5090357237923
+14,13,Schools,30.966222837276327,4832.0,18.73995958098325
+15,14,Art galleries,35.638522108839986,30.0,21.943791037321198
+16,15,Indoor sports arenas,32.334745130819236,105.0,27.8964819914823
+17,17,Indoor swimming pools,91.63811483127515,135.0,67.7005188442
+18,18,Student residences,25.592470201261133,75.0,25.8008763916469
+19,19,Auditoriums,27.2436906566999,21.0,23.0742922734291
+20,20,Facilities related to the pumping of water,215.37344990543744,990.0,0.0
+21,21,"Administrative offices and related facilities, including municipal council chambers",77.92854401938004,1299.0,23.0337287385539
+22,22,Indoor recreational facilities,90.06689000965812,378.0,31.402704353513748
+23,23,Facilities related to the treatment of water,345.728007359847,385.0,0.0
+24,24,Laboratories,38.78842410653305,175.0,28.9549710950646
+25,11,Performing arts facilities,27.28177555243461,45.0,26.5230815144531
+26,26,Cultural facilities,25.683408806817237,571.0,19.138668321
+27,27,Ambulance stations and associated offices and facilities,29.48012564115006,281.0,27.199545047853498
+28,28,Library,27.07276393853343,82.0,24.91587596214135
+29,29,Fire stations and associated offices and facilities,391.12431111250646,1123.0,21.4850640521803
+30,30,Facilities used for hospital purposes,60.20181903134229,283.0,59.713208448296214
