@@ -5,9 +5,12 @@
 <style>
 body {
   font: 18px helvetica neue;
-  margin:50px 0px; padding:0px;
+  padding:0px;
   /* text-align:center; */
 }
+
+#container {
+  background-color: white;}
 
 #tags { 
   width: 910px; 
@@ -19,9 +22,10 @@ body {
   margin:0px auto;
   text-align:left;
   padding:15px;
-  border:1px dashed #333;  /*comment this out */
+ /* border:1px dashed #333;  /*comment this out */
 }
 
+#footnote {margin-top: 50px;}
 .ui-widget {
   text-align:left;
 }
@@ -31,6 +35,7 @@ body {
   height: 500px;
   overflow: hidden;
   margin: 0px auto;
+  margin-bottom: 50px;
 }
 
 #map_canvas {
@@ -46,7 +51,8 @@ body {
   height: 99%; 
   overflow-y: scroll;
   float: left;
-  border:1px #333; /*  comment this out */
+  background-color: #f6f6f6;
+  /* border:1px #333; /*  comment this out */
 }
 
 .pct-rank {
@@ -60,19 +66,19 @@ body {
  float:left;
 }
 
-.pct-rank, .report-div {
-  height: 250px;
+.report-table {
+  background-color: #f6f6f6;
 }
 
-.main-report-div {
-  width:800px; 
+.sub-report-div {
+  width:1000px;
+  height: 350px;
   margin:0 auto;
+  margin-bottom: 50px;
 }
 
-.main-report-div.sub-report-div {
-  width:100%;
-  height: 250px;
-  border:1px #333; /*  comment this out */
+tr > td {
+  padding-bottom: 10px;
 }
 
 .axis text {
@@ -122,7 +128,7 @@ label {
 
 var infowindow = null;
 var master, dim_city, dim_operation_type, dists; 
-do_something();
+initialize_map();
 
 d3.csv("dim_city.csv", function(DimCity) {
   dim_city = DimCity;
@@ -151,8 +157,6 @@ d3.csv("dim_city.csv", function(DimCity) {
   });
 
   d3.csv("dim_operation_type.csv", function(DimOperationType) {
-      $(".mlink").removeClass();
-
     dim_operation_type = DimOperationType;
     d3.csv("master_short.csv", function(Master) {
       master = master;
@@ -162,21 +166,24 @@ d3.csv("dim_city.csv", function(DimCity) {
         $( "input[id=go-button]" )
         .button()
         .click(function( event ) {
+          $('.sub-report-div').remove();
+          initialize_map();
+          $("#sensorList").empty();
           event.preventDefault();
           var nameInput = document.getElementById('tags');
           var org = nameInput.value;
           var dim_organization_row = DimOrganization.filter(function( obj ) { return obj.organization == org; });
-                  var dim_org_id = dim_organization_row[0].dim_organization; // should be only one result
-                  var rows = Master.filter(function( obj ) { return obj.dim_organization == dim_org_id; });
-                  do_everything(rows, Master, DimCity, DimOperationType, dists);
-                });
+            var dim_org_id = dim_organization_row[0].dim_organization; // should be only one result
+            var rows = Master.filter(function( obj ) { return obj.dim_organization == dim_org_id; });
+            do_everything(rows, Master, DimCity, DimOperationType, dists);
+          });
       });
     });
   });
 });
 });
 
-function do_something(){
+function initialize_map(){
 
   $(document).ready(function () {
     var myOptions = {
@@ -233,26 +240,9 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
         infowindow.setContent(this.title);
         infowindow.open(map, this);
         if (this.zIndex == 1) {
-                    // not yet selected. if zIndex == 2, selected=True
-                    this.setIcon("green_pin.png");
-                    this.setZIndex(2);
-                    this.setOpacity(1.0);
-                    $("#"+this.index+"VisibleCheckbox").prop('checked', true);
-                    // start of report stuff
-                    var row_index = 1*this.index;
-                    var row = Master.filter(function( obj ) { return obj.index == row_index; })[0];
-                    var city_row = DimCity.filter(function( obj ) { return obj.dim_City == row.dim_City; })[0];
-                    var operation_type_row = DimOperationType.filter(function( obj ) { return obj.dim_operation_type == row.dim_operation_type; })[0];
-                    var dist = dists[row.dim_operation_type];
-                    generateReport(row, city_row, operation_type_row, dist);
-                    // end of report stuff
+                    on_select(this, Master, DimCity, DimOperationType, dists);
                   } else {
-                    // not yet deselected
-                    this.setIcon("grey_pin.png");
-                    this.setZIndex(1);
-                    $("#"+this.index+"VisibleCheckbox").prop('checked', false);
-                    this.setOpacity(0.5)
-                    $( "#sub-report-" + this.index ).remove();
+                    on_deselect(this);
                   }
           });
 }
@@ -260,28 +250,45 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
 map.setCenter(latlngbounds.getCenter());
 map.fitBounds(latlngbounds); 
 
-        // listen for checkbox change
-        $('input:checkbox').change(
-          function(){
-            sId = $(this)[0].id;
-            m = markers[sId]
-            if (m.zIndex == 1) {
-                    // not yet selected. if zIndex == 2, selected=True
-                    m.setIcon("green_pin.png");
-                    m.setZIndex(2);
-                    m.setOpacity(1.0)
-                  } else {
-                    // not yet deselected
-                    m.setIcon("grey_pin.png");
-                    m.setZIndex(1);  
-                    m.setOpacity(0.5)
-                  } 
-                });
+// listen for checkbox change
+$('input:checkbox').change(
+  function(){
+    sId = $(this)[0].id;
+    m = markers[sId]
+    if (m.zIndex == 1) {
+            on_select(m, Master, DimCity, DimOperationType, dists);
+          } else {
+            on_deselect(m);
+          } 
+        });
 });
 }
 
+function on_select(marker, Master, DimCity, DimOperationType, dists) {
+  //if zIndex == 2, selected=True
+  marker.setIcon("green_pin.png");
+  marker.setZIndex(2);
+  marker.setOpacity(1.0);
+  $("#"+marker.index+"VisibleCheckbox").prop('checked', true);
+  // start of report stuff
+  var row_index = 1*marker.index;
+  var row = Master.filter(function( obj ) { return obj.index == row_index; })[0];
+  var city_row = DimCity.filter(function( obj ) { return obj.dim_City == row.dim_City; })[0];
+  var operation_type_row = DimOperationType.filter(function( obj ) { return obj.dim_operation_type == row.dim_operation_type; })[0];
+  var dist = dists[row.dim_operation_type];
+  generateReport(row, city_row, operation_type_row, dist);
+};
+
+function on_deselect(marker) {
+  marker.setIcon("grey_pin.png");
+  marker.setZIndex(1);
+  $("#"+marker.index+"VisibleCheckbox").prop('checked', false);
+  marker.setOpacity(0.5)
+  $( "#sub-report-" + marker.index ).remove();
+}
+
 function generateReport(row, city_row, operation_type_row, clean_dist) {
-  $( ".main-report-div" ).append( '<div class="sub-report-div" id="sub-report-' + row.index + '"></div>' );
+  $( "#container" ).append( '<div class="sub-report-div" id="sub-report-' + row.index + '"></div>' );
 
   $( "#sub-report-" + row.index ).append( '<div id="report-' + row.index +'"></div>' );
 
@@ -294,13 +301,18 @@ function generateReport(row, city_row, operation_type_row, clean_dist) {
 function get_table(row, city_row, operation_type_row) {
   var table = '';
   table += '<div class="report-div">'
-  table += '<table cellspacing="10">' //border-spacing:10px;">';
-  table += '<col width="30%">'
-  table += '<col width="70%">'
 
+  table += '<h2>' + row.operation_name + '</h2>'
+
+  table += '<table class="report-table">' //cellspacing="10" //border-spacing:10px;">';
+  table += '<col width="40%">'
+  table += '<col width="60%">'
+
+/*
   table += '<tr>'
   table += '<td colspan="2"><h2>' + row.operation_name + '</h2></td>'
   table += '</tr>' 
+  */
 
   table += '<tr>'
   table += '<td><b>Address</b></td>'
@@ -333,7 +345,7 @@ function get_pct_rank(row, div_id) {
     else { rank_text += 'bottom ' + Math.ceil(100. - val).toString() + '%' };
   var span = '';
   span += '<div class="pct-rank" id="' + div_id + '">'
-  span += '<table style="border-spacing:10px;">';
+  span += '<table>'; //  style="border-spacing:10px;"
   span += '<tr><td><h2>' + rank_text + '</h2></td></tr>'
   span += '<tr><td>of energy efficiency for this type of building in Ontario.</td></tr>'
   span += '</table>'
@@ -440,6 +452,8 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
   </script>
 
   <body>
+
+    <div id='container'>
     <h1 id="title">Public Building Energy Consumption in Ontario</h1>
 
     <div class="ui-widget" id="search-div">
@@ -451,9 +465,9 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
       <div id="sensorList"></div>
       <div id="map_canvas"></div>
     </div>
-
-    <div class="main-report-div"></div>
-
+  </div>
+</body>
+<footer>
   <div id="footnote">
   <p>
   This work uses utility data for 2012, and was made possible by the Government of Ontario's <a class="my-link" href="https://www.ontario.ca/open-data">Open Data Catalogue</a>.
@@ -464,11 +478,8 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
   <p>
   Created by Stephen McMurtry, (c) 2015. 
   </p>
-  <p>
-  print page
-  </p>
   </div>
 
-  </body>
+</footer>
 
-  </html>
+</html>
