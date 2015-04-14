@@ -6,23 +6,19 @@
 body {
   font: 18px helvetica neue;
   padding:0px;
-  /* text-align:center; */
+  background-color: #f6f6f6;
 }
 
-#container {
-  background-color: white;}
-
-#tags { 
-  width: 910px; 
+#search-bar { 
+  width: 949px; 
   text-align:left;
 }
 
-#Content, #search-div, #footnote, #title {
+#search-div, #footnote, #title {
   width:1000px;
   margin:0px auto;
   text-align:left;
   padding:15px;
- /* border:1px dashed #333;  /*comment this out */
 }
 
 #footnote {margin-top: 50px;}
@@ -44,44 +40,64 @@ body {
   float: right;
 }
 
-#sensorList {
-  white-space: nowrap; 
+#map-left {
   text-align: left;
   width: 34%; 
-  height: 99%; 
-  overflow-y: scroll;
+  height: 100%; 
   float: left;
-  background-color: #f6f6f6;
-  /* border:1px #333; /*  comment this out */
 }
 
-.pct-rank {
-  width:25%;
+#buildings-title {
+  font-size: 20px;
+  padding-bottom: 5px;
+}
+
+#sensorList {
+  background-color: white;
+  white-space: nowrap; 
+  height: 475px; 
+  overflow-y: scroll;
+}
+
+.left-report tr > td {
+  padding-bottom: 10px;
+}
+
+.right-report tr > td {
+  padding-bottom: 0px;
+}
+
+.report, 
+.right-report, .left-report{
+  height: 250px;
+}
+
+.right-report, .left-report{
+  background-color: white;
+}
+
+.big-text {
+  font-size: 40px;
+}
+
+.right-report {
+  width:29%;
   text-align:right;
   float:right;
 }
 
-.report-div {
+.left-report {
  width:70%; 
  float:left;
 }
 
-.report-table {
-  background-color: #f6f6f6;
-}
-
-.sub-report-div {
+.report {
   width:1000px;
-  height: 350px;
   margin:0 auto;
-  margin-bottom: 50px;
+  padding-bottom: 100px;
 }
 
-tr > td {
-  padding-bottom: 10px;
-}
-
-.axis text {
+.axis text, .x.label, .y.label {
   font: 10px sans-serif;
 }
 
@@ -91,8 +107,6 @@ tr > td {
   stroke: #000;
   shape-rendering: crispEdges;
 }
-
-.x.label, .y.label {font: 8px sans-serif;}
 
 .y.axis line {
   stroke: #000; 
@@ -137,7 +151,7 @@ d3.csv("dim_city.csv", function(DimCity) {
    for (var i = DimOrganization.length - 1; i >= 0; i--) {
     org_array.push(DimOrganization[i].organization);
   };
-  $(function() {$( "#tags" ).autocomplete({ source: org_array }); });
+  $(function() {$( "#search-bar" ).autocomplete({ source: org_array }); });
   $('.default-value').each( function () {
     var $t = $(this),
     default_value = this.value;
@@ -166,11 +180,11 @@ d3.csv("dim_city.csv", function(DimCity) {
         $( "input[id=go-button]" )
         .button()
         .click(function( event ) {
-          $('.sub-report-div').remove();
+          $('.report').remove();
           initialize_map();
           $("#sensorList").empty();
           event.preventDefault();
-          var nameInput = document.getElementById('tags');
+          var nameInput = document.getElementById('search-bar');
           var org = nameInput.value;
           var dim_organization_row = DimOrganization.filter(function( obj ) { return obj.organization == org; });
             var dim_org_id = dim_organization_row[0].dim_organization; // should be only one result
@@ -284,35 +298,30 @@ function on_deselect(marker) {
   marker.setZIndex(1);
   $("#"+marker.index+"VisibleCheckbox").prop('checked', false);
   marker.setOpacity(0.5)
-  $( "#sub-report-" + marker.index ).remove();
+  $( "#report-" + marker.index ).remove();
 }
 
 function generateReport(row, city_row, operation_type_row, clean_dist) {
-  $( "#container" ).append( '<div class="sub-report-div" id="sub-report-' + row.index + '"></div>' );
+  $( "#container" ).append( '<div class="report" id="report-' + row.index + '"></div>' );
+ 
 
-  $( "#sub-report-" + row.index ).append( '<div id="report-' + row.index +'"></div>' );
+  $( "#report-" + row.index ).append(  '<h2>' + row.operation_name + '</h2>' );
 
-  $( "#report-" + row.index ).append( get_table(row, city_row, operation_type_row) );
-  $( "#report-" + row.index ).append( get_pct_rank(row, 'pct-rank-' + row.index) )
-  $( "#pct-rank-" + row.index ).append( '<div id="chart-' + row.index + '" class="chart"></div>' )
+  $( "#report-" + row.index ).append(  '<div class="left-report"></div>' );
+  $( "#report-" + row.index ).append(  '<div class="right-report"></div>' );
+
+  $( "#report-" + row.index + "> .left-report").append( get_table(row, city_row, operation_type_row) );
+
+  $( "#report-" + row.index + "> .right-report").append( get_pct_rank(row) )
+  $( "#report-" + row.index + "> .right-report").append( '<div id="chart-' + row.index + '" class="chart"></div>' )
   plot_hist(clean_dist, row.en_intensity_ekWh_sqft, '#chart-' + row.index);
 };
 
 function get_table(row, city_row, operation_type_row) {
-  var table = '';
-  table += '<div class="report-div">'
 
-  table += '<h2>' + row.operation_name + '</h2>'
-
-  table += '<table class="report-table">' //cellspacing="10" //border-spacing:10px;">';
+  var table = '<table class="report-table">'
   table += '<col width="40%">'
   table += '<col width="60%">'
-
-/*
-  table += '<tr>'
-  table += '<td colspan="2"><h2>' + row.operation_name + '</h2></td>'
-  table += '</tr>' 
-  */
 
   table += '<tr>'
   table += '<td><b>Address</b></td>'
@@ -338,18 +347,17 @@ function get_table(row, city_row, operation_type_row) {
   return table
 };
 
-function get_pct_rank(row, div_id) {
+function get_pct_rank(row) {
+  
   var val = row.en_intensity_ekWh_sqft_pct_rank;
   var rank_text = '';
   if (val <= 50.) { rank_text += 'top ' + Math.ceil(val).toString() + '%' } 
     else { rank_text += 'bottom ' + Math.ceil(100. - val).toString() + '%' };
-  var span = '';
-  span += '<div class="pct-rank" id="' + div_id + '">'
-  span += '<table>'; //  style="border-spacing:10px;"
-  span += '<tr><td><h2>' + rank_text + '</h2></td></tr>'
+  
+  var span = '<table>'; 
+  span += '<tr><td class="big-text">' + rank_text + '</td></tr>'
   span += '<tr><td>of energy efficiency for this type of building in Ontario.</td></tr>'
   span += '</table>'
-  span += '</div>'
   return span
 };
 
@@ -457,12 +465,15 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
     <h1 id="title">Public Building Energy Consumption in Ontario</h1>
 
     <div class="ui-widget" id="search-div">
-      <input id="tags" onkeydown="if (event.keyCode == 13) document.getElementById('go-button').click()" value="Enter an organization name here..." class="default-value"a>
-      <input type="submit" value="Go" id="go-button" >
+      <input id="search-bar" onkeydown="if (event.keyCode == 13) document.getElementById('go-button').click()" value="Enter an organization name here..." class="default-value">
+      <input id="go-button" type="submit" value="Go">
     </div>
 
     <div id="map-and-list">
-      <div id="sensorList"></div>
+      <div id="map-left">
+        <div id="buildings-title">Buildings (sorted by energy efficiency)</div>
+        <div id="sensorList"></div>
+      </div>
       <div id="map_canvas"></div>
     </div>
   </div>

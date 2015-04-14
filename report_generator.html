@@ -9,7 +9,7 @@
 	}
 
 .right-report {
-	width:25%;
+	width:29%;
 	text-align:right;
 	float:right;
 }
@@ -35,7 +35,7 @@
   shape-rendering: crispEdges;
 }
 
-.x.label, .y.label {font: 8px sans-serif;}
+.x.label, .y.label {font: 10px sans-serif;}
 
 
 .y.axis line {
@@ -119,8 +119,8 @@ function generateReport(row, city_row, operation_type_row, clean_dist) {
 function get_table(row, city_row, operation_type_row) {
 	var table = '';
 	table += '<table>'
-  	table += '<col width="30%">'
-  	table += '<col width="70%">'
+  	table += '<col width="40%">'
+  	table += '<col width="60%">'
 
 	table += '<tr>'
 	table += '<td><b>Address</b></td>'
@@ -157,7 +157,7 @@ function get_pct_rank(row) {
 	span += '<tr><td class="big-text">91st of 207</td></tr>'
 	span += '<tr><td>energy efficiency ranked against the 207 other buildings of this type in Ontario.</td></tr>'
 	span += '</table>'
-	span += '</div>'
+	//span += '</div>'
 	return span
 };
 
@@ -177,9 +177,9 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
   // A formatter for counts.
   var formatCount = d3.format(",.0f");
 
-  var margin = {top: 20, right: 10, bottom: 50, left: 40},
-      width = 250 - margin.left - margin.right, // 800 was 960
-      height = 150 - margin.top - margin.bottom;
+  var margin = {top: 40, right: 20, bottom: 50, left: 50},
+      width = 290 - margin.left - margin.right, // 800 was 960
+      height = 240 - margin.top - margin.bottom;
 
   var x = d3.scale.linear()
       .domain([0, 100.]) //100., d3.max(values)])
