@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-
+<title>Public Building Energy Consumption in Ontario</title>
 <link rel="stylesheet" href="jquery-ui.css">
 
 <style>
@@ -19,7 +19,7 @@ body {
   color: black;
 }
 
-#search-div, #footnote, #title {
+#search-div, #footnote, #title, #intro {
   width:1000px;
   margin:0px auto;
   text-align:left;
@@ -270,11 +270,19 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
         infowindow.setContent(this.title);
         infowindow.open(map, this);
         if (this.zIndex == 1) {
-                    on_select(this, Master, DimCity, DimOperationType, dists);
-                  } else {
-                    on_deselect(this);
-                  }
-          });
+
+          // scroll to checked box in list #sensorList*
+          var container = $('#sensorList'),
+              scrollTo = $("#"+this.index+"VisibleCheckbox");
+          container.scrollTop(
+              scrollTo.offset().top - container.offset().top + container.scrollTop() - 20 // 20 is an offset so that the entry is not hidden at the very top
+          );
+
+          on_select(this, Master, DimCity, DimOperationType, dists);
+        } else {
+          on_deselect(this);
+        }
+        });
 }
 
 map.setCenter(latlngbounds.getCenter());
@@ -327,6 +335,8 @@ function generateReport(row, city_row, operation_type_row, clean_dist) {
   plot_hist(clean_dist, row.en_intensity_ekWh_sqft, '#chart-' + row.index);
 };
 
+comma_format = d3.format("0,000");
+
 function get_table(row, city_row, operation_type_row) {
 
   var table = '<table class="report-table">'
@@ -345,7 +355,7 @@ function get_table(row, city_row, operation_type_row) {
 
   table += '<tr>'
   table += '<td><b>Floor Area</b></td>'
-  table += '<td>' + d3.round(row.tot_floor_area_ft2, 0) + ' sqft</td>'
+  table += '<td>' + comma_format(row.tot_floor_area_ft2) + ' sqft</td>' //d3.round(row.tot_floor_area_ft2, 0) + ' sqft</td>'
   table += '</tr>' 
 
   table += '<tr>'
@@ -474,6 +484,14 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
   <body>
     <div id='container'>
     <h1 id="title">Public Building Energy Consumption in Ontario</h1>
+
+    <div id="intro">
+    <p> This page allows you to explore the energy consumption of public buildings in Ontario. It is intended to highlight the best and worst performing buildings to help organizations identify good candidates for retrofit. It is also for individuals to see how the public buildings near them compare to others in Ontario. </p>
+
+    <p> To get started, start typing the name of an organization or building type in the search bar and select the one you want. Then select the buildings you are interested in and individual energy reports will appear. The energy efficiency of each building is ranked in two ways: compared to buildings of the same type (e.g. Community Centres) and compared to buildings managed by the same organization. </p>
+    <p> To get started, choose to search by building type or organization name: </p>
+    </div>
+
     <div class="ui-widget" id="search-div">
       <input id="search-bar" class="default-value" onkeydown="if (event.keyCode == 13) document.getElementById('go-button').click()" value="Enter an organization name here...">
       <input id="go-button" type="submit" value="Go">
@@ -490,15 +508,15 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
 
 <footer>
   <div id="footnote">
-  <p>
-  This work uses utility data for 2012, and was made possible by the Government of Ontario's <a class="my-link" href="https://www.ontario.ca/open-data">Open Data Catalogue</a>.
-  </p>
-  <p>
-  For the raw data this app uses, <a class='my-link' href="https://www.ontario.ca/data/energy-use-and-greenhouse-gas-emissions-broader-public-sector">click here</a>.
-  </p>
-  <p>
-  Created by <a class='my-link' href="http://stephenmcmurtry.org/">Stephen McMurtry</a>, &copy; 2015. 
-  </p>
+  
+  <p>Note: ekWh stands for equivalent kilowatt hours, which includes heating, cooling and other electrical energy use. sqft stands for square feet of floor area. </p>
+  
+  <p>This work uses utility data for 2012, and was made possible by the Government of Ontario's <a class="my-link" href="https://www.ontario.ca/open-data">Open Data Catalogue</a>. </p>
+  
+  <p>For the raw data this app uses, <a class='my-link' href="https://www.ontario.ca/data/energy-use-and-greenhouse-gas-emissions-broader-public-sector">click here</a>.</p>
+  
+  <p>Created by <a class='my-link' href="http://stephenmcmurtry.org/">Stephen McMurtry</a>, &copy; 2015. </p>
+  
   </div>
 </footer>
 
