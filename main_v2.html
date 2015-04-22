@@ -2,6 +2,7 @@
 <html>
 <title>Public Building Energy Consumption in Ontario</title>
 <link rel="stylesheet" href="jquery-ui.css">
+<link rel="stylesheet" href="jquery.dataTables.css">
 
 <style>
 body {
@@ -40,28 +41,22 @@ body {
 }
 
 #map_canvas {
-  width: 65%;
+  width: 50%;
   height: 100%;
   float: right;
-}
-
-#map-left {
-  text-align: left;
-  width: 34%; 
-  height: 100%; 
-  float: left;
-}
-
-#buildings-title {
-  font-size: 18px;
-  padding-bottom: 5px;
 }
 
 #sensorList {
   background-color: white;
   white-space: nowrap; 
-  height: 475px; 
-  overflow-y: scroll;
+  height: 500px;
+  width: 49%; 
+  float: left;
+  text-align: left;
+}
+
+#sensorList tbody {
+  overflow-y: auto; /*scroll;*/
 }
 
 .left-report tr > td {
@@ -143,6 +138,7 @@ label {
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization"></script>
+<script src="jquery.dataTables.min.js"></script>
 
 <script>
 // <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js">
@@ -199,18 +195,18 @@ d3.csv("dim_city.csv", function(DimCity) {
           // sort rows by percentile rank
           function compare(a, b) {
             if (a.en_intensity_ekWh_sqft_pct_rank < b.en_intensity_ekWh_sqft_pct_rank)
-               return -1;
-            if (a.en_intensity_ekWh_sqft_pct_rank > b.en_intensity_ekWh_sqft_pct_rank)
-              return 1;
-            return 0;
-          }
-          rows.sort(compare);
+             return -1;
+           if (a.en_intensity_ekWh_sqft_pct_rank > b.en_intensity_ekWh_sqft_pct_rank)
+            return 1;
+          return 0;
+        }
+        rows.sort(compare);
 
-          do_everything(rows, Master, DimCity, DimOperationType, dists);
-          });
+        do_everything(rows, Master, DimCity, DimOperationType, dists);
       });
-    });
-  });
+});
+});
+});
 });
 });
 
@@ -227,7 +223,7 @@ function initialize_map(){
 }
 
 function do_everything(rows, Master, DimCity, DimOperationType, dists){
-  
+
   $(document).ready(function () {
     $('#map_canvas').empty();
     $("#sensorList").empty();
@@ -246,14 +242,36 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
 
     var pinImage = new google.maps.MarkerImage('grey_pin.png'); 
     var markers = {};
+    
+    var table = $('<table></table>', {id:'results-table', class:"display", cellspacing:"0"});
+    var table_header = $("<thead></thead>");
+    table_header.append("<tr> <th></th> <th>Rank 1</th> <th>Rank 2</th> <th>Building Name</th> </tr>");
+    table.append(table_header);
+    
+
+    var table_contents = $("<tbody></tbody>");
+
     for (var x = 0; x < rows.length; x++) {
+
       var sensorId = rows[x].index;
-      $("#sensorList").append($('<div>', { id : sensorId })
-        .addClass("sensorListItem")
-        );
-      /* Adds visibile checkbox */
-      $("#"+sensorId).append($('<input>', { id : sensorId + "VisibleCheckbox", type:"checkbox", name: sensorId + "VisibleCheckbox"}));
-      $("#"+sensorId).append( rows[x].operation_name );
+
+      var row = $('<tr></tr>').attr('id', sensorId).addClass("sensorListItem");
+      var c1 = $('<td></td>');
+      var c2 = $('<td></td>'); 
+      var c3 = $('<td></td>'); 
+      var c4 = $('<td></td>');
+
+      c1.append($('<input>', { id : sensorId + "VisibleCheckbox", type:"checkbox", name: sensorId + "VisibleCheckbox"}));
+      c2.append('10 of 399');
+      c3.append('1,000 of 3,496')
+      c4.append(rows[x].operation_name);
+
+      row.append(c1);
+      row.append(c2);
+      row.append(c3);
+      row.append(c4);
+      table_contents.append(row);
+      
       var latlng = new google.maps.LatLng(rows[x].lat, rows[x].lng);
       latlngbounds.extend(latlng);
       var marker = new google.maps.Marker({
@@ -272,34 +290,49 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
         if (this.zIndex == 1) {
 
           // scroll to checked box in list #sensorList*
-          var container = $('#sensorList'),
-              scrollTo = $("#"+this.index+"VisibleCheckbox");
+          /*
+          var container = $('#dataTables_scrollBody'),
+          scrollTo = $("#"+this.index+"VisibleCheckbox");
           container.scrollTop(
               scrollTo.offset().top - container.offset().top + container.scrollTop() - 20 // 20 is an offset so that the entry is not hidden at the very top
-          );
-
+              );
+          */
           on_select(this, Master, DimCity, DimOperationType, dists);
         } else {
           on_deselect(this);
         }
-        });
-}
+      });
+    }
+    table.append(table_contents)
+    $('#sensorList').append(table);
 
-map.setCenter(latlngbounds.getCenter());
-map.fitBounds(latlngbounds); 
+    map.setCenter(latlngbounds.getCenter());
+    map.fitBounds(latlngbounds); 
 
-// listen for checkbox change
-$('input:checkbox').change(
-  function(){
-    sId = $(this)[0].id;
-    m = markers[sId]
-    if (m.zIndex == 1) {
-            on_select(m, Master, DimCity, DimOperationType, dists);
-          } else {
-            on_deselect(m);
-          } 
-        });
-});
+  // listen for checkbox change
+  $('input:checkbox').change(
+    function(){
+      sId = $(this)[0].id;
+      m = markers[sId]
+      if (m.zIndex == 1) {
+        on_select(m, Master, DimCity, DimOperationType, dists);
+      } else {
+        on_deselect(m);
+      } 
+    });
+  });
+
+  $(document).ready(function() {
+      $('#results-table').dataTable( {
+          "scrollY":        "460px",
+          "scrollX": true,
+          "paging":         false,
+          "defaultContent": '',
+          'sDom': 'lrtp', // removed i=length statement and f=search box
+          "columns": [{ "orderable": false }, null, null, null]
+      } );
+  } );
+
 }
 
 function on_select(marker, Master, DimCity, DimOperationType, dists) {
@@ -373,7 +406,7 @@ function get_table(row, city_row, operation_type_row) {
 };
 
 function get_pct_rank(row, operation_type_row) {
-  
+
   var rank = d3.round(row.en_intensity_rank + 1, 0);
   var rank_text = '#' + rank.toString();
   var span = '<table>'; 
@@ -403,70 +436,70 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
       width = 275 - margin.left - margin.right, // 800 was 960
       height = 180 - margin.top - margin.bottom;
 
-  var x = d3.scale.linear()
+      var x = d3.scale.linear()
     .domain([0, 100.]) //100., d3.max(values)])
-    .range([0, width]);
+.range([0, width]);
 
   // Generate a histogram using twenty uniformly-spaced bins.
   var data = d3.layout.histogram()
-    .bins(x.ticks(20))
-    (values);
+  .bins(x.ticks(20))
+  (values);
 
   var y = d3.scale.linear()
-    .domain([0, d3.max(data, function(d) { return d.y; })])
-    .range([height, 0]);
+  .domain([0, d3.max(data, function(d) { return d.y; })])
+  .range([height, 0]);
 
   var xAxis = d3.svg.axis()
-    .scale(x)
-    .ticks(6)
-    .orient("bottom");
+  .scale(x)
+  .ticks(6)
+  .orient("bottom");
 
   var yAxis = d3.svg.axis()
-    .scale(y)
-    .ticks(4)
-    .orient("left");
+  .scale(y)
+  .ticks(4)
+  .orient("left");
 
   var svg = d3.select(div_tag).append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   // Add an x-axis label.
   svg.append("text")
-    .attr("class", "x label")
-    .attr("text-anchor", "end")
-    .attr("x", width)
-    .attr("y", height + 30)
-    .text("Energy Consumption (ekWh/sqft)");
+  .attr("class", "x label")
+  .attr("text-anchor", "end")
+  .attr("x", width)
+  .attr("y", height + 30)
+  .text("Energy Consumption (ekWh/sqft)");
 
   // Add a y-axis label.
   svg.append("text")
-    .attr("class", "y label")
-    .attr("text-anchor", "end")
-    .attr("y", -33)
-    .attr("x", 6)
+  .attr("class", "y label")
+  .attr("text-anchor", "end")
+  .attr("y", -33)
+  .attr("x", 6)
     //.attr("dy", ".75em")
     .attr("transform", "rotate(-90)")
     .text("# of Buildings");
 
-  var bar = svg.selectAll(".bar")
+    var bar = svg.selectAll(".bar")
     .data(data)
     .enter().append("g")
     .attr("class", "bar")
     .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
 
-  bar.append("rect")
+    bar.append("rect")
     .attr("x", 1)
     .attr("width", x(data[0].dx) - 1)
     .attr("height", function(d) { return height - y(d.y); });
 
-  svg.append("g")
+    svg.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
     .call(xAxis);
 
-  svg.append("g")
+    svg.append("g")
     .attr("class", "y axis")
     .call(yAxis);
 
@@ -483,41 +516,44 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
 
   <body>
     <div id='container'>
-    <h1 id="title">Public Building Energy Consumption in Ontario</h1>
+      <h1 id="title">Public Building Energy Consumption in Ontario</h1>
 
-    <div id="intro">
-    <p> This page allows you to explore the energy consumption of public buildings in Ontario. It is intended to highlight the best and worst performing buildings to help organizations identify good candidates for retrofit. It is also for individuals to see how the public buildings near them compare to others in Ontario. </p>
+      <div id="intro">
+        <p> This page allows you to explore the energy consumption of public buildings in Ontario. It is intended to highlight the best and worst performing buildings to help organizations identify good candidates for retrofit. It is also for individuals to see how the public buildings near them compare to others in Ontario. </p>
 
-    <p> To get started, start typing the name of an organization or building type in the search bar and select the one you want. Then select the buildings you are interested in and individual energy reports will appear. The energy efficiency of each building is ranked in two ways: compared to buildings of the same type (e.g. Community Centres) and compared to buildings managed by the same organization. </p>
-    <p> To get started, choose to search by building type or organization name: </p>
-    </div>
-
-    <div class="ui-widget" id="search-div">
-      <input id="search-bar" class="default-value" onkeydown="if (event.keyCode == 13) document.getElementById('go-button').click()" value="Enter an organization name here...">
-      <input id="go-button" type="submit" value="Go">
-    </div>
-    <div id="map-and-list">
-      <div id="map-left">
-        <div id="buildings-title"><b>Buildings (most to least efficient)</b></div>
-        <div id="sensorList"></div>
+        <p> To get started, start typing the name of an organization or building type in the search bar and select the one you want. Then select the buildings you are interested in and individual energy reports will appear. The energy efficiency of each building is ranked in two ways: compared to buildings of the same type (e.g. Community Centres) and compared to buildings managed by the same organization. </p>
+        <p> To get started, choose to search by building type or organization name: </p>
       </div>
-      <div id="map_canvas"></div>
+
+      <div class="ui-widget" id="search-div">
+        <input id="search-bar" class="default-value" onkeydown="if (event.keyCode == 13) document.getElementById('go-button').click()" value="Enter an organization name here...">
+        <input id="go-button" type="submit" value="Go">
+      </div>
+      <div id="map-and-list">
+        <div id="sensorList">
+          <table id='results-table' class="display" cellspacing="0">
+            <thead>
+              <tr> <th></th> <th>Rank 1</th> <th>Rank 2</th> <th>Building Name</th> </tr>
+            </thead>
+          </table>
+        </div>
+        <div id="map_canvas"></div>
+      </div>
     </div>
-  </div>
-</body>
+  </body>
 
-<footer>
-  <div id="footnote">
-  
-  <p>Note: ekWh stands for equivalent kilowatt hours, which includes heating, cooling and other electrical energy use. sqft stands for square feet of floor area. </p>
-  
-  <p>This work uses utility data for 2012, and was made possible by the Government of Ontario's <a class="my-link" href="https://www.ontario.ca/open-data">Open Data Catalogue</a>. </p>
-  
-  <p>For the raw data this app uses, <a class='my-link' href="https://www.ontario.ca/data/energy-use-and-greenhouse-gas-emissions-broader-public-sector">click here</a>.</p>
-  
-  <p>Created by <a class='my-link' href="http://stephenmcmurtry.org/">Stephen McMurtry</a>, &copy; 2015. </p>
-  
-  </div>
-</footer>
+  <footer>
+    <div id="footnote">
 
-</html>
+      <p>Note: ekWh stands for equivalent kilowatt hours, which includes heating, cooling and other electrical energy use. sqft stands for square feet of floor area. </p>
+
+      <p>This work uses utility data for 2012, and was made possible by the Government of Ontario's <a class="my-link" href="https://www.ontario.ca/open-data">Open Data Catalogue</a>. </p>
+
+      <p>For the raw data this app uses, <a class='my-link' href="https://www.ontario.ca/data/energy-use-and-greenhouse-gas-emissions-broader-public-sector">click here</a>.</p>
+
+      <p>Created by <a class='my-link' href="http://stephenmcmurtry.org/">Stephen McMurtry</a>, &copy; 2015. </p>
+
+    </div>
+  </footer>
+
+  </html>
