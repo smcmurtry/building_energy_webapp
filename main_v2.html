@@ -182,7 +182,7 @@ d3.csv("dim_city.csv", function(DimCity) {
         .click(function( event ) {
           $('.report').remove();
           initialize_map();
-          $("#sensorList").empty();
+          $("#results-table tbody").empty();
           event.preventDefault();
           var nameInput = document.getElementById('search-bar');
           var org = nameInput.value;
@@ -219,14 +219,25 @@ function initialize_map(){
       mapTypeId: 'terrain'
     };
     var map = new google.maps.Map($('#map_canvas')[0], myOptions);
+
+    $('#results-table').dataTable( {
+        "scrollY":        "460px",
+        "scrollX":        true,
+        "paging":         false,
+        "retrieve":       true,
+        "defaultContent": '',
+        'sDom': 'lrtp', // removed i=length statement and f=search box
+        "columns": [{ "orderable": false }, null, null, null]
+    } );
   });
+
 }
 
 function do_everything(rows, Master, DimCity, DimOperationType, dists){
 
   $(document).ready(function () {
     $('#map_canvas').empty();
-    $("#sensorList").empty();
+    $("#results-table tbody").empty();
 
     var myOptions = {
       zoom: 1,
@@ -243,13 +254,15 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
     var pinImage = new google.maps.MarkerImage('grey_pin.png'); 
     var markers = {};
     
-    var table = $('<table></table>', {id:'results-table', class:"display", cellspacing:"0"});
+    //var table = $('<table></table>', {id:'results-table', class:"display", cellspacing:"0"});
+
+    /*
     var table_header = $("<thead></thead>");
     table_header.append("<tr> <th></th> <th>Rank 1</th> <th>Rank 2</th> <th>Building Name</th> </tr>");
     table.append(table_header);
-    
-
-    var table_contents = $("<tbody></tbody>");
+    */
+    // var table = $("#results-table");
+    var table_contents = $("#results-table tbody");
 
     for (var x = 0; x < rows.length; x++) {
 
@@ -303,8 +316,8 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
         }
       });
     }
-    table.append(table_contents)
-    $('#sensorList').append(table);
+    $("#results-table").append(table_contents);
+    //$('#sensorList').append(table);
 
     map.setCenter(latlngbounds.getCenter());
     map.fitBounds(latlngbounds); 
@@ -313,7 +326,7 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
   $('input:checkbox').change(
     function(){
       sId = $(this)[0].id;
-      m = markers[sId]
+      m = markers[sId];
       if (m.zIndex == 1) {
         on_select(m, Master, DimCity, DimOperationType, dists);
       } else {
@@ -322,17 +335,18 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
     });
   });
 
+/*
   $(document).ready(function() {
       $('#results-table').dataTable( {
           "scrollY":        "460px",
-          "scrollX": true,
+          "scrollX":        true,
           "paging":         false,
           "defaultContent": '',
           'sDom': 'lrtp', // removed i=length statement and f=search box
           "columns": [{ "orderable": false }, null, null, null]
       } );
   } );
-
+*/
 }
 
 function on_select(marker, Master, DimCity, DimOperationType, dists) {
@@ -531,10 +545,11 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
       </div>
       <div id="map-and-list">
         <div id="sensorList">
-          <table id='results-table' class="display" cellspacing="0">
+          <table id="results-table" class="display" cellspacing="0">
             <thead>
               <tr> <th></th> <th>Rank 1</th> <th>Rank 2</th> <th>Building Name</th> </tr>
             </thead>
+            <tbody></tbody>
           </table>
         </div>
         <div id="map_canvas"></div>
