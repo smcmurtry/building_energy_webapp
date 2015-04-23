@@ -148,7 +148,8 @@ label {
 var infowindow = null;
 initialize_map();
 comma_format = d3.format("0,000");
-
+zero_format_int = d3.format("05d");
+zero_format_float = d3.format('05.0r');
 
 d3.csv("dim_city.csv", function(DimCity) {
   d3.csv("dim_organization.csv", function(DimOrganization) { 
@@ -223,16 +224,16 @@ function initialize_map(){
     var map = new google.maps.Map($('#map_canvas')[0], myOptions);
 
     $('#results-table').dataTable( {
-        "scrollY":        "460px",
-        "scrollX":        true,
-        "paging":         false,
-        "retrieve":       true,
-        "defaultContent": '',
-        'sDom': 'lrtp', // removed i=length statement and f=search box
-        "columns": [
-            { "data": "org_rank" },
-            { "data": "similar_rank" },
-            { "data": "name"} ]
+        scrollY:        "460px",
+        scrollX:        true,
+        paging:         false,
+        retrieve:       true,
+        defaultContent: '',
+        sDom: 'lrtp', // removed i=length statement and f=search box
+        columns: [
+            { data: { _: 'org_rank.display', sort: 'org_rank.rank' } }, 
+            { data: { _: 'similar_rank.display', sort: 'similar_rank.rank' } },
+            { data: "name"} ]
     } );
   });
 
@@ -243,6 +244,7 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
   $(document).ready(function () {
     $('#map_canvas').empty();
     $("#results-table tbody").empty();
+    $('#results-table').DataTable().clear().draw();
 
     var myOptions = {
       zoom: 1,
@@ -258,8 +260,7 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
 
     var pinImage = new google.maps.MarkerImage('grey_pin.png'); 
     var markers = {};
-    var table = $('#results-table').DataTable();
-    var table_contents = $( table.table().body() ); // $("#results-table tbody");
+    //var table = $('#results-table')
 
     n_buildings = rows.length;
 
@@ -272,8 +273,12 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
 
       $('#results-table').dataTable().fnAddData( [
         { "DT_RowId": sensorId + "VisibleCheckbox", 
-          "org_rank": org_rank + ' of ' + n_buildings,
-          "similar_rank": comma_format(rows[x].en_intensity_rank) + ' of ' + comma_format(operation_type_row.n_buildings),
+          "org_rank": {
+            "display": comma_format(org_rank) + ' of ' + comma_format(n_buildings), 
+            "rank": zero_format_int(org_rank) },
+          "similar_rank": {
+            "display": comma_format(rows[x].en_intensity_rank) + ' of ' + comma_format(operation_type_row.n_buildings), 
+            "rank": zero_format_float(10. * rows[x].en_intensity_ekWh_sqft_pct_rank ) },
           "name": rows[x].operation_name } ]
       );
       
@@ -295,7 +300,6 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
         infowindow.setContent(this.title);
         infowindow.open(map, this);
         if (this.zIndex == 1) {
-
           // scroll to checked box in list #sensorList*
           /*
           var container = $('#dataTables_scrollBody'),
@@ -318,7 +322,6 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
   // listen for results click
     $('#results-table tbody').on( 'click', 'tr', function () {
         $(this).toggleClass('selected');
-        console.log(this);
         // update map and stuff
         sId = $(this)[0].id;
         m = markers[sId];
