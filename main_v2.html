@@ -211,24 +211,18 @@ d3.csv("dim_city.csv", function(DimCity) {
 
       initialize_autocomplete(org_array);
 
+      // add listeners to the radio button
       $(function() {
         $( "input[id=radio1]" )
         .button()
-        .click(function( event ) {
-          console.log("radio1");
-          initialize_autocomplete(org_array);
-        })
+        .click(function( event ) { initialize_autocomplete(org_array); })
       });
 
       $(function() {
         $( "input[id=radio2]" )
         .button()
-        .click(function( event ) {
-          console.log("radio2");
-          initialize_autocomplete(op_types);
-        })
+        .click(function( event ) { initialize_autocomplete(op_types); })
       });
-
 
       d3.csv("master_short.csv", function(Master) {
         var dists = get_dists(Master);
@@ -241,11 +235,30 @@ d3.csv("dim_city.csv", function(DimCity) {
             $("#results-table tbody").empty();
             event.preventDefault();
             var nameInput = document.getElementById('search-bar');
-            var org = nameInput.value;
-            var dim_organization_row = DimOrganization.filter( function( obj ) { return obj.organization == org; });
-            var dim_org_id = dim_organization_row[0].dim_organization; // should be only one result
-            var rows = Master.filter( function( obj ) { return obj.dim_organization == dim_org_id; });
-            do_everything(rows, Master, DimCity, DimOperationType, dists);
+            
+            var dim_organization_row = DimOrganization.filter( function( obj ) { return obj.organization == nameInput.value; });
+            var dim_op_type_row = DimOperationType.filter( function( obj ) { return obj.operation_type == nameInput.value; });
+            var rows;
+            var org_mode;
+
+            if (dim_organization_row.length > 0) {
+              console.log(dim_organization_row);
+              var dim_org_id = dim_organization_row[0].dim_organization; // should be only one result
+              rows = Master.filter( function( obj ) { return obj.dim_organization == dim_org_id; });
+              org_mode = true;
+            }
+            if (dim_op_type_row.length) {
+              console.log(dim_op_type_row);
+              var dim_op_type_id = dim_op_type_row[0].dim_operation_type; // should be only one result
+              rows = Master.filter( function( obj ) { return obj.dim_operation_type == dim_op_type_id; });
+              org_mode = false;
+            }
+            //var org = nameInput.value;
+            //var dim_organization_row = DimOrganization.filter( function( obj ) { return obj.organization == org; });
+            //var dim_org_id = dim_organization_row[0].dim_organization; // should be only one result
+            //var rows = Master.filter( function( obj ) { return obj.dim_organization == dim_org_id; });
+
+            do_everything(rows, Master, DimCity, DimOperationType, DimOrganization, dists, org_mode);
         });
 });
 });
@@ -279,7 +292,7 @@ function initialize_map(){
 
 }
 
-function do_everything(rows, Master, DimCity, DimOperationType, dists){
+function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization, dists, org_mode) {
 
   $(document).ready(function () {
     $('#map_canvas').empty();
@@ -300,17 +313,20 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
 
     var pinImage = new google.maps.MarkerImage('grey_pin.png'); 
     var markers = {};
-    org_n_buildings = rows.length;
+    
+
+    //org_n_buildings = rows.length;
 
     for (var x = 0; x < rows.length; x++) {
       var r = rows[x]
       var operation_type_row = DimOperationType.filter(function( obj ) { return obj.dim_operation_type == r.dim_operation_type; })[0];
+      var organization_row = DimOrganization.filter(function( obj ) { return obj.dim_organization == r.dim_organization; })[0];
       var sensorId = r.index;
 
       $('#results-table').dataTable().fnAddData( [
         { "DT_RowId": sensorId + "VisibleCheckbox", 
           "org_rank": {
-            "display": comma_format(r.org_rank) + ' of ' + comma_format(org_n_buildings), 
+            "display": comma_format(r.org_rank) + ' of ' + comma_format(organization_row.n_buildings), 
             "rank": zero_format_int(r.org_rank) },
           "similar_rank": {
             "display": comma_format(r.op_type_rank) + ' of ' + comma_format(operation_type_row.n_buildings), 
@@ -359,7 +375,9 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
     $('#results-table tbody').on( 'click', 'tr', function () {
         $(this).toggleClass('selected');
         // update map and stuff
+        console.log(this);
         sId = $(this)[0].id;
+        console.log(sId);
         m = markers[sId];
         if (m.zIndex == 1) {
           on_select(m, Master, DimCity, DimOperationType, dists);
