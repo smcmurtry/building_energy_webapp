@@ -229,7 +229,22 @@ function initialize_map(){
         "retrieve":       true,
         "defaultContent": '',
         'sDom': 'lrtp', // removed i=length statement and f=search box
-        "columns": [{ "orderable": false }, null, null, null]
+        "columns": [
+            { "data": "org_rank" },
+            { "data": "similar_rank" },
+            { "data": "name"} ]
+        
+        /*"fields": [ {
+              label:     "a",
+              name:      "a",
+              type:      "checkbox",
+              separator: "|",
+              options:   [ { label: '', value: 1 } ]
+          }, 
+          null,
+          null, 
+         null
+        ]*/
     } );
   });
 
@@ -255,8 +270,8 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
 
     var pinImage = new google.maps.MarkerImage('grey_pin.png'); 
     var markers = {};
-
-    var table_contents = $("#results-table tbody");
+    var table = $('#results-table').DataTable();
+    var table_contents = $( table.table().body() ); // $("#results-table tbody");
 
     n_buildings = rows.length;
 
@@ -267,6 +282,7 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
 
       var sensorId = rows[x].index;
 
+/*
       var row = $('<tr></tr>').attr('id', sensorId).addClass("sensorListItem");
       var c1 = $('<td></td>');
       var c2 = $('<td></td>'); 
@@ -283,6 +299,14 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
       row.append(c3);
       row.append(c4);
       table_contents.append(row);
+*/
+
+      $('#results-table').dataTable().fnAddData( [
+        { "DT_RowId": sensorId + "VisibleCheckbox", 
+          "org_rank": org_rank + ' of ' + n_buildings,
+          "similar_rank": comma_format(rows[x].en_intensity_rank) + ' of ' + comma_format(operation_type_row.n_buildings),
+          "name": rows[x].operation_name } ]
+      );
       
       var latlng = new google.maps.LatLng(rows[x].lat, rows[x].lng);
       latlngbounds.extend(latlng);
@@ -315,22 +339,24 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
         }
       });
     }
-    $("#results-table").append(table_contents);
 
     map.setCenter(latlngbounds.getCenter());
     map.fitBounds(latlngbounds); 
 
-  // listen for checkbox change
-  $('input:checkbox').change(
-    function(){
-      sId = $(this)[0].id;
-      m = markers[sId];
-      if (m.zIndex == 1) {
-        on_select(m, Master, DimCity, DimOperationType, dists);
-      } else {
-        on_deselect(m);
-      } 
-    });
+  // listen for results click
+    $('#results-table tbody').on( 'click', 'tr', function () {
+        $(this).toggleClass('selected');
+        console.log(this);
+        // update map and stuff
+        sId = $(this)[0].id;
+        m = markers[sId];
+        if (m.zIndex == 1) {
+          on_select(m, Master, DimCity, DimOperationType, dists);
+        } else {
+          on_deselect(m);
+        } 
+    } );
+
   });
 }
 
@@ -531,7 +557,7 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
         <div id="sensorList">
           <table id="results-table" class="display" cellspacing="0">
             <thead>
-              <tr> <th></th> <th>Org Rank</th> <th>Similar <br>Building Rank</th> <th>Building Name</th> </tr>
+              <tr> <th>Org Rank</th> <th>Similar <br>Building Rank</th> <th>Building Name</th> </tr>
             </thead>
             <tbody></tbody>
           </table>
