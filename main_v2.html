@@ -148,8 +148,8 @@ label {
 var infowindow = null;
 initialize_map();
 comma_format = d3.format("0,000");
-zero_format_int = d3.format("05d");
-zero_format_float = d3.format('05.0r');
+zero_format_int = d3.format("06d");
+zero_format_float = d3.format('07.0r');
 
 d3.csv("dim_city.csv", function(DimCity) {
   d3.csv("dim_organization.csv", function(DimOrganization) { 
@@ -278,10 +278,10 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
             "rank": zero_format_int(org_rank) },
           "similar_rank": {
             "display": comma_format(rows[x].en_intensity_rank) + ' of ' + comma_format(operation_type_row.n_buildings), 
-            "rank": zero_format_float(10. * rows[x].en_intensity_ekWh_sqft_pct_rank ) },
+            "rank": zero_format_int(d3.round(10000 * rows[x].en_intensity_rank / operation_type_row.n_buildings )) },
           "name": rows[x].operation_name } ]
       );
-      
+
       var latlng = new google.maps.LatLng(rows[x].lat, rows[x].lng);
       latlngbounds.extend(latlng);
       var marker = new google.maps.Marker({
