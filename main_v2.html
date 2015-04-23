@@ -147,6 +147,8 @@ label {
 
 var infowindow = null;
 initialize_map();
+comma_format = d3.format("0,000");
+
 
 d3.csv("dim_city.csv", function(DimCity) {
   d3.csv("dim_organization.csv", function(DimOrganization) { 
@@ -253,18 +255,15 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
 
     var pinImage = new google.maps.MarkerImage('grey_pin.png'); 
     var markers = {};
-    
-    //var table = $('<table></table>', {id:'results-table', class:"display", cellspacing:"0"});
 
-    /*
-    var table_header = $("<thead></thead>");
-    table_header.append("<tr> <th></th> <th>Rank 1</th> <th>Rank 2</th> <th>Building Name</th> </tr>");
-    table.append(table_header);
-    */
-    // var table = $("#results-table");
     var table_contents = $("#results-table tbody");
 
+    n_buildings = rows.length;
+
     for (var x = 0; x < rows.length; x++) {
+
+      var org_rank = x + 1;
+      var operation_type_row = DimOperationType.filter(function( obj ) { return obj.dim_operation_type == rows[x].dim_operation_type; })[0];
 
       var sensorId = rows[x].index;
 
@@ -275,8 +274,8 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
       var c4 = $('<td></td>');
 
       c1.append($('<input>', { id : sensorId + "VisibleCheckbox", type:"checkbox", name: sensorId + "VisibleCheckbox"}));
-      c2.append('10 of 399');
-      c3.append('1,000 of 3,496')
+      c2.append(org_rank + ' of ' + n_buildings);
+      c3.append(comma_format(rows[x].en_intensity_rank) + ' of ' + comma_format(operation_type_row.n_buildings));
       c4.append(rows[x].operation_name);
 
       row.append(c1);
@@ -317,7 +316,6 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
       });
     }
     $("#results-table").append(table_contents);
-    //$('#sensorList').append(table);
 
     map.setCenter(latlngbounds.getCenter());
     map.fitBounds(latlngbounds); 
@@ -334,19 +332,6 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
       } 
     });
   });
-
-/*
-  $(document).ready(function() {
-      $('#results-table').dataTable( {
-          "scrollY":        "460px",
-          "scrollX":        true,
-          "paging":         false,
-          "defaultContent": '',
-          'sDom': 'lrtp', // removed i=length statement and f=search box
-          "columns": [{ "orderable": false }, null, null, null]
-      } );
-  } );
-*/
 }
 
 function on_select(marker, Master, DimCity, DimOperationType, dists) {
@@ -382,7 +367,6 @@ function generateReport(row, city_row, operation_type_row, clean_dist) {
   plot_hist(clean_dist, row.en_intensity_ekWh_sqft, '#chart-' + row.index);
 };
 
-comma_format = d3.format("0,000");
 
 function get_table(row, city_row, operation_type_row) {
 
@@ -424,8 +408,8 @@ function get_pct_rank(row, operation_type_row) {
   var rank = d3.round(row.en_intensity_rank + 1, 0);
   var rank_text = '#' + rank.toString();
   var span = '<table>'; 
-  span += '<tr><td class="big-text">' + rank_text + ' of ' + d3.round(operation_type_row.n_buildings, 0) + '</td></tr>'
-  span += '<tr><td class="small-text">energy efficiency ranked against the ' + d3.round(operation_type_row.n_buildings, 0) + ' other buildings of this type in Ontario.</td></tr>'
+  span += '<tr><td class="big-text">' + rank_text + ' of ' + comma_format(operation_type_row.n_buildings) + '</td></tr>'
+  span += '<tr><td class="small-text">energy efficiency ranked against the ' + comma_format(operation_type_row.n_buildings) + ' other buildings of this type in Ontario.</td></tr>'
   span += '</table>'
   return span
 };
@@ -547,7 +531,7 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
         <div id="sensorList">
           <table id="results-table" class="display" cellspacing="0">
             <thead>
-              <tr> <th></th> <th>Rank 1</th> <th>Rank 2</th> <th>Building Name</th> </tr>
+              <tr> <th></th> <th>Org Rank</th> <th>Similar <br>Building Rank</th> <th>Building Name</th> </tr>
             </thead>
             <tbody></tbody>
           </table>
