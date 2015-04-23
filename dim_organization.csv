@@ -1,681 +1,681 @@
-,dim_organization,organization
-0,0,Municipality of Grey Highlands
-1,1,County of Elgin
-2,2,Township of St. Joseph
-3,3,Bruce‐Grey Catholic District School Board
-4,4,County of Middlesex
-5,6,Kenora Lake of the Woods District Hospital
-6,8,Limestone District School Board
-7,9,Township of Laurentian Valley
-8,475,Dunnville Haldimand War Memorial Hospital
-9,636,Renfrew Victoria Hospital
-10,11,Town of Kirkland Lake
-11,12,Lake Huron Primary Water Supply System Joint Board of Management
-12,13,Town of South Bruce Peninsula
-13,14,Township of Armour
-14,15,City of Pickering
-15,16,Town of Oakville
-16,17,Township of Amaranth
-17,18,Township of Essa
-18,19,Listowel Memorial Hospital
-19,20,Town of Gravenhurst
-20,21,Township of South Dundas
-21,22,Conseil scolaire public du Nord‐Est de l'Ontario
-22,23,Kenora Catholic District School Board
-23,24,Municipality of North Middlesex
-24,25,Newmarket southlake Regional Health Centre
-25,26,Kapuskasing Sensenbrenner Hospital
-26,27,Campbellford Memorial Hospital
-27,28,City of Thunder Bay
-28,29,Township of Warwick
-29,164,Township of Faraday
-30,31,Township of Nairn & Hyman
-31,115,Township of Emo
-32,33,Township of East Hawkesbury
-33,204,Township of St. Clair
-34,36,Tillsonburg District Memorial Hospital
-35,37,Espanola General Hospital
-36,38,Town of Moosonee
-37,39,Township of Sioux Narrows-Nestor Falls
-38,40,Windsor‐Essex Catholic District School Board
-39,41,Township of Nipigon
-40,48,Town of Hearst
-41,544,Township of Asphodel-Norwood
-42,45,Township of Adjala-Tosorontio
-43,272,Superior‐Greenstone District School Board
-44,47,Municipality of Temagami
-45,285,Township of Algonquin Highlands
-46,50,Boreal College
-47,51,Terrace Bay McCausland Hospital
-48,52,Kemptville District Hospital
-49,53,County of Huron
-50,54,Brock University
-51,55,City of Burlington
-52,56,Toronto Runnymede Healthcare Centre
-53,57,Municipality of Northern Bruce Peninsula
-54,58,Township of Tiny
-55,59,Town of Deep River
-56,60,Hamilton‐Wentworth Catholic District School Board
-57,61,Municipality of Sioux Lookout
-58,62,County of Prince Edward
-59,63,Hamilton Health Sciences Corporation
-60,64,University of Windsor
-61,343,Town of The Blue Mountains
-62,66,Wellington Catholic District School Board
-63,67,Municipality of Oliver-Paipoonge
-64,458,Algonquin & Lakeshore Catholic District School Board
-65,69,Toronto Catholic District School Board
-66,70,Marathon Wilson Memorial General Hospital
-67,71,Municipality of Clarington
-68,72,Barrie Royal Victoria Regional Health Centre
-69,73,Township of Alberton
-70,74,City of Pembroke
-71,75,Alexandra Hospital
-72,673,Municipality of McDougall
-73,76,The Ottawa Hospital
-74,77,Town of Mono
-75,78,Municipality of Machin
-76,79,City of Mississauga
-77,80,Municipality of Brooke-Alvinston
-78,82,Wilfrid Laurier University
-79,83,County of Grey
-80,220,Township of Pickle Lake
-81,84,Conseil scolaire de district du Viamonde
-82,85,Conseil scolaire de district catholique du Centre‐Est de l'Ontario
-83,86,Town of Milton
-84,87,Town of Grimsby
-85,88,Township of McGarry
-86,89,City of Thorold
-87,90,Region of Niagara
-88,91,Township of Huron-Kinloss
-89,92,City of Niagara Falls
-90,93,The Salvation Army Toronto Grace Health Centre
-91,94,Belleville Quinte Healthcare Corporation
-92,95,Township of Addington Highlands
-93,96,Hearst University
-94,584,Deep River and District Hospital
-95,98,Town of Bancroft
-96,99,Township of Billings
-97,100,Township of Perry
-98,585,Municipality of Bayham
-99,102,City of Owen Sound
-100,103,Town of Petrolia
-101,7,Town of Renfrew
-102,105,Carleton University
-103,5,Township of East Garafraxa
-104,228,Township of Carling
-105,108,Regional Municipality of York
-106,109,Village of Point Edward
-107,110,Richmond Hill Mackenzie Health
-108,586,Municipality of Chatham-Kent
-109,112,Municipality of North Grenville
-110,113,Town of Laurentian Hills
-111,114,Toronto Mount Sinai Hospital
-112,116,City of Kenora
-113,117,Windsor Utilities Commission
-114,118,Township of Hudson
-115,119,City of Oshawa
-116,352,Township of Admaston/Bromley
-117,121,Humber College
-118,122,Durham Catholic District School Board
-119,123,Municipality of Shuniah
-120,124,Township of Adelaide Metcalfe
-121,125,City of Windsor
-122,353,City of Welland
-123,127,Township of Horton
-124,128,County of Bruce
-125,129,Township of Havelock-Belmont-Methuen
-126,130,City of Temiskaming Shores
-127,131,Town of Mattawa
-128,133,Manitouwadge General Hospital
-129,134,Union Water System Join Board of Management
-130,135,City of St. Catharines
-131,136,St. Joseph's Health Care London
-132,137,City of North Bay
-133,138,Town of Lakeshore
-134,139,Town of Niagara-on-the-Lake
-135,230,Township of Pelee
-136,141,Oshawa Lakeridge Health
-137,142,Township of Front of Yonge
-138,143,University of Ontario Institute of Technology
-139,144,Town of Parry Sound
-140,274,Township of Selwyn
-141,147,City of Toronto
-142,148,Ottawa Hopital Montfort
-143,533,Northwest Catholic District School Board
-144,149,Township of Dawson
-145,150,Town of Innisfil
-146,151,Township of Malahide
-147,152,Township of Brethour
-148,153,Town of Kingsville
-149,154,Midland Georgian Bay General Hospital
-150,571,Region of Halton
-151,474,Kingston General Hospital
-152,156,York Catholic District School Board
-153,158,Township of Muskoka Lakes
-154,159,Newbury Four Counties Health Services
-155,160,Town of Newmarket
-156,349,City of St. Thomas
-157,161,City of Guelph
-158,162,Township of Beckwith
-159,163,Pembroke Regional Hospital Inc.
-160,30,Cornwall St. Joseph's Continuing Care Centre
-161,165,Barry's Bay St. Frances Memorial Hospital
-162,392,Toronto East General Hospital
-163,167,University of Waterloo
-164,168,Carleton Place and District Memorial Hospital
-165,169,Conestoga College
-166,170,Northeastern Catholic District School Board
-167,32,Municipality of Bluewater
-168,172,Durham College & University of Ontario Institute of Technology
-169,173,Municipality of Leamington
-170,174,Aylmer Area Secondary Water Supply Sustem Joint Board
-171,176,Toronto Casey House
-172,177,Township of Manitouwadge
-173,178,Township of Hornepayne
-174,179,Red Lake Margaret Cochenour Memorial Hospital
-175,175,Toronto's Woman's College Hospital
-176,181,Municipality of Port Hope
-177,182,City of Sault Ste. Marie
-178,183,Municipality of Strathroy-Caradoc
-179,184,South Bruce Grey Health Centre
-180,605,City of Orillia
-181,185,Huntsville Muskoka Algonquin Healthcare
-182,186,Mississauga The Credit Valley Hospital and Trillium Health Centre
-183,480,Town of Amherstburg
-184,188,Toronto University Health Network
-185,189,Ottawa Queensway-Carleton Hospital
-186,190,Township of Southgate
-187,191,Guelph St. Joseph's Health Care
-188,192,Municipality of Magnetawan
-189,365,Hôpital Général de Hawkesbury & District General Hospital
-190,194,Guelph University
-191,481,Niagara Catholic District School Board
-192,196,Markham Stouffville Hospital
-193,197,Township of Atikokan
-194,198,Mount Forest North Wellington Health Care Corporation
-195,199,McMaster University
-196,201,Region of Peel
-197,202,Municipality of Highlands East
-198,203,County of Lambton
-199,35,Kingston Hotel Dieu Hospital
-200,205,City of Vaughan
-201,367,Municipality of Greenstone
-202,207,The Scarborough Hospital
-203,208,Toronto Sunnybrook health Sciences Centre
-204,209,Hagersville West Haldimand General Hospital
-205,630,City of Barrie
-206,210,Township of North Kawartha
-207,211,St. Marys Memorial Hospital
-208,212,Thunder Bay Regional Health Sciences Centre
-209,369,Township of Norwich
-210,213,Regional Municipality of Durham
-211,214,Huron‐Superior Catholic District School Board
-212,564,Toronto St. Michael's Hospital
-213,215,Town of LaSalle
-214,372,Arnprior and District Memorial
-215,217,Sioux Lookout Meno-Ya-Win Health Centre
-216,218,County of Hastings
-217,219,City of Timmins
-218,42,District School Board Ontario North East
-219,221,Hastings and Prince Edward District School Board
-220,222,Township of Mattice-Val Cote
-221,223,Municipality of Mattawan
-222,225,Town of Cochrane
-223,227,Township of Southwold
-224,107,Village of Sundridge
-225,229,Burlington Joseph Brant Memorial
-226,140,Kawartha Pine Ridge District School Board
-227,232,Near North District School Board
-228,233,Conseil scolaire de district des écoles catholiques du Sud‐Ouest
-229,234,Kitchener St. Mary's General Hospital
-230,235,Collingwood Public Utilities
-231,236,Township of Wellesley
-232,575,Municipality of Lambton Shores
-233,487,Rainbow District School Board
-234,237,Ottawa Bruyere Continuing Care Inc.
-235,238,Township of North Huron
-236,239,Laurentian University
-237,240,Municipality of West Elgin
-238,241,City of Stratford
-239,242,Township of Black River-Matheson
-240,10,Town of Tillsonburg
-241,244,Sault Ste. Marie Sault Area Hospital
-242,245,Township of Woolwich
-243,246,City of Clarence-Rockland
-244,247,City of Cambridge
-245,248,Bluewater District School Board
-246,249,Lakehead University
-247,250,County of Lanark
-248,251,Town of Halton Hills
-249,252,Algoma District School Board
-250,253,Kirkland and District Hospital
-251,254,Cochrane Lady Minto Hospital
-252,255,Fergus Groves Memorial Community Hospital
-253,256,Municipality of Gordon/Barrie Island
-254,257,Township of Georgian Bay
-255,258,Town of Cobalt
-256,336,County of Perth
-257,260,Sturgeon Falls West Nipissing General
-258,261,Township of Ramara
-259,262,Greater Essex County District School Board
-260,259,Village of Burk's Falls
-261,263,Renfrew County Catholic District School Board
-262,264,Township of Melancthon
-263,265,Township of Dawn-Euphemia
-264,266,Grand Erie District School Board
-265,267,Town of Spanish
-266,340,City of Greater Sudbury
-267,269,Township of La Vallee
-268,270,Town of Midland
-269,271,North Bay Regional Health Centre
-270,46,Loyalist Township
-271,273,Loyalist College
-272,146,Township of Alfred and Plantagenet
-273,275,Municipality of Thames Centre
-274,277,Township of Clearview
-275,278,Ottawa Catholic School Board
-276,279,Township of Harley
-277,280,Geraldton District Hospital
-278,281,District School Board Of Niagara
-279,650,Township of Chamberlain
-280,282,Township of Russell
-281,283,Township of South Stormont
-282,284,Sault College
-283,49,Haliburton Highlands Health Services
-284,286,Township of Strong
-285,287,Township of Severn
-286,385,Thunder Bay Catholic District School Board
-287,289,Napanee Lennox & Addington County General Hospital
-288,290,Brockville General Hospital
-289,291,Englehart and District Hospital
-290,292,Township of Opasatika
-291,293,Conseil scolaire de district catholique Centre‐Sud
-292,294,Toronto Baycrest
-293,295,Township of Chapple
-294,296,District of Muskoka
-295,297,Township of The North Shore
-296,298,Township of Ryerson
-297,299,La Cite Collegiale
-298,300,Municipality of Marmora and Lake
-299,301,Township of Lanark Highlands
-300,302,Blind River District Health Centre
-301,303,Sir Sandford Fleming
-302,304,Municipality of South Huron
-303,305,Timmins and District Hospital
-304,306,Oakville Halton Healthcare Services
-305,307,Township of Armstrong
-306,308,Township of Chisholm
-307,309,Hanover and District Hospital
-308,310,London District Catholic School Board
-309,617,Kitchener Grand River Hospital
-310,312,Sarnia Bluewater Health
-311,313,Renfrew County District School Board
-312,314,Township of Otonabee-South Monaghan
-313,316,Nipigon District Memorial Hospital
-314,317,City of Hamilton
-315,318,Toronto Rouge Valley Health System
-316,375,City of Belleville
-317,319,Township of Conmee
-318,320,Hornepayne Community Hospital
-319,321,Nipissing‐Parry Sound Catholic District School Board
-320,322,County of Dufferin
-321,323,University of Western Ontario
-322,324,Georgian College
-323,325,Township of Dorion
-324,326,Township of Casey
-325,327,Municipality of West Perth
-326,328,Municipality of Centre Hastings
-327,329,Township of Puslinch
-328,330,Norfolk County
-329,145,University of Toronto
-330,332,Brampton William Osler Health System
-331,463,City of Brantford
-332,335,Simcoe County District School Board
-333,81,Township of Machar
-334,337,Town of Gore Bay
-335,338,Township of Wainfleet
-336,339,Municipality of Dysart Et Al
-337,268,Perth & Smiths Falls District Hospital
-338,341,Town of Blind River
-339,342,Municipality of Powassan
-340,65,Township of Terrace Bay
-341,344,Township of Hilton
-342,345,Township of Wilmot
-343,346,Town of Iroquois Falls
-344,347,City of Woodstock
-345,348,Town of Greater Napanee
-346,106,Strathroy Middlesex General Hospital
-347,350,Toronto Humber River Regional Hospital
-348,351,Hearst Notre Dame Hospital
-349,120,Township of Kerns
-350,126,Town of Espanola
-351,354,Rainy River District School Board
-352,355,Haldimand County
-353,356,Township of Edwardsburgh/Cardinal
-354,357,Township of North Dumfries
-355,358,Queen's University
-356,359,Town of St. Marys
-357,360,Conseil scolaire de district catholique de l'est Ontarien
-358,361,Iroquois Falls Anson General Hospital
-359,362,City of Kitchener
-360,363,City of Dryden
-361,364,Township of Lake of the Woods
-362,193,Municipality of Brockton
-363,366,Conseil scolaire de district catholique du Nouvel‐Ontario
-364,206,Township of Carlow/Mayo
-365,368,Kingston Providence Care Centre
-366,171,Town of Perth
-367,370,County of Renfrew
-368,371,Cambrian College
-369,216,Town of Fort Frances
-370,373,Mohawk College
-371,394,Ottawa Children's Hospital of Eastern Ontario
-372,231,Township of Morley
-373,376,The Public Utilities Commission of the City of Sault Ste. Marie
-374,377,Township of North Dundas
-375,378,Lindsay Ross Memorial Hospital
-376,379,West Parry Sound Health Centre
-377,380,Township of Harris
-378,519,Municipality of Tweed
-379,382,Region of Waterloo
-380,383,George Brown College
-381,384,Municipality of Charlton and Dack
-382,288,Town of Deseronto
-383,386,Township of Wellington North
-384,387,Township of South Algonquin
-385,388,Conseil des écoles publiques de l'Est de l'Ontario
-386,389,Township of Calvin
-387,390,Waterloo Region District School Board
-388,391,Separated Town of Gananoque
-389,393,Peterborough Victoria Northumberland and Clarington District Catholic School Board
-390,374,Clinton Public Hospital
-391,395,Township of Madoc
-392,396,Conseil scolaire de district catholique des Grandes Rivières
-393,397,Township of Georgian Bluffs
-394,398,The Public General Hospital Society of Chatham
-395,399,Algonquin College
-396,400,Municipality of Killarney
-397,401,Town of Bracebridge
-398,403,Catholic District School Board of Eastern Ontario
-399,404,Township of Oro-Medonte
-400,405,Town of Erin
-401,406,Township of Papineau-Cameron
-402,407,Town of Bruce Mines
-403,408,Seneca College
-404,409,Town of Hanover
-405,410,Township of Chatsworth
-406,411,"United Counties of Stormont, Dundas & Glengarry"
-407,412,Town of Arnprior
-408,413,Town of Whitchurch-Stouffville
-409,414,Halton District School Board
-410,415,Toronto Providence Healthcare
-411,416,Mattawa General Hospital
-412,417,Township of Bonfield
-413,418,Town of Petawawa
-414,419,City of Waterloo
-415,420,Township of McMurrich/Monteith
-416,421,City of Elliot Lake
-417,422,Ottawa‐Carleton District School Board
-418,423,Town of East Gwillimbury
-419,424,Township of James
-420,425,Town of Smooth Rock Falls
-421,426,"Township of Brudenell, Lyndoch and Raglan"
-422,427,Municipality of Huron Shores
-423,428,Lambton Area Water Supply System
-424,429,Lambton College
-425,430,Sheridan College
-426,431,County of Peterborough
-427,432,Township of Burpee & Mills
-428,433,Cornwall Community Hospital
-429,434,Brant Caommunity Healthcare System
-430,435,Guelph General Hospital
-431,226,York University
-432,437,Town of Georgina
-433,438,County of Brant
-434,439,Alexandria Glengarry Memorial Hospital
-435,440,Township of Drummond/North Elmsley
-436,441,City of Sarnia
-437,442,Wingham and District Hospital
-438,443,Port Burwell Area Secondary Water Supply Joint Board of Management
-439,444,City of Peterborough
-440,523,County of Haliburton
-441,446,St. Thomas - Elgin General Hospital
-442,447,Elliot Lake St. Joseph's General Hospital
-443,448,Township of Enniskillen
-444,449,Lakehead District School Board
-445,450,Municipality of Morris-Turnberry
-446,451,Keewatin‐Patricia District School Board
-447,452,Lambton Kent District School Board
-448,453,Township of Minden Hills
-449,454,Town of Thessalon
-450,598,Township of Lucan Biddulph
-451,455,Toronto St. Joseph's Health Care
-452,456,Municipality of Wawa
-453,457,Township of Ear Falls
-454,68,Village of Merrickville-Wolford
-455,527,Township of Douro-Dummer
-456,460,Municipality of Kincardine
-457,461,Township of Blandford-Blenheim
-458,462,Town of Collingwood
-459,104,Town of Cobourg
-460,464,Township of The Archipelago
-461,465,Cambridge Memorial Hospital
-462,647,Town of Kapuskasing
-463,467,Toronto North York General
-464,468,Township of Evanturel
-465,469,City of London
-466,470,City of Brockville
-467,471,Ottawa Royal Ottawa Health Care Group
-468,472,Windsor Hotel-Dieu Grace Hospital
-469,473,Township of McNab/Braeside
-470,155,Seaforth Community Hospital
-471,166,Centennial College
-472,476,Town of Hawkesbury
-473,477,Upper Grand District School Board
-474,478,Municipality of Huron East
-475,479,New Liskeard Temiskaming Hospital
-476,187,Township of Dubreuilville
-477,195,York Region District School Board
-478,482,Township of Frontenac Islands
-479,483,Orangeville Headwaters Health Care Centre
-480,484,Town of Carleton Place
-481,485,Leamington District Memorial Hospital
-482,486,Township of Elizabethtown-Kitley
-483,180,Goderich Alexandra Marine and General Hospital
-484,488,Elgin Area Primary Water Supply System Joint Board of Management
-485,489,Town of New Tecumseth
-486,490,United Counties of Leeds & Grenville
-487,491,City of Ottawa
-488,492,Atikokan General Hospital
-489,493,Town of Northeastern Manitoulin and the Islands
-490,494,Township of Sables-Spanish Rivers
-491,495,Town of Tecumseh
-492,496,Peel District School Board
-493,497,Village of Oil Springs
-494,498,Municipality of North Perth
-495,500,Township of Lake of Bays
-496,501,Municipality of Callander
-497,502,Municipality of Trent Hills
-498,503,Municipality of French River
-499,504,Municipality of West Nipissing
-500,505,Waterloo Catholic District School Board
-501,506,Township of Howick
-502,507,Toronto West Park Healthcare Centre
-503,508,Canadore College
-504,509,Woodstock General Hospital
-505,510,Township of East Luther Grand Valley
-506,511,City of Quinte West
-507,512,St. Catharines Niagara Health System
-508,513,Town of Marathon
-509,654,Municipality of Brighton
-510,515,Thames Valley District School Board
-511,516,County of Simcoe
-512,517,St. Clair College
-513,518,Township of South Frontenac
-514,381,University of Ottawa
-515,520,Township of North Stormont
-516,521,Township of Bonnechere Valley
-517,445,Township of Schreiber
-518,524,Township of Perth South
-519,655,Halton Catholic District School Board
-520,526,Township of Wollaston
-521,459,Township of Uxbridge
-522,528,Town of Aurora
-523,529,"Township of Killaloe, Hagarty & Richards"
-524,530,Township of Coleman
-525,531,County of Frontenac
-526,532,Township of Chapleau
-527,499,Township of Montague
-528,534,Township of Mapleton
-529,535,The Nation Municipality
-530,536,Town of Plympton-Wyoming
-531,537,Township of Red Rock
-532,538,Conseil scolaire de district du Grand Nord de l'Ontario
-533,659,St. Joseph's Healthcare Hamilton
-534,539,Sudbury St. Joseph's Continuing Care Centre of Sudbury
-535,540,Town of Whitby
-536,541,Ryerson University
-537,542,Town of Pelham
-538,543,Township of Hilliard
-539,545,Owen Sound Grey Bruce Health Services
-540,546,Niagara College
-541,547,Township of Greater Madawaska
-542,548,Village of Hilton Beach
-543,549,Thunder Bay St. Joseph's Care Group
-544,550,Township of Perth East
-545,551,County of Essex
-546,331,United Counties of Prescott & Russell
-547,553,Northern College
-548,554,Township of Alnwick/Haldimand
-549,555,Town of Aylmer
-550,43,Township of East Zorra-Tavistock
-551,557,Township of Assiginack
-552,558,St. Clair Catholic District School Board
-553,224,Fort Frances Riverside Health Care
-554,132,Toronto Centre for Addiction and Mental Health
-555,561,Township of Prince
-556,562,Township of Val Rita-Harty
-557,563,Little Current Manitoulin Health Centre
-558,315,Township of South-West Oxford
-559,565,Town of Orangeville
-560,667,Lady Dunn Health Centre
-561,566,Town of Bradford-West Gwillimbury
-562,567,Hamilton‐Wentworth District School Board
-563,568,Upper Canada District School Board
-564,569,Township of Ashfield-Colborne-Wawanosh
-565,570,Township of Leeds and the Thousand Islands
-566,402,Township of Central Frontenac
-567,572,Peterborough Regional Health Centre
-568,573,Township of North Algona Wilberforce
-569,574,Township of North Frontenac
-570,44,Toronto District School Board
-571,576,Township of Jocelyn
-572,577,Whitby Ontario Shores Centre for Mental Health Sciences
-573,578,Municipality of Whitestone
-574,579,Township of White River
-575,580,Township of Guelph/Eramosa
-576,581,Simcoe Norfolk General Hospital
-577,582,Town of Ingersoll
-578,583,Township of O'Connor
-579,97,Township of Hamilton
-580,101,Township of Scugog
-581,111,Township of Athens
-582,587,Township of Cavan Monaghan
-583,588,Almonte General Hospital
-584,436,Nipissing University
-585,590,Town of Shelburne
-586,591,Township of Tay
-587,592,Durham District School Board
-588,593,Town of Mississippi Mills
-589,594,Tay Valley Township
-590,595,County of Northumberland
-591,596,Town of Goderich
-592,522,Township of McKellar
-593,599,Alliston Stevenson Memorial
-594,600,Township of Ignace
-595,601,Town of Englehart
-596,602,Sudbury Catholic District School Board
-597,603,Township of Joly
-598,604,Town of Wasaga Beach
-599,200,Matheson Bingham Memorial Hospital
-600,606,Town of Caledon
-601,607,Toronto Hospital for Sick Children
-602,608,Township of Augusta
-603,609,Municipality of West Grey
-604,610,Municipality of Middlesex Centre
-605,552,Town of Ajax
-606,611,Town of Fort Erie
-607,612,Township of Zorra
-608,613,Township of Brock
-609,614,Municipality of Central Elgin
-610,615,Huron Perth Catholic District School Board
-611,616,County of Lennox & Addington
-612,639,City of Port Colborne
-613,311,Township of West Lincoln
-614,618,Village of South River
-615,619,University of Toronto at Mississauga
-616,620,Town of Richmond Hill
-617,621,Township of Whitewater Region
-618,622,Trillium Lakelands District School Board
-619,623,Trent University
-620,624,Utilities Kingston
-621,625,City of Cornwall
-622,626,Township of Mulmur
-623,627,Dufferin Peel Catholic District School Board
-624,628,Township of Limerick
-625,629,Wallaceburg Sydenham District Hospital
-626,334,Township of Tudor & Cashel
-627,631,Town of Rainy River
-628,632,Municipality of Central Manitoulin
-629,633,Winchester District Memorial Hospital
-630,634,Penetanguishene Waypoint Centre for Mental Health Care
-631,635,London Health Sciences Centre
-632,333,County of Oxford
-633,637,St. Catharines Hotel Dieu Shaver
-634,638,Town of Huntsville
-635,157,Township of King
-636,640,Confederation College
-637,641,Dryden Regional Health Centre
-638,642,Township of Fauquier-Strickland
-639,556,Stratford General Hospital
-640,643,Moose Factory Weeneebayko Area Health Authority
-641,644,Collingwood General and Marine Hospital
-642,645,City of Kingston
-643,646,Township of South Glengarry
-644,466,Township of Baldwin
-645,589,Township of Madawaska Valley
-646,648,Municipality of South Bruce
-647,649,Municipality of Central Huron
-648,276,Windsor Regional Hospital
-649,651,Town of Kearney
-650,652,Municipality of Dutton/Dunwich
-651,653,Superior North Catholic District School Board
-652,514,Township of Stirling-Rawdon
-653,525,Exeter South Huron Hospital Association
-654,656,Toronto Bridgepoint Hospital
-655,657,Conseil scolaire de district catholique Franco‐Nord
-656,658,Municipality of St. Charles
-657,559,Conseil scolaire de district catholique des Aurores boréales
-658,660,Township of Nipissing
-659,661,Sudbury Health Science North
-660,662,Township of Laird
-661,663,Town of Minto
-662,664,Town of Saugeen Shores
-663,665,Municipality of Hastings Highlands
-664,666,Simcoe Muskoka Catholic District School Board
-665,560,Municipality of Arran-Elderslie
-666,668,Municipality of Red Lake
-667,243,City of Brampton
-668,669,Toronto Holland Bloorview Kids Rehabilitation Hospital
-669,679,Municipality of Southwest Middlesex
-670,670,Avon Maitland District School Board
-671,671,Cobourg Northumberland Hills Hospital
-672,672,Township of Springwater
-673,34,"Township of MacDonald, Meredith & Aberdeen Add'l"
-674,674,Town of Smiths Falls
-675,675,Municipality of Trent Lakes
-676,676,Town of Markham
-677,677,Fanshawe College
-678,678,University of Toronto at Scarborough
-679,597,Brant Haldimand Norfolk Catholic District School Board
+,dim_organization,organization,n_buildings
+0,0,Municipality of Grey Highlands,22.0
+1,1,County of Elgin,1.0
+2,2,Township of St. Joseph,7.0
+3,3,Bruce‐Grey Catholic District School Board,14.0
+4,4,County of Middlesex,20.0
+5,6,Kenora Lake of the Woods District Hospital,2.0
+6,8,Limestone District School Board,2.0
+7,9,Township of Laurentian Valley,10.0
+8,475,Dunnville Haldimand War Memorial Hospital,64.0
+9,636,Renfrew Victoria Hospital,5.0
+10,11,Town of Kirkland Lake,10.0
+11,12,Lake Huron Primary Water Supply System Joint Board of Management,16.0
+12,13,Town of South Bruce Peninsula,0.0
+13,14,Township of Armour,17.0
+14,15,City of Pickering,4.0
+15,16,Town of Oakville,32.0
+16,17,Township of Amaranth,69.0
+17,18,Township of Essa,2.0
+18,19,Listowel Memorial Hospital,6.0
+19,20,Town of Gravenhurst,4.0
+20,21,Township of South Dundas,20.0
+21,22,Conseil scolaire public du Nord‐Est de l'Ontario,15.0
+22,23,Kenora Catholic District School Board,18.0
+23,24,Municipality of North Middlesex,6.0
+24,25,Newmarket southlake Regional Health Centre,15.0
+25,26,Kapuskasing Sensenbrenner Hospital,4.0
+26,27,Campbellford Memorial Hospital,4.0
+27,28,City of Thunder Bay,1.0
+28,29,Township of Warwick,81.0
+29,164,Township of Faraday,9.0
+30,31,Township of Nairn & Hyman,1.0
+31,115,Township of Emo,6.0
+32,33,Township of East Hawkesbury,22.0
+33,204,Township of St. Clair,7.0
+34,36,Tillsonburg District Memorial Hospital,10.0
+35,37,Espanola General Hospital,2.0
+36,38,Town of Moosonee,3.0
+37,39,Township of Sioux Narrows-Nestor Falls,1.0
+38,40,Windsor‐Essex Catholic District School Board,12.0
+39,41,Township of Nipigon,7.0
+40,48,Town of Hearst,50.0
+41,544,Township of Asphodel-Norwood,12.0
+42,45,Township of Adjala-Tosorontio,38.0
+43,272,Superior‐Greenstone District School Board,10.0
+44,47,Municipality of Temagami,584.0
+45,285,Township of Algonquin Highlands,4.0
+46,50,Boreal College,28.0
+47,51,Terrace Bay McCausland Hospital,12.0
+48,52,Kemptville District Hospital,12.0
+49,53,County of Huron,2.0
+50,54,Brock University,15.0
+51,55,City of Burlington,1.0
+52,56,Toronto Runnymede Healthcare Centre,3.0
+53,57,Municipality of Northern Bruce Peninsula,19.0
+54,58,Township of Tiny,18.0
+55,59,Town of Deep River,37.0
+56,60,Hamilton‐Wentworth Catholic District School Board,2.0
+57,61,Municipality of Sioux Lookout,15.0
+58,62,County of Prince Edward,11.0
+59,63,Hamilton Health Sciences Corporation,10.0
+60,64,University of Windsor,70.0
+61,343,Town of The Blue Mountains,10.0
+62,66,Wellington Catholic District School Board,50.0
+63,67,Municipality of Oliver-Paipoonge,42.0
+64,458,Algonquin & Lakeshore Catholic District School Board,1.0
+65,69,Toronto Catholic District School Board,9.0
+66,70,Marathon Wilson Memorial General Hospital,25.0
+67,71,Municipality of Clarington,13.0
+68,72,Barrie Royal Victoria Regional Health Centre,9.0
+69,73,Township of Alberton,203.0
+70,74,City of Pembroke,1.0
+71,75,Alexandra Hospital,29.0
+72,673,Municipality of McDougall,2.0
+73,76,The Ottawa Hospital,4.0
+74,77,Town of Mono,18.0
+75,78,Municipality of Machin,2.0
+76,79,City of Mississauga,4.0
+77,80,Municipality of Brooke-Alvinston,5.0
+78,82,Wilfrid Laurier University,1.0
+79,83,County of Grey,143.0
+80,220,Township of Pickle Lake,6.0
+81,84,Conseil scolaire de district du Viamonde,3.0
+82,85,Conseil scolaire de district catholique du Centre‐Est de l'Ontario,3.0
+83,86,Town of Milton,11.0
+84,87,Town of Grimsby,47.0
+85,88,Township of McGarry,53.0
+86,89,City of Thorold,34.0
+87,90,Region of Niagara,14.0
+88,91,Township of Huron-Kinloss,10.0
+89,92,City of Niagara Falls,22.0
+90,93,The Salvation Army Toronto Grace Health Centre,38.0
+91,94,Belleville Quinte Healthcare Corporation,14.0
+92,95,Township of Addington Highlands,29.0
+93,96,Hearst University,1.0
+94,584,Deep River and District Hospital,3.0
+95,98,Town of Bancroft,10.0
+96,99,Township of Billings,7.0
+97,100,Township of Perry,12.0
+98,585,Municipality of Bayham,13.0
+99,102,City of Owen Sound,7.0
+100,103,Town of Petrolia,8.0
+101,7,Town of Renfrew,18.0
+102,105,Carleton University,20.0
+103,5,Township of East Garafraxa,8.0
+104,228,Township of Carling,16.0
+105,108,Regional Municipality of York,1.0
+106,109,Village of Point Edward,4.0
+107,110,Richmond Hill Mackenzie Health,5.0
+108,586,Municipality of Chatham-Kent,47.0
+109,112,Municipality of North Grenville,6.0
+110,113,Town of Laurentian Hills,1.0
+111,114,Toronto Mount Sinai Hospital,7.0
+112,116,City of Kenora,14.0
+113,117,Windsor Utilities Commission,7.0
+114,118,Township of Hudson,5.0
+115,119,City of Oshawa,9.0
+116,352,Township of Admaston/Bromley,25.0
+117,121,Humber College,0.0
+118,122,Durham Catholic District School Board,5.0
+119,123,Municipality of Shuniah,24.0
+120,124,Township of Adelaide Metcalfe,4.0
+121,125,City of Windsor,9.0
+122,353,City of Welland,55.0
+123,127,Township of Horton,6.0
+124,128,County of Bruce,5.0
+125,129,Township of Havelock-Belmont-Methuen,79.0
+126,130,City of Temiskaming Shores,12.0
+127,131,Town of Mattawa,4.0
+128,133,Manitouwadge General Hospital,15.0
+129,134,Union Water System Join Board of Management,12.0
+130,135,City of St. Catharines,25.0
+131,136,St. Joseph's Health Care London,7.0
+132,137,City of North Bay,4.0
+133,138,Town of Lakeshore,2.0
+134,139,Town of Niagara-on-the-Lake,0.0
+135,230,Township of Pelee,42.0
+136,141,Oshawa Lakeridge Health,8.0
+137,142,Township of Front of Yonge,15.0
+138,143,University of Ontario Institute of Technology,23.0
+139,144,Town of Parry Sound,19.0
+140,274,Township of Selwyn,94.0
+141,147,City of Toronto,5.0
+142,148,Ottawa Hopital Montfort,5.0
+143,533,Northwest Catholic District School Board,11.0
+144,149,Township of Dawson,7.0
+145,150,Town of Innisfil,1.0
+146,151,Township of Malahide,21.0
+147,152,Township of Brethour,530.0
+148,153,Town of Kingsville,6.0
+149,154,Midland Georgian Bay General Hospital,2.0
+150,571,Region of Halton,27.0
+151,474,Kingston General Hospital,12.0
+152,156,York Catholic District School Board,2.0
+153,158,Township of Muskoka Lakes,16.0
+154,159,Newbury Four Counties Health Services,2.0
+155,160,Town of Newmarket,1.0
+156,349,City of St. Thomas,104.0
+157,161,City of Guelph,25.0
+158,162,Township of Beckwith,31.0
+159,163,Pembroke Regional Hospital Inc.,5.0
+160,30,Cornwall St. Joseph's Continuing Care Centre,27.0
+161,165,Barry's Bay St. Frances Memorial Hospital,29.0
+162,392,Toronto East General Hospital,5.0
+163,167,University of Waterloo,4.0
+164,168,Carleton Place and District Memorial Hospital,5.0
+165,169,Conestoga College,4.0
+166,170,Northeastern Catholic District School Board,31.0
+167,32,Municipality of Bluewater,3.0
+168,172,Durham College & University of Ontario Institute of Technology,2.0
+169,173,Municipality of Leamington,49.0
+170,174,Aylmer Area Secondary Water Supply Sustem Joint Board,28.0
+171,176,Toronto Casey House,10.0
+172,177,Township of Manitouwadge,49.0
+173,178,Township of Hornepayne,10.0
+174,179,Red Lake Margaret Cochenour Memorial Hospital,0.0
+175,175,Toronto's Woman's College Hospital,2.0
+176,181,Municipality of Port Hope,3.0
+177,182,City of Sault Ste. Marie,14.0
+178,183,Municipality of Strathroy-Caradoc,6.0
+179,184,South Bruce Grey Health Centre,2.0
+180,605,City of Orillia,5.0
+181,185,Huntsville Muskoka Algonquin Healthcare,19.0
+182,186,Mississauga The Credit Valley Hospital and Trillium Health Centre,32.0
+183,480,Town of Amherstburg,18.0
+184,188,Toronto University Health Network,4.0
+185,189,Ottawa Queensway-Carleton Hospital,4.0
+186,190,Township of Southgate,7.0
+187,191,Guelph St. Joseph's Health Care,5.0
+188,192,Municipality of Magnetawan,8.0
+189,365,Hôpital Général de Hawkesbury & District General Hospital,1.0
+190,194,Guelph University,13.0
+191,481,Niagara Catholic District School Board,1.0
+192,196,Markham Stouffville Hospital,4.0
+193,197,Township of Atikokan,11.0
+194,198,Mount Forest North Wellington Health Care Corporation,1.0
+195,199,McMaster University,219.0
+196,201,Region of Peel,4.0
+197,202,Municipality of Highlands East,11.0
+198,203,County of Lambton,6.0
+199,35,Kingston Hotel Dieu Hospital,1.0
+200,205,City of Vaughan,1.0
+201,367,Municipality of Greenstone,31.0
+202,207,The Scarborough Hospital,24.0
+203,208,Toronto Sunnybrook health Sciences Centre,24.0
+204,209,Hagersville West Haldimand General Hospital,27.0
+205,630,City of Barrie,48.0
+206,210,Township of North Kawartha,4.0
+207,211,St. Marys Memorial Hospital,4.0
+208,212,Thunder Bay Regional Health Sciences Centre,42.0
+209,369,Township of Norwich,3.0
+210,213,Regional Municipality of Durham,14.0
+211,214,Huron‐Superior Catholic District School Board,1.0
+212,564,Toronto St. Michael's Hospital,1.0
+213,215,Town of LaSalle,37.0
+214,372,Arnprior and District Memorial,29.0
+215,217,Sioux Lookout Meno-Ya-Win Health Centre,12.0
+216,218,County of Hastings,14.0
+217,219,City of Timmins,1.0
+218,42,District School Board Ontario North East,6.0
+219,221,Hastings and Prince Edward District School Board,33.0
+220,222,Township of Mattice-Val Cote,17.0
+221,223,Municipality of Mattawan,55.0
+222,225,Town of Cochrane,4.0
+223,227,Township of Southwold,1.0
+224,107,Village of Sundridge,3.0
+225,229,Burlington Joseph Brant Memorial,26.0
+226,140,Kawartha Pine Ridge District School Board,72.0
+227,232,Near North District School Board,11.0
+228,233,Conseil scolaire de district des écoles catholiques du Sud‐Ouest,4.0
+229,234,Kitchener St. Mary's General Hospital,1.0
+230,235,Collingwood Public Utilities,5.0
+231,236,Township of Wellesley,5.0
+232,575,Municipality of Lambton Shores,47.0
+233,487,Rainbow District School Board,29.0
+234,237,Ottawa Bruyere Continuing Care Inc.,1.0
+235,238,Township of North Huron,0.0
+236,239,Laurentian University,13.0
+237,240,Municipality of West Elgin,7.0
+238,241,City of Stratford,21.0
+239,242,Township of Black River-Matheson,1.0
+240,10,Town of Tillsonburg,18.0
+241,244,Sault Ste. Marie Sault Area Hospital,17.0
+242,245,Township of Woolwich,14.0
+243,246,City of Clarence-Rockland,194.0
+244,247,City of Cambridge,2.0
+245,248,Bluewater District School Board,23.0
+246,249,Lakehead University,17.0
+247,250,County of Lanark,59.0
+248,251,Town of Halton Hills,53.0
+249,252,Algoma District School Board,2.0
+250,253,Kirkland and District Hospital,6.0
+251,254,Cochrane Lady Minto Hospital,23.0
+252,255,Fergus Groves Memorial Community Hospital,57.0
+253,256,Municipality of Gordon/Barrie Island,2.0
+254,257,Township of Georgian Bay,1.0
+255,258,Town of Cobalt,2.0
+256,336,County of Perth,4.0
+257,260,Sturgeon Falls West Nipissing General,12.0
+258,261,Township of Ramara,4.0
+259,262,Greater Essex County District School Board,8.0
+260,259,Village of Burk's Falls,2.0
+261,263,Renfrew County Catholic District School Board,17.0
+262,264,Township of Melancthon,83.0
+263,265,Township of Dawn-Euphemia,24.0
+264,266,Grand Erie District School Board,3.0
+265,267,Town of Spanish,6.0
+266,340,City of Greater Sudbury,81.0
+267,269,Township of La Vallee,5.0
+268,270,Town of Midland,4.0
+269,271,North Bay Regional Health Centre,3.0
+270,46,Loyalist Township,13.0
+271,273,Loyalist College,4.0
+272,146,Township of Alfred and Plantagenet,15.0
+273,275,Municipality of Thames Centre,13.0
+274,277,Township of Clearview,24.0
+275,278,Ottawa Catholic School Board,11.0
+276,279,Township of Harley,2.0
+277,280,Geraldton District Hospital,25.0
+278,281,District School Board Of Niagara,82.0
+279,650,Township of Chamberlain,5.0
+280,282,Township of Russell,1.0
+281,283,Township of South Stormont,123.0
+282,284,Sault College,25.0
+283,49,Haliburton Highlands Health Services,14.0
+284,286,Township of Strong,8.0
+285,287,Township of Severn,15.0
+286,385,Thunder Bay Catholic District School Board,4.0
+287,289,Napanee Lennox & Addington County General Hospital,8.0
+288,290,Brockville General Hospital,6.0
+289,291,Englehart and District Hospital,1.0
+290,292,Township of Opasatika,5.0
+291,293,Conseil scolaire de district catholique Centre‐Sud,3.0
+292,294,Toronto Baycrest,4.0
+293,295,Township of Chapple,54.0
+294,296,District of Muskoka,2.0
+295,297,Township of The North Shore,5.0
+296,298,Township of Ryerson,9.0
+297,299,La Cite Collegiale,3.0
+298,300,Municipality of Marmora and Lake,5.0
+299,301,Township of Lanark Highlands,2.0
+300,302,Blind River District Health Centre,20.0
+301,303,Sir Sandford Fleming,24.0
+302,304,Municipality of South Huron,1.0
+303,305,Timmins and District Hospital,39.0
+304,306,Oakville Halton Healthcare Services,19.0
+305,307,Township of Armstrong,1.0
+306,308,Township of Chisholm,6.0
+307,309,Hanover and District Hospital,5.0
+308,310,London District Catholic School Board,4.0
+309,617,Kitchener Grand River Hospital,1.0
+310,312,Sarnia Bluewater Health,61.0
+311,313,Renfrew County District School Board,6.0
+312,314,Township of Otonabee-South Monaghan,2.0
+313,316,Nipigon District Memorial Hospital,32.0
+314,317,City of Hamilton,10.0
+315,318,Toronto Rouge Valley Health System,15.0
+316,375,City of Belleville,1.0
+317,319,Township of Conmee,162.0
+318,320,Hornepayne Community Hospital,4.0
+319,321,Nipissing‐Parry Sound Catholic District School Board,7.0
+320,322,County of Dufferin,2.0
+321,323,University of Western Ontario,14.0
+322,324,Georgian College,10.0
+323,325,Township of Dorion,67.0
+324,326,Township of Casey,9.0
+325,327,Municipality of West Perth,6.0
+326,328,Municipality of Centre Hastings,5.0
+327,329,Township of Puslinch,14.0
+328,330,Norfolk County,11.0
+329,145,University of Toronto,7.0
+330,332,Brampton William Osler Health System,77.0
+331,463,City of Brantford,12.0
+332,335,Simcoe County District School Board,6.0
+333,81,Township of Machar,23.0
+334,337,Town of Gore Bay,3.0
+335,338,Township of Wainfleet,126.0
+336,339,Municipality of Dysart Et Al,10.0
+337,268,Perth & Smiths Falls District Hospital,11.0
+338,341,Town of Blind River,7.0
+339,342,Municipality of Powassan,15.0
+340,65,Township of Terrace Bay,253.0
+341,344,Township of Hilton,6.0
+342,345,Township of Wilmot,13.0
+343,346,Town of Iroquois Falls,16.0
+344,347,City of Woodstock,3.0
+345,348,Town of Greater Napanee,13.0
+346,106,Strathroy Middlesex General Hospital,18.0
+347,350,Toronto Humber River Regional Hospital,24.0
+348,351,Hearst Notre Dame Hospital,23.0
+349,120,Township of Kerns,24.0
+350,126,Town of Espanola,4.0
+351,354,Rainy River District School Board,2.0
+352,355,Haldimand County,9.0
+353,356,Township of Edwardsburgh/Cardinal,29.0
+354,357,Township of North Dumfries,14.0
+355,358,Queen's University,43.0
+356,359,Town of St. Marys,9.0
+357,360,Conseil scolaire de district catholique de l'est Ontarien,11.0
+358,361,Iroquois Falls Anson General Hospital,1.0
+359,362,City of Kitchener,12.0
+360,363,City of Dryden,47.0
+361,364,Township of Lake of the Woods,1.0
+362,193,Municipality of Brockton,44.0
+363,366,Conseil scolaire de district catholique du Nouvel‐Ontario,19.0
+364,206,Township of Carlow/Mayo,2.0
+365,368,Kingston Providence Care Centre,4.0
+366,171,Town of Perth,34.0
+367,370,County of Renfrew,43.0
+368,371,Cambrian College,3.0
+369,216,Town of Fort Frances,16.0
+370,373,Mohawk College,10.0
+371,394,Ottawa Children's Hospital of Eastern Ontario,13.0
+372,231,Township of Morley,1.0
+373,376,The Public Utilities Commission of the City of Sault Ste. Marie,9.0
+374,377,Township of North Dundas,1.0
+375,378,Lindsay Ross Memorial Hospital,34.0
+376,379,West Parry Sound Health Centre,0.0
+377,380,Township of Harris,24.0
+378,519,Municipality of Tweed,2.0
+379,382,Region of Waterloo,1.0
+380,383,George Brown College,2.0
+381,384,Municipality of Charlton and Dack,43.0
+382,288,Town of Deseronto,42.0
+383,386,Township of Wellington North,12.0
+384,387,Township of South Algonquin,2.0
+385,388,Conseil des écoles publiques de l'Est de l'Ontario,21.0
+386,389,Township of Calvin,14.0
+387,390,Waterloo Region District School Board,13.0
+388,391,Separated Town of Gananoque,32.0
+389,393,Peterborough Victoria Northumberland and Clarington District Catholic School Board,4.0
+390,374,Clinton Public Hospital,124.0
+391,395,Township of Madoc,8.0
+392,396,Conseil scolaire de district catholique des Grandes Rivières,6.0
+393,397,Township of Georgian Bluffs,39.0
+394,398,The Public General Hospital Society of Chatham,2.0
+395,399,Algonquin College,4.0
+396,400,Municipality of Killarney,45.0
+397,401,Town of Bracebridge,10.0
+398,403,Catholic District School Board of Eastern Ontario,1.0
+399,404,Township of Oro-Medonte,78.0
+400,405,Town of Erin,10.0
+401,406,Township of Papineau-Cameron,14.0
+402,407,Town of Bruce Mines,18.0
+403,408,Seneca College,45.0
+404,409,Town of Hanover,18.0
+405,410,Township of Chatsworth,10.0
+406,411,"United Counties of Stormont, Dundas & Glengarry",3.0
+407,412,Town of Arnprior,5.0
+408,413,Town of Whitchurch-Stouffville,123.0
+409,414,Halton District School Board,14.0
+410,415,Toronto Providence Healthcare,13.0
+411,416,Mattawa General Hospital,19.0
+412,417,Township of Bonfield,7.0
+413,418,Town of Petawawa,21.0
+414,419,City of Waterloo,103.0
+415,420,Township of McMurrich/Monteith,2.0
+416,421,City of Elliot Lake,2.0
+417,422,Ottawa‐Carleton District School Board,5.0
+418,423,Town of East Gwillimbury,10.0
+419,424,Township of James,62.0
+420,425,Town of Smooth Rock Falls,8.0
+421,426,"Township of Brudenell, Lyndoch and Raglan",12.0
+422,427,Municipality of Huron Shores,150.0
+423,428,Lambton Area Water Supply System,21.0
+424,429,Lambton College,8.0
+425,430,Sheridan College,7.0
+426,431,County of Peterborough,13.0
+427,432,Township of Burpee & Mills,17.0
+428,433,Cornwall Community Hospital,0.0
+429,434,Brant Caommunity Healthcare System,27.0
+430,435,Guelph General Hospital,25.0
+431,226,York University,15.0
+432,437,Town of Georgina,6.0
+433,438,County of Brant,9.0
+434,439,Alexandria Glengarry Memorial Hospital,2.0
+435,440,Township of Drummond/North Elmsley,1.0
+436,441,City of Sarnia,21.0
+437,442,Wingham and District Hospital,36.0
+438,443,Port Burwell Area Secondary Water Supply Joint Board of Management,43.0
+439,444,City of Peterborough,2.0
+440,523,County of Haliburton,8.0
+441,446,St. Thomas - Elgin General Hospital,32.0
+442,447,Elliot Lake St. Joseph's General Hospital,2.0
+443,448,Township of Enniskillen,0.0
+444,449,Lakehead District School Board,29.0
+445,450,Municipality of Morris-Turnberry,12.0
+446,451,Keewatin‐Patricia District School Board,2.0
+447,452,Lambton Kent District School Board,1.0
+448,453,Township of Minden Hills,4.0
+449,454,Town of Thessalon,56.0
+450,598,Township of Lucan Biddulph,6.0
+451,455,Toronto St. Joseph's Health Care,25.0
+452,456,Municipality of Wawa,71.0
+453,457,Township of Ear Falls,16.0
+454,68,Village of Merrickville-Wolford,5.0
+455,527,Township of Douro-Dummer,2.0
+456,460,Municipality of Kincardine,9.0
+457,461,Township of Blandford-Blenheim,14.0
+458,462,Town of Collingwood,42.0
+459,104,Town of Cobourg,23.0
+460,464,Township of The Archipelago,14.0
+461,465,Cambridge Memorial Hospital,10.0
+462,647,Town of Kapuskasing,8.0
+463,467,Toronto North York General,52.0
+464,468,Township of Evanturel,3.0
+465,469,City of London,1.0
+466,470,City of Brockville,4.0
+467,471,Ottawa Royal Ottawa Health Care Group,5.0
+468,472,Windsor Hotel-Dieu Grace Hospital,2.0
+469,473,Township of McNab/Braeside,66.0
+470,155,Seaforth Community Hospital,16.0
+471,166,Centennial College,2.0
+472,476,Town of Hawkesbury,1.0
+473,477,Upper Grand District School Board,16.0
+474,478,Municipality of Huron East,2.0
+475,479,New Liskeard Temiskaming Hospital,1.0
+476,187,Township of Dubreuilville,11.0
+477,195,York Region District School Board,77.0
+478,482,Township of Frontenac Islands,17.0
+479,483,Orangeville Headwaters Health Care Centre,2.0
+480,484,Town of Carleton Place,18.0
+481,485,Leamington District Memorial Hospital,69.0
+482,486,Township of Elizabethtown-Kitley,12.0
+483,180,Goderich Alexandra Marine and General Hospital,2.0
+484,488,Elgin Area Primary Water Supply System Joint Board of Management,11.0
+485,489,Town of New Tecumseth,1.0
+486,490,United Counties of Leeds & Grenville,9.0
+487,491,City of Ottawa,53.0
+488,492,Atikokan General Hospital,0.0
+489,493,Town of Northeastern Manitoulin and the Islands,32.0
+490,494,Township of Sables-Spanish Rivers,12.0
+491,495,Town of Tecumseh,203.0
+492,496,Peel District School Board,2.0
+493,497,Village of Oil Springs,16.0
+494,498,Municipality of North Perth,15.0
+495,500,Township of Lake of Bays,14.0
+496,501,Municipality of Callander,253.0
+497,502,Municipality of Trent Hills,4.0
+498,503,Municipality of French River,17.0
+499,504,Municipality of West Nipissing,4.0
+500,505,Waterloo Catholic District School Board,19.0
+501,506,Township of Howick,8.0
+502,507,Toronto West Park Healthcare Centre,28.0
+503,508,Canadore College,8.0
+504,509,Woodstock General Hospital,30.0
+505,510,Township of East Luther Grand Valley,61.0
+506,511,City of Quinte West,11.0
+507,512,St. Catharines Niagara Health System,2.0
+508,513,Town of Marathon,18.0
+509,654,Municipality of Brighton,3.0
+510,515,Thames Valley District School Board,8.0
+511,516,County of Simcoe,29.0
+512,517,St. Clair College,7.0
+513,518,Township of South Frontenac,14.0
+514,381,University of Ottawa,15.0
+515,520,Township of North Stormont,178.0
+516,521,Township of Bonnechere Valley,30.0
+517,445,Township of Schreiber,10.0
+518,524,Township of Perth South,25.0
+519,655,Halton Catholic District School Board,7.0
+520,526,Township of Wollaston,18.0
+521,459,Township of Uxbridge,20.0
+522,528,Town of Aurora,7.0
+523,529,"Township of Killaloe, Hagarty & Richards",8.0
+524,530,Township of Coleman,5.0
+525,531,County of Frontenac,2.0
+526,532,Township of Chapleau,3.0
+527,499,Township of Montague,18.0
+528,534,Township of Mapleton,14.0
+529,535,The Nation Municipality,8.0
+530,536,Town of Plympton-Wyoming,2.0
+531,537,Township of Red Rock,10.0
+532,538,Conseil scolaire de district du Grand Nord de l'Ontario,6.0
+533,659,St. Joseph's Healthcare Hamilton,8.0
+534,539,Sudbury St. Joseph's Continuing Care Centre of Sudbury,18.0
+535,540,Town of Whitby,10.0
+536,541,Ryerson University,14.0
+537,542,Town of Pelham,4.0
+538,543,Township of Hilliard,14.0
+539,545,Owen Sound Grey Bruce Health Services,1.0
+540,546,Niagara College,32.0
+541,547,Township of Greater Madawaska,1.0
+542,548,Village of Hilton Beach,11.0
+543,549,Thunder Bay St. Joseph's Care Group,3.0
+544,550,Township of Perth East,8.0
+545,551,County of Essex,6.0
+546,331,United Counties of Prescott & Russell,48.0
+547,553,Northern College,8.0
+548,554,Township of Alnwick/Haldimand,12.0
+549,555,Town of Aylmer,2.0
+550,43,Township of East Zorra-Tavistock,14.0
+551,557,Township of Assiginack,25.0
+552,558,St. Clair Catholic District School Board,25.0
+553,224,Fort Frances Riverside Health Care,22.0
+554,132,Toronto Centre for Addiction and Mental Health,11.0
+555,561,Township of Prince,9.0
+556,562,Township of Val Rita-Harty,7.0
+557,563,Little Current Manitoulin Health Centre,6.0
+558,315,Township of South-West Oxford,32.0
+559,565,Town of Orangeville,5.0
+560,667,Lady Dunn Health Centre,18.0
+561,566,Town of Bradford-West Gwillimbury,5.0
+562,567,Hamilton‐Wentworth District School Board,3.0
+563,568,Upper Canada District School Board,4.0
+564,569,Township of Ashfield-Colborne-Wawanosh,3.0
+565,570,Township of Leeds and the Thousand Islands,7.0
+566,402,Township of Central Frontenac,18.0
+567,572,Peterborough Regional Health Centre,119.0
+568,573,Township of North Algona Wilberforce,100.0
+569,574,Township of North Frontenac,11.0
+570,44,Toronto District School Board,23.0
+571,576,Township of Jocelyn,27.0
+572,577,Whitby Ontario Shores Centre for Mental Health Sciences,1.0
+573,578,Municipality of Whitestone,7.0
+574,579,Township of White River,28.0
+575,580,Township of Guelph/Eramosa,25.0
+576,581,Simcoe Norfolk General Hospital,3.0
+577,582,Town of Ingersoll,2.0
+578,583,Township of O'Connor,7.0
+579,97,Township of Hamilton,10.0
+580,101,Township of Scugog,11.0
+581,111,Township of Athens,1.0
+582,587,Township of Cavan Monaghan,10.0
+583,588,Almonte General Hospital,4.0
+584,436,Nipissing University,2.0
+585,590,Town of Shelburne,18.0
+586,591,Township of Tay,140.0
+587,592,Durham District School Board,12.0
+588,593,Town of Mississippi Mills,2.0
+589,594,Tay Valley Township,13.0
+590,595,County of Northumberland,6.0
+591,596,Town of Goderich,18.0
+592,522,Township of McKellar,181.0
+593,599,Alliston Stevenson Memorial,9.0
+594,600,Township of Ignace,6.0
+595,601,Town of Englehart,14.0
+596,602,Sudbury Catholic District School Board,11.0
+597,603,Township of Joly,36.0
+598,604,Town of Wasaga Beach,8.0
+599,200,Matheson Bingham Memorial Hospital,4.0
+600,606,Town of Caledon,1.0
+601,607,Toronto Hospital for Sick Children,6.0
+602,608,Township of Augusta,24.0
+603,609,Municipality of West Grey,3.0
+604,610,Municipality of Middlesex Centre,14.0
+605,552,Town of Ajax,30.0
+606,611,Town of Fort Erie,37.0
+607,612,Township of Zorra,3.0
+608,613,Township of Brock,12.0
+609,614,Municipality of Central Elgin,31.0
+610,615,Huron Perth Catholic District School Board,15.0
+611,616,County of Lennox & Addington,18.0
+612,639,City of Port Colborne,10.0
+613,311,Township of West Lincoln,21.0
+614,618,Village of South River,8.0
+615,619,University of Toronto at Mississauga,19.0
+616,620,Town of Richmond Hill,11.0
+617,621,Township of Whitewater Region,8.0
+618,622,Trillium Lakelands District School Board,5.0
+619,623,Trent University,1.0
+620,624,Utilities Kingston,61.0
+621,625,City of Cornwall,20.0
+622,626,Township of Mulmur,60.0
+623,627,Dufferin Peel Catholic District School Board,3.0
+624,628,Township of Limerick,0.0
+625,629,Wallaceburg Sydenham District Hospital,34.0
+626,334,Township of Tudor & Cashel,5.0
+627,631,Town of Rainy River,156.0
+628,632,Municipality of Central Manitoulin,3.0
+629,633,Winchester District Memorial Hospital,1.0
+630,634,Penetanguishene Waypoint Centre for Mental Health Care,39.0
+631,635,London Health Sciences Centre,6.0
+632,333,County of Oxford,15.0
+633,637,St. Catharines Hotel Dieu Shaver,3.0
+634,638,Town of Huntsville,1.0
+635,157,Township of King,8.0
+636,640,Confederation College,2.0
+637,641,Dryden Regional Health Centre,1.0
+638,642,Township of Fauquier-Strickland,18.0
+639,556,Stratford General Hospital,20.0
+640,643,Moose Factory Weeneebayko Area Health Authority,9.0
+641,644,Collingwood General and Marine Hospital,2.0
+642,645,City of Kingston,7.0
+643,646,Township of South Glengarry,5.0
+644,466,Township of Baldwin,1.0
+645,589,Township of Madawaska Valley,57.0
+646,648,Municipality of South Bruce,3.0
+647,649,Municipality of Central Huron,12.0
+648,276,Windsor Regional Hospital,13.0
+649,651,Town of Kearney,9.0
+650,652,Municipality of Dutton/Dunwich,4.0
+651,653,Superior North Catholic District School Board,3.0
+652,514,Township of Stirling-Rawdon,14.0
+653,525,Exeter South Huron Hospital Association,9.0
+654,656,Toronto Bridgepoint Hospital,10.0
+655,657,Conseil scolaire de district catholique Franco‐Nord,52.0
+656,658,Municipality of St. Charles,1.0
+657,559,Conseil scolaire de district catholique des Aurores boréales,16.0
+658,660,Township of Nipissing,12.0
+659,661,Sudbury Health Science North,3.0
+660,662,Township of Laird,7.0
+661,663,Town of Minto,3.0
+662,664,Town of Saugeen Shores,6.0
+663,665,Municipality of Hastings Highlands,22.0
+664,666,Simcoe Muskoka Catholic District School Board,13.0
+665,560,Municipality of Arran-Elderslie,20.0
+666,668,Municipality of Red Lake,55.0
+667,243,City of Brampton,3.0
+668,669,Toronto Holland Bloorview Kids Rehabilitation Hospital,9.0
+669,679,Municipality of Southwest Middlesex,3.0
+670,670,Avon Maitland District School Board,45.0
+671,671,Cobourg Northumberland Hills Hospital,1.0
+672,672,Township of Springwater,22.0
+673,34,"Township of MacDonald, Meredith & Aberdeen Add'l",6.0
+674,674,Town of Smiths Falls,18.0
+675,675,Municipality of Trent Lakes,12.0
+676,676,Town of Markham,74.0
+677,677,Fanshawe College,90.0
+678,678,University of Toronto at Scarborough,1.0
+679,597,Brant Haldimand Norfolk Catholic District School Board,20.0

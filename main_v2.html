@@ -189,23 +189,10 @@ d3.csv("dim_city.csv", function(DimCity) {
           event.preventDefault();
           var nameInput = document.getElementById('search-bar');
           var org = nameInput.value;
-          var dim_organization_row = DimOrganization.filter(
-            function( obj ) { return obj.organization == org; });
+          var dim_organization_row = DimOrganization.filter( function( obj ) { return obj.organization == org; });
           var dim_org_id = dim_organization_row[0].dim_organization; // should be only one result
-          var rows = Master.filter(
-            function( obj ) { return obj.dim_organization == dim_org_id; });
-          
-          // sort rows by percentile rank
-          function compare(a, b) {
-            if (a.en_intensity_ekWh_sqft_pct_rank < b.en_intensity_ekWh_sqft_pct_rank)
-             return -1;
-           if (a.en_intensity_ekWh_sqft_pct_rank > b.en_intensity_ekWh_sqft_pct_rank)
-            return 1;
-          return 0;
-        }
-        rows.sort(compare);
-
-        do_everything(rows, Master, DimCity, DimOperationType, dists);
+          var rows = Master.filter( function( obj ) { return obj.dim_organization == dim_org_id; });
+          do_everything(rows, Master, DimCity, DimOperationType, dists);
       });
 });
 });
@@ -260,37 +247,33 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
 
     var pinImage = new google.maps.MarkerImage('grey_pin.png'); 
     var markers = {};
-    //var table = $('#results-table')
-
-    n_buildings = rows.length;
+    org_n_buildings = rows.length;
 
     for (var x = 0; x < rows.length; x++) {
-
-      var org_rank = x + 1;
-      var operation_type_row = DimOperationType.filter(function( obj ) { return obj.dim_operation_type == rows[x].dim_operation_type; })[0];
-
-      var sensorId = rows[x].index;
+      var r = rows[x]
+      var operation_type_row = DimOperationType.filter(function( obj ) { return obj.dim_operation_type == r.dim_operation_type; })[0];
+      var sensorId = r.index;
 
       $('#results-table').dataTable().fnAddData( [
         { "DT_RowId": sensorId + "VisibleCheckbox", 
           "org_rank": {
-            "display": comma_format(org_rank) + ' of ' + comma_format(n_buildings), 
-            "rank": zero_format_int(org_rank) },
+            "display": comma_format(r.org_rank) + ' of ' + comma_format(org_n_buildings), 
+            "rank": zero_format_int(r.org_rank) },
           "similar_rank": {
-            "display": comma_format(rows[x].en_intensity_rank) + ' of ' + comma_format(operation_type_row.n_buildings), 
-            "rank": zero_format_int(d3.round(10000 * rows[x].en_intensity_rank / operation_type_row.n_buildings )) },
-          "name": rows[x].operation_name } ]
+            "display": comma_format(r.op_type_rank) + ' of ' + comma_format(operation_type_row.n_buildings), 
+            "rank": zero_format_int(d3.round(10000 * r.op_type_rank / operation_type_row.n_buildings )) },
+          "name": r.operation_name } ]
       );
 
-      var latlng = new google.maps.LatLng(rows[x].lat, rows[x].lng);
+      var latlng = new google.maps.LatLng(r.lat, r.lng);
       latlngbounds.extend(latlng);
       var marker = new google.maps.Marker({
         position: latlng,
         map: map,
-        title: rows[x].operation_name,
+        title: r.operation_name,
         icon: pinImage,
         zIndex: 1,
-        index: rows[x].index,
+        index: r.index,
         opacity: 0.5
       });
       markers[sensorId+"VisibleCheckbox"] = marker;
@@ -331,7 +314,6 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
           on_deselect(m);
         } 
     } );
-
   });
 }
 
@@ -405,11 +387,8 @@ function get_table(row, city_row, operation_type_row) {
 };
 
 function get_pct_rank(row, operation_type_row) {
-
-  var rank = d3.round(row.en_intensity_rank + 1, 0);
-  var rank_text = '#' + rank.toString();
   var span = '<table>'; 
-  span += '<tr><td class="big-text">' + rank_text + ' of ' + comma_format(operation_type_row.n_buildings) + '</td></tr>'
+  span += '<tr><td class="big-text">' + '#' + comma_format(row.op_type_rank) + ' of ' + comma_format(operation_type_row.n_buildings) + '</td></tr>'
   span += '<tr><td class="small-text">energy efficiency ranked against the ' + comma_format(operation_type_row.n_buildings) + ' other buildings of this type in Ontario.</td></tr>'
   span += '</table>'
   return span
