@@ -233,18 +233,6 @@ function initialize_map(){
             { "data": "org_rank" },
             { "data": "similar_rank" },
             { "data": "name"} ]
-        
-        /*"fields": [ {
-              label:     "a",
-              name:      "a",
-              type:      "checkbox",
-              separator: "|",
-              options:   [ { label: '', value: 1 } ]
-          }, 
-          null,
-          null, 
-         null
-        ]*/
     } );
   });
 
@@ -282,25 +270,6 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
 
       var sensorId = rows[x].index;
 
-/*
-      var row = $('<tr></tr>').attr('id', sensorId).addClass("sensorListItem");
-      var c1 = $('<td></td>');
-      var c2 = $('<td></td>'); 
-      var c3 = $('<td></td>'); 
-      var c4 = $('<td></td>');
-
-      c1.append($('<input>', { id : sensorId + "VisibleCheckbox", type:"checkbox", name: sensorId + "VisibleCheckbox"}));
-      c2.append(org_rank + ' of ' + n_buildings);
-      c3.append(comma_format(rows[x].en_intensity_rank) + ' of ' + comma_format(operation_type_row.n_buildings));
-      c4.append(rows[x].operation_name);
-
-      row.append(c1);
-      row.append(c2);
-      row.append(c3);
-      row.append(c4);
-      table_contents.append(row);
-*/
-
       $('#results-table').dataTable().fnAddData( [
         { "DT_RowId": sensorId + "VisibleCheckbox", 
           "org_rank": org_rank + ' of ' + n_buildings,
@@ -321,6 +290,8 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
       });
       markers[sensorId+"VisibleCheckbox"] = marker;
       google.maps.event.addListener(marker, 'click', function(e) {
+
+        $("#"+this.index+"VisibleCheckbox").toggleClass('selected');
         infowindow.setContent(this.title);
         infowindow.open(map, this);
         if (this.zIndex == 1) {
@@ -333,6 +304,7 @@ function do_everything(rows, Master, DimCity, DimOperationType, dists){
               scrollTo.offset().top - container.offset().top + container.scrollTop() - 20 // 20 is an offset so that the entry is not hidden at the very top
               );
           */
+
           on_select(this, Master, DimCity, DimOperationType, dists);
         } else {
           on_deselect(this);
