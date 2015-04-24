@@ -215,13 +215,20 @@ d3.csv("dim_city.csv", function(DimCity) {
       $(function() {
         $( "input[id=radio1]" )
         .button()
-        .click(function( event ) { initialize_autocomplete(org_array); })
+        .click(function( event ) {
+          initialize_autocomplete(org_array);
+          $("#search-bar").attr('value', "Enter organization here...");
+        })
       });
 
       $(function() {
         $( "input[id=radio2]" )
         .button()
-        .click(function( event ) { initialize_autocomplete(op_types); })
+        .click(function( event ) { 
+          initialize_autocomplete(op_types); 
+          $("#search-bar").attr('value', "Enter building type here...");
+
+        })
       });
 
       d3.csv("master_short.csv", function(Master) {
@@ -597,7 +604,7 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
         </div>
       </div>
       <div class="ui-widget" id="search-div">
-        <input id="search-bar" class="default-value" onkeydown="if (event.keyCode == 13) document.getElementById('go-button').click()" value="Enter an organization name here...">
+        <input id="search-bar" class="default-value" onkeydown="if (event.keyCode == 13) document.getElementById('go-button').click()" value="Enter organization here...">
         <input id="go-button" type="submit" value="Go">
       </div>
       <div id="map-and-list">
