@@ -242,13 +242,13 @@ d3.csv("dim_city.csv", function(DimCity) {
             var org_mode;
 
             if (dim_organization_row.length > 0) {
-              console.log(dim_organization_row);
+              console.log('1');
               var dim_org_id = dim_organization_row[0].dim_organization; // should be only one result
               rows = Master.filter( function( obj ) { return obj.dim_organization == dim_org_id; });
               org_mode = true;
             }
-            if (dim_op_type_row.length) {
-              console.log(dim_op_type_row);
+            if (dim_op_type_row.length > 0) {
+              console.log('2');
               var dim_op_type_id = dim_op_type_row[0].dim_operation_type; // should be only one result
               rows = Master.filter( function( obj ) { return obj.dim_operation_type == dim_op_type_id; });
               org_mode = false;
@@ -257,7 +257,7 @@ d3.csv("dim_city.csv", function(DimCity) {
             //var dim_organization_row = DimOrganization.filter( function( obj ) { return obj.organization == org; });
             //var dim_org_id = dim_organization_row[0].dim_organization; // should be only one result
             //var rows = Master.filter( function( obj ) { return obj.dim_organization == dim_org_id; });
-
+            console.log('3');
             do_everything(rows, Master, DimCity, DimOperationType, DimOrganization, dists, org_mode);
         });
 });
@@ -293,11 +293,13 @@ function initialize_map(){
 }
 
 function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization, dists, org_mode) {
+  console.log('4');
 
   $(document).ready(function () {
     $('#map_canvas').empty();
     $("#results-table tbody").empty();
     $('#results-table').DataTable().clear().draw();
+    console.log('5');
 
     var myOptions = {
       zoom: 1,
@@ -315,24 +317,30 @@ function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization,
     var markers = {};
     
 
-    //org_n_buildings = rows.length;
+    //console.log('6');
 
     for (var x = 0; x < rows.length; x++) {
       var r = rows[x]
       var operation_type_row = DimOperationType.filter(function( obj ) { return obj.dim_operation_type == r.dim_operation_type; })[0];
       var organization_row = DimOrganization.filter(function( obj ) { return obj.dim_organization == r.dim_organization; })[0];
+      var n_org_buildings = organization_row.n_buildings;
+      var n_op_type_buildings = operation_type_row.n_buildings;
+
+      //console.log('7');
+
       var sensorId = r.index;
 
       $('#results-table').dataTable().fnAddData( [
         { "DT_RowId": sensorId + "VisibleCheckbox", 
           "org_rank": {
-            "display": comma_format(r.org_rank) + ' of ' + comma_format(organization_row.n_buildings), 
+            "display": comma_format(r.org_rank) + ' of ' + comma_format(n_org_buildings), 
             "rank": zero_format_int(r.org_rank) },
           "similar_rank": {
-            "display": comma_format(r.op_type_rank) + ' of ' + comma_format(operation_type_row.n_buildings), 
-            "rank": zero_format_int(d3.round(10000 * r.op_type_rank / operation_type_row.n_buildings )) },
-          "name": r.operation_name } ]
-      );
+            "display": comma_format(r.op_type_rank) + ' of ' + comma_format(n_op_type_buildings), 
+            "rank": zero_format_int(d3.round(10000 * r.op_type_rank / n_op_type_buildings )) },
+          "name": r.operation_name } ],
+      false);
+      //console.log('8');
 
       var latlng = new google.maps.LatLng(r.lat, r.lng);
       latlngbounds.extend(latlng);
@@ -346,12 +354,17 @@ function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization,
         opacity: 0.5
       });
       markers[sensorId+"VisibleCheckbox"] = marker;
+
       google.maps.event.addListener(marker, 'click', function(e) {
+        console.log('9');
 
         $("#"+this.index+"VisibleCheckbox").toggleClass('selected');
         infowindow.setContent(this.title);
         infowindow.open(map, this);
         if (this.zIndex == 1) {
+
+          //$(".dataTables_scrollBody").scrollTop( $("#" + this.index + "VisibleCheckbox").offset().top - 400 );//- $(".dataTables_scrollBody").height() );
+
           // scroll to checked box in list #results-container*
           /*
           var container = $('#dataTables_scrollBody'),
@@ -368,16 +381,20 @@ function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization,
       });
     }
 
+    // draw the datatable
+    $('#results-table').dataTable().fnDraw();
+
     map.setCenter(latlngbounds.getCenter());
     map.fitBounds(latlngbounds); 
+    console.log('10');
 
   // listen for results click
     $('#results-table tbody').on( 'click', 'tr', function () {
         $(this).toggleClass('selected');
         // update map and stuff
-        console.log(this);
+        //console.log(this);
         sId = $(this)[0].id;
-        console.log(sId);
+        //console.log(sId);
         m = markers[sId];
         if (m.zIndex == 1) {
           on_select(m, Master, DimCity, DimOperationType, dists);
