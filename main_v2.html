@@ -11,6 +11,11 @@ body {
   background-color: #f6f6f6;
 }
 
+#footnote {
+  font-size: 14px;
+  color: grey;
+}
+
 #search-bar { 
   width: 910px; 
   text-align:left;
@@ -74,7 +79,7 @@ body {
   height: 100%;
   width: 49%; 
   float: left;
-  text-align: left;
+  text-align: center;
 }
 
 .left-report tr > td {
@@ -162,12 +167,6 @@ label {
 // <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js">
 // <script src="jquery-ui-1.11.4.custom/jquery-ui.js">
 // from http://stackoverflow.com/questions/19640055/multiple-markers-google-map-api-v3-from-array-of-addresses-and-avoid-over-query
-
-// initialize radio buttons
-$(function() {
-  $( "#radio" ).buttonset();
-});
-
 
 var infowindow = null;
 initialize_map();
@@ -270,6 +269,11 @@ d3.csv("dim_city.csv", function(DimCity) {
 function initialize_map(){
 
   $(document).ready(function () {
+    // initialize radio buttons
+    $(function() {
+      $( "#radio" ).buttonset();
+    });
+
     var myOptions = {
       zoom: 5,
       center: new google.maps.LatLng(49.3,-85.0),
@@ -278,7 +282,7 @@ function initialize_map(){
     var map = new google.maps.Map($('#map_canvas')[0], myOptions);
 
     $('#results-table').dataTable( {
-        scrollY:        "400px", // this doesn't include the header
+        scrollY:        "435px", // this doesn't include the header
         //scrollX:        true,
         paging:         false,
         retrieve:       true,
@@ -289,6 +293,7 @@ function initialize_map(){
             { data: { _: 'similar_rank.display', sort: 'similar_rank.rank' } },
             { data: "name"} ]
     } );
+
   });
 
 }
@@ -316,8 +321,6 @@ function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization,
 
     var pinImage = new google.maps.MarkerImage('grey_pin.png'); 
     var markers = {};
-    
-
     //console.log('6');
     var oTable = $('#results-table').dataTable();
 
@@ -364,22 +367,8 @@ function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization,
         infowindow.setContent(this.title);
         infowindow.open(map, this);
         if (this.zIndex == 1) {
-
           var scroller = oTable.fnSettings().nTable.parentNode;                                              
-           
           $(scroller).scrollTo( $("#"+this.index+"r"), 1 );
-
-          //$(".dataTables_scrollBody").scrollTop( $("#" + this.index + "r").offset().top );//- $(".dataTables_scrollBody").height() );
-
-          // scroll to checked box in list #results-container*
-          /*
-          var container = $('#dataTables_scrollBody'),
-          scrollTo = $("#"+this.index+"r");
-          container.scrollTop(
-              scrollTo.offset().top - container.offset().top + container.scrollTop() - 20 // 20 is an offset so that the entry is not hidden at the very top
-              );
-          */
-
           on_select(this, Master, DimCity, DimOperationType, dists);
         } else {
           on_deselect(this);
@@ -589,12 +578,12 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
   <body>
     <div id='container'>
       <h1 id="title">Public Building Energy Consumption in Ontario</h1>
-
       <div id="intro">
-        <p> This page allows you to explore the energy consumption of public buildings in Ontario. It is intended to highlight the best and worst performing buildings to help organizations identify good candidates for retrofit. It is also for individuals to see how the public buildings near them compare to others in Ontario. </p>
+        <p>This page allows you to explore the energy consumption of public buildings in Ontario. It is intended to highlight the best and worst performing buildings and help organizations identify good candidates for retrofit. It is also for individuals to see how the public buildings near them compare to others in Ontario. </p>
 
-        <p> To get started, start typing the name of an organization or building type in the search bar and select the one you want. Then select the buildings you are interested in and individual energy reports will appear. The energy efficiency of each building is ranked in two ways: compared to buildings of the same type (e.g. Community Centres) and compared to buildings managed by the same organization. </p>
-        <p> To get started, choose to search by building type or organization name: </p>
+        <p>To get started, start searching for an organization (e.g. City of Toronto) or type of building type (e.g. Public Libraries). Then select the buildings you are interested in from the results list or by clicking a pin on the map. Once selected, an energy report for that building will appear below the map. </p>
+
+        <p>The energy efficiency of each building is ranked in two ways: in comparison to buildings of the same type, and in comparison to buildings owned by the same organization. </p>
       </div>
       <div id='text-and-radio'>
         <div id="search-by"> Search by: </div> 
@@ -611,7 +600,7 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
         <div id="results-container">
           <table id="results-table" class="display" cellspacing="0">
             <thead>
-              <tr> <th>Organization<br>Rank</th> <th>Operation<br>Type Rank</th> <th>Building Name</th> </tr>
+              <tr> <th>Organization<br>Rank</th> <th>Building<br>Type Rank</th> <th>Building Name</th> </tr>
             </thead>
             <tbody></tbody>
           </table>
