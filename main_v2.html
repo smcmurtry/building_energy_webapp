@@ -173,6 +173,7 @@ initialize_map();
 comma_format = d3.format("0,000");
 zero_format_int = d3.format("06d");
 zero_format_float = d3.format('07.0r');
+var markers = {};
 
 function initialize_autocomplete(searchable_array) {
   $(function() {$( "#search-bar" ).autocomplete({ source: searchable_array }); });
@@ -320,7 +321,9 @@ function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization,
     });
 
     var pinImage = new google.maps.MarkerImage('grey_pin.png'); 
-    var markers = {};
+    // var markers = {};
+    markers = {};
+    //var markers2 = [];
     //console.log('6');
     var oTable = $('#results-table').dataTable();
 
@@ -358,7 +361,6 @@ function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization,
         index: r.index,
         opacity: 0.5
       });
-      markers[sensorId+"r"] = marker;
 
       google.maps.event.addListener(marker, 'click', function(e) {
         // console.log('9');
@@ -374,6 +376,9 @@ function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization,
           on_deselect(this);
         }
       });
+
+    markers[sensorId+"r"] = marker;
+
     }
 
     // draw the datatable
@@ -381,21 +386,23 @@ function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization,
 
     map.setCenter(latlngbounds.getCenter());
     map.fitBounds(latlngbounds); 
+    
     // console.log('10');
 
   // listen for results click
-    $('#results-table tbody').on( 'click', 'tr', function () {
-        $(this).toggleClass('selected');
+    $('#results-table tbody').unbind("click").on( 'click', 'tr', function () { // unbind is very important! it removes the event handlers from previous searches
         // update map and stuff
-        //console.log(this);
-        sId = $(this)[0].id;
-        //console.log(sId);
-        m = markers[sId];
-        if (m.zIndex == 1) {
-          on_select(m, Master, DimCity, DimOperationType, dists);
+        id = $(this)[0].id;
+        console.log(id);
+        m = markers[id];
+        // before class is toggled
+        if ($(this).hasClass('selected')) { 
+          on_deselect(m); 
         } else {
-          on_deselect(m);
-        } 
+          on_select(m, Master, DimCity, DimOperationType, dists);
+        }
+        $("#" + id).toggleClass('selected');
+
     } );
   });
 }
@@ -405,7 +412,6 @@ function on_select(marker, Master, DimCity, DimOperationType, dists) {
   marker.setIcon("green_pin.png");
   marker.setZIndex(2);
   marker.setOpacity(1.0);
-  $("#"+marker.index+"r").prop('checked', true);
   var row_index = 1*marker.index;
   var row = Master.filter(function( obj ) { return obj.index == row_index; })[0];
   var city_row = DimCity.filter(function( obj ) { return obj.dim_City == row.dim_City; })[0];
@@ -417,7 +423,6 @@ function on_select(marker, Master, DimCity, DimOperationType, dists) {
 function on_deselect(marker) {
   marker.setIcon("grey_pin.png");
   marker.setZIndex(1);
-  $("#"+marker.index+"r").prop('checked', false);
   marker.setOpacity(0.5)
   $( "#report-" + marker.index ).remove();
 };
