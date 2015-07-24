@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>Public Building Energy Consumption in Ontario</title>
+<title>Building Energy Consumption in Ontario</title>
 <link rel="stylesheet" href="jquery-ui-v2.css">
 <link rel="stylesheet" href="jquery.dataTables.css">
 
@@ -294,19 +294,16 @@ function initialize_map(){
             { data: { _: 'similar_rank.display', sort: 'similar_rank.rank' } },
             { data: "name"} ]
     } );
-
   });
 
 }
 
 function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization, dists, org_mode) {
-  // console.log('4');
 
   $(document).ready(function () {
     $('#map_canvas').empty();
     $("#results-table tbody").empty();
     $('#results-table').DataTable().clear().draw();
-    // console.log('5');
 
     var myOptions = {
       zoom: 1,
@@ -321,10 +318,7 @@ function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization,
     });
 
     var pinImage = new google.maps.MarkerImage('grey_pin.png'); 
-    // var markers = {};
     markers = {};
-    //var markers2 = [];
-    //console.log('6');
     var oTable = $('#results-table').dataTable();
 
     for (var x = 0; x < rows.length; x++) {
@@ -333,9 +327,6 @@ function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization,
       var organization_row = DimOrganization.filter(function( obj ) { return obj.dim_organization == r.dim_organization; })[0];
       var n_org_buildings = organization_row.n_buildings;
       var n_op_type_buildings = operation_type_row.n_buildings;
-
-      //console.log('7');
-
       var sensorId = r.index;
 
       oTable.fnAddData( [
@@ -348,7 +339,6 @@ function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization,
             "rank": zero_format_int(d3.round(10000 * r.op_type_rank / n_op_type_buildings )) },
           "name": r.operation_name } ],
       false);
-      //console.log('8');
 
       var latlng = new google.maps.LatLng(r.lat, r.lng);
       latlngbounds.extend(latlng);
@@ -363,7 +353,6 @@ function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization,
       });
 
       google.maps.event.addListener(marker, 'click', function(e) {
-        // console.log('9');
 
         $("#"+this.index+"r").toggleClass('selected');
         infowindow.setContent(this.title);
@@ -387,13 +376,10 @@ function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization,
     map.setCenter(latlngbounds.getCenter());
     map.fitBounds(latlngbounds); 
     
-    // console.log('10');
-
   // listen for results click
     $('#results-table tbody').unbind("click").on( 'click', 'tr', function () { // unbind is very important! it removes the event handlers from previous searches
         // update map and stuff
         id = $(this)[0].id;
-        console.log(id);
         m = markers[id];
         // before class is toggled
         if ($(this).hasClass('selected')) { 
@@ -582,11 +568,11 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
 
   <body>
     <div id='container'>
-      <h1 id="title">Public Building Energy Consumption in Ontario</h1>
+      <h1 id="title">Building Energy Consumption in Ontario</h1>
       <div id="intro">
         <p>This page allows you to explore the energy consumption of public buildings in Ontario. It is intended to highlight the best and worst performing buildings and help organizations identify good candidates for retrofit. It is also for individuals to see how the public buildings near them compare to others in Ontario. </p>
 
-        <p>To get started, start searching for an organization (e.g. City of Toronto) or type of building type (e.g. Public Libraries). Then select the buildings you are interested in from the results list or by clicking a pin on the map. Once selected, an energy report for that building will appear below the map. </p>
+        <p>To get started, type the name of an organization (e.g. City of Toronto) or type of building (e.g. Public Libraries) into the search bar. Then select the buildings you are interested in from the results list or by clicking on the map. Once selected, an energy report for that building will appear below the map. </p>
 
         <p>The energy efficiency of each building is ranked in two ways: in comparison to buildings of the same type, and in comparison to buildings owned by the same organization. </p>
       </div>
@@ -605,7 +591,7 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
         <div id="results-container">
           <table id="results-table" class="display" cellspacing="0">
             <thead>
-              <tr> <th>Organization<br>Rank</th> <th>Building<br>Type Rank</th> <th>Building Name</th> </tr>
+              <tr> <th>Organization Rank</th> <th>Building Type Rank</th> <th>Building Name</th> </tr>
             </thead>
             <tbody></tbody>
           </table>
