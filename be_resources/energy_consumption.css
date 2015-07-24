@@ -1,0 +1,149 @@
+body {
+  font: 18px helvetica neue;
+  padding:0px;
+  background-color: #f6f6f6;
+}
+
+#footnote {
+  font-size: 14px;
+  color: grey;
+}
+
+#search-bar { 
+  width: 910px; 
+  text-align:left;
+  color: black;
+}
+#go-button {
+  color: black;
+}
+
+#radio label { 
+  padding: 0px;
+  border-color: grey;
+  top: 0px;
+}
+
+#search-by {
+  font-size: 20px;
+  padding: .4em 0em;
+  width:150px;
+  float: left;
+}
+
+.ui-state-default {
+  color:lightgrey;
+}
+
+.ui-state-active {
+  color:black;
+}
+
+.ui-widget {
+  text-align:left;
+}
+
+#search-div, #footnote, #title, #intro, #text-and-radio, #search-title {
+  width:1000px;
+  margin:0px auto;
+  padding:15px;
+  text-align:left;
+}
+
+#footnote {margin-top: 50px;}
+
+#map-and-list {
+  width: 1000px;
+  height: 500px;
+  overflow: hidden;
+  margin: 0px auto;
+  margin-bottom: 50px;
+}
+
+#map_canvas {
+  width: 50%;
+  height: 100%;
+  float: right;
+}
+
+#results-container {
+  background-color: white;
+  /*white-space: nowrap; causes text not to wrap */
+  height: 100%;
+  width: 49%; 
+  float: left;
+  text-align: center;
+}
+
+.left-report tr > td {
+  padding-bottom: 10px;
+}
+
+.right-report tr > td {
+  padding-bottom: 0px;
+}
+
+.report, 
+.right-report, .left-report{
+  height: 300px;
+}
+
+.right-report, .left-report{
+  background-color: white;
+}
+
+.big-text {
+  font-size: 40px;
+}
+
+.small-text {
+  font-size: 14px;
+}
+.right-report {
+  width:29%;
+  text-align:right;
+  float:right;
+}
+
+.left-report {
+ width:70%; 
+ float:left;
+}
+
+.report {
+  width:1000px;
+  margin:0 auto;
+  padding-bottom: 100px;
+}
+
+.axis text, .x.label, .y.label {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.y.axis line {
+  stroke: #000; 
+}
+
+.x.axis path, .y.axis path {
+  display: none;
+}
+
+.bar {
+  fill: grey;
+  fill-opacity: 1.;
+}
+
+label {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.chart {float: right;}
