@@ -3,17 +3,17 @@
 
 <head>
 <title>Public Building Energy Consumption in Ontario</title>
-<link rel="stylesheet" href="building_energy_consumption/jquery-ui-v2.css">
-<link rel="stylesheet" href="building_energy_consumption/jquery.dataTables.css">
-<link rel="stylesheet" href="building_energy_consumption/energy_consumption.css">
+<link rel="stylesheet" href="resources/jquery-ui-v2.css">
+<link rel="stylesheet" href="resources/jquery.dataTables.css">
+<link rel="stylesheet" href="energy_consumption.css">
 
-<script src="building_energy_consumption/d3.min.js"></script>
+<script src="resources/d3.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="http://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization"></script>
-<script src="building_energy_consumption/jquery.dataTables.min.js"></script>
-<script src="building_energy_consumption/jquery.scrollTo.min.js"></script>
-<script src="building_energy_consumption/string_score.js"></script>
+<script src="resources/jquery.dataTables.min.js"></script>
+<script src="resources/jquery.scrollTo.min.js"></script>
+<script src="resources/string_score.js"></script>
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -28,8 +28,12 @@
 </head>
 
 <script>
-// <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js">
-// <script src="jquery-ui-1.11.4.custom/jquery-ui.js">
+
+var data_path = "../data/", // or building_energy/ ?
+    grey_pin_path = 'resources/images/grey_pin.png',
+    green_pin_path = 'resources/images/green_pin.png';
+    
+
 // from http://stackoverflow.com/questions/19640055/multiple-markers-google-map-api-v3-from-array-of-addresses-and-avoid-over-query
 
 var infowindow = null;
@@ -60,9 +64,9 @@ function initialize_autocomplete(searchable_array) {
   });
 }
 
-d3.csv("building_energy_consumption/dim_city.csv", function(DimCity) {
-  d3.csv("building_energy_consumption/dim_organization.csv", function(DimOrganization) { 
-    d3.csv("building_energy_consumption/dim_operation_type.csv", function(DimOperationType) {
+d3.csv(data_path + "dim_city.csv", function(DimCity) {
+  d3.csv(data_path + "dim_organization.csv", function(DimOrganization) { 
+    d3.csv(data_path + "dim_operation_type.csv", function(DimOperationType) {
       var org_array = [];
       for (var i = DimOrganization.length - 1; i >= 0; i--) {
         org_array.push(DimOrganization[i].organization);
@@ -77,92 +81,85 @@ d3.csv("building_energy_consumption/dim_city.csv", function(DimCity) {
 
       // add listeners to the radio button
       $(function() {
-        $( "input[id=radio1]" )
-        .button()
-        .click(function( event ) {
-          initialize_autocomplete(org_array);
-          $("#search-bar").attr('value', "Enter organization here...");
-        })
+        $( "input[id=radio1]" ).button()
+          .click(function( event ) {
+            initialize_autocomplete(org_array);
+            $("#search-bar").attr('value', "Enter organization here...");
+          })
       });
 
       $(function() {
-        $( "input[id=radio2]" )
-        .button()
-        .click(function( event ) { 
-          initialize_autocomplete(op_types); 
-          $("#search-bar").attr('value', "Enter building type here...");
-
-        })
+        $( "input[id=radio2]" ).button()
+          .click(function( event ) { 
+            initialize_autocomplete(op_types); 
+            $("#search-bar").attr('value', "Enter building type here...");
+          })
       });
 
-      d3.csv("building_energy_consumption/master_short.csv", function(Master) {
+      d3.csv(data_path + "master_short.csv", function(Master) {
         var dists = get_dists(Master);
         $(function() {
-          $( "input[id=go-button]" )
-          .button()
-          .click(function( event ) {
-            $('.report').remove();
-            initialize_map();
-            $("#results-table tbody").empty();
-            event.preventDefault();
+          $( "input[id=go-button]" ).button()
+            .click(function( event ) {
+              $('.report').remove();
+              initialize_map();
+              $("#results-table tbody").empty();
+              event.preventDefault();
 
-            var nameInput = document.getElementById('search-bar');
-            var search_term = nameInput.value;
-            var radioButton1 = document.getElementById('radio1');
-            var radioButton2 = document.getElementById('radio2');
-            var rows;
+              var nameInput = document.getElementById('search-bar');
+              var search_term = nameInput.value;
+              var radioButton1 = document.getElementById('radio1');
+              var radioButton2 = document.getElementById('radio2');
+              var rows;
 
-            if (radioButton1.checked) {
-              
-              var dim_organization_row = DimOrganization.filter( function( obj ) { return obj.organization == search_term; });
-              var dim_org_id;
-              var org_name;
-              if (dim_organization_row.length > 0) {
-                dim_org_id = dim_organization_row[0].dim_organization; // should be only one result
-                org_name = dim_organization_row[0].organization;
-              } else {
-                // I need to search through obj.organization to find the closest entry to the search term.
-                // hopefully string_score.js will help me do this.
-                var best_score = 0;
-                for (var i = DimOrganization.length - 1; i >= 0; i--) {
-                  var score = DimOrganization[i].organization.score(search_term);
-                  if (score > best_score) { 
-                    dim_org_id = DimOrganization[i].dim_organization;
-                    best_score = score;
-                    org_name = DimOrganization[i].organization;
+              if (radioButton1.checked) {
+                var dim_organization_row = DimOrganization.filter( function( obj ) { return obj.organization == search_term; });
+                var dim_org_id,
+                    org_name;
+                if (dim_organization_row.length > 0) {
+                  dim_org_id = dim_organization_row[0].dim_organization; // should be only one result
+                  org_name = dim_organization_row[0].organization;
+                } else {
+                  // I need to search through obj.organization to find the closest entry to the search term.
+                  // hopefully string_score.js will help me do this.
+                  var best_score = 0;
+                  for (var i = DimOrganization.length - 1; i >= 0; i--) {
+                    var score = DimOrganization[i].organization.score(search_term);
+                    if (score > best_score) { 
+                      dim_org_id = DimOrganization[i].dim_organization;
+                      best_score = score;
+                      org_name = DimOrganization[i].organization;
+                    }
                   }
                 }
+                rows = Master.filter( function( obj ) { return obj.dim_organization == dim_org_id; });
+                $("#search-title").text(org_name);
               }
-              rows = Master.filter( function( obj ) { return obj.dim_organization == dim_org_id; });
-              $("#search-title").text(org_name);
-              // xxx
-            }
-            if (radioButton2.checked) {
-              var dim_op_type_row = DimOperationType.filter( function( obj ) { return obj.operation_type == search_term; });
-              var dim_op_type_id;
-              var op_name;
-              if (dim_op_type_row.length > 0) {
-                dim_op_type_id = dim_op_type_row[0].dim_operation_type; // should be only one result
-                op_name = dim_op_type_row[0].operation_type;
-              } else {
-                // I need to search through obj.organization to find the closest entry to the search term.
-                // hopefully string_score.js will help me do this.
-                var best_score = 0;
-                for (var i = DimOperationType.length - 1; i >= 0; i--) {
-                  var score = DimOperationType[i].operation_type.score(search_term);
-                  if (score > best_score) { 
-                    dim_op_type_id = DimOperationType[i].dim_operation_type;
-                    best_score = score;
-                    op_name = DimOperationType[i].operation_type;
+              if (radioButton2.checked) {
+                var dim_op_type_row = DimOperationType.filter( function( obj ) { return obj.operation_type == search_term; });
+                var dim_op_type_id,
+                    op_name;
+                if (dim_op_type_row.length > 0) {
+                  dim_op_type_id = dim_op_type_row[0].dim_operation_type; // should be only one result
+                  op_name = dim_op_type_row[0].operation_type;
+                } else {
+                  // I need to search through obj.organization to find the closest entry to the search term.
+                  // hopefully string_score.js will help me do this.
+                  var best_score = 0;
+                  for (var i = DimOperationType.length - 1; i >= 0; i--) {
+                    var score = DimOperationType[i].operation_type.score(search_term);
+                    if (score > best_score) { 
+                      dim_op_type_id = DimOperationType[i].dim_operation_type;
+                      best_score = score;
+                      op_name = DimOperationType[i].operation_type;
+                    }
                   }
                 }
+                rows = Master.filter( function( obj ) { return obj.dim_operation_type == dim_op_type_id; });
+                $("#search-title").text(op_name);
               }
-              rows = Master.filter( function( obj ) { return obj.dim_operation_type == dim_op_type_id; });
-              $("#search-title").text(op_name);
-            }
-            //console.log('3');
-            do_everything(rows, Master, DimCity, DimOperationType, DimOrganization, dists);
-        });
+              do_everything(rows, Master, DimCity, DimOperationType, DimOrganization, dists);
+          });
 });
 });
 });
@@ -197,7 +194,6 @@ function initialize_map(){
             { data: "name"} ]
     } );
   });
-
 }
 
 function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization, dists) {
@@ -215,11 +211,9 @@ function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization,
     var map = new google.maps.Map($('#map_canvas')[0], myOptions);
     var latlngbounds = new google.maps.LatLngBounds();
 
-    infowindow = new google.maps.InfoWindow({
-      content: "holding..."
-    });
+    infowindow = new google.maps.InfoWindow({ content: "holding..." });
 
-    var pinImage = new google.maps.MarkerImage('building_energy_consumption/images/grey_pin.png'); 
+    var pinImage = new google.maps.MarkerImage(grey_pin_path); 
     markers = {};
     var oTable = $('#results-table').dataTable();
 
@@ -267,9 +261,7 @@ function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization,
           on_deselect(this);
         }
       });
-
     markers[sensorId+"r"] = marker;
-
     }
 
     // draw the datatable
@@ -290,14 +282,13 @@ function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization,
           on_select(m, Master, DimCity, DimOperationType, dists);
         }
         $("#" + id).toggleClass('selected');
-
-    } );
+    });
   });
 }
 
 function on_select(marker, Master, DimCity, DimOperationType, dists) {
   //if zIndex == 2, selected=True
-  marker.setIcon("building_energy_consumption/images/green_pin.png");
+  marker.setIcon(green_pin_path);
   marker.setZIndex(2);
   marker.setOpacity(1.0);
   var row_index = 1*marker.index;
@@ -309,7 +300,7 @@ function on_select(marker, Master, DimCity, DimOperationType, dists) {
 };
 
 function on_deselect(marker) {
-  marker.setIcon("building_energy_consumption/grey_pin.png");
+  marker.setIcon(grey_pin_path);
   marker.setZIndex(1);
   marker.setOpacity(0.5)
   $( "#report-" + marker.index ).remove();
@@ -390,70 +381,69 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
       width = 275 - margin.left - margin.right, // 800 was 960
       height = 180 - margin.top - margin.bottom;
 
-      var x = d3.scale.linear()
+  var x = d3.scale.linear()
     .domain([0, 100.]) //100., d3.max(values)])
-.range([0, width]);
+    .range([0, width]);
 
   // Generate a histogram using twenty uniformly-spaced bins.
   var data = d3.layout.histogram()
-  .bins(x.ticks(20))
-  (values);
+    .bins(x.ticks(20))
+    (values);
 
   var y = d3.scale.linear()
-  .domain([0, d3.max(data, function(d) { return d.y; })])
-  .range([height, 0]);
+    .domain([0, d3.max(data, function(d) { return d.y; })])
+    .range([height, 0]);
 
   var xAxis = d3.svg.axis()
-  .scale(x)
-  .ticks(6)
-  .orient("bottom");
+    .scale(x)
+    .ticks(6)
+    .orient("bottom");
 
   var yAxis = d3.svg.axis()
-  .scale(y)
-  .ticks(4)
-  .orient("left");
+    .scale(y)
+    .ticks(4)
+    .orient("left");
 
   var svg = d3.select(div_tag).append("svg")
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   // Add an x-axis label.
   svg.append("text")
-  .attr("class", "x label")
-  .attr("text-anchor", "end")
-  .attr("x", width)
-  .attr("y", height + 30)
-  .text("Energy Consumption (ekWh/sqft)");
+    .attr("class", "x label")
+    .attr("text-anchor", "end")
+    .attr("x", width)
+    .attr("y", height + 30)
+    .text("Energy Consumption (ekWh/sqft)");
 
   // Add a y-axis label.
   svg.append("text")
-  .attr("class", "y label")
-  .attr("text-anchor", "end")
-  .attr("y", -33)
-  .attr("x", 6)
-    //.attr("dy", ".75em")
+    .attr("class", "y label")
+    .attr("text-anchor", "end")
+    .attr("y", -33)
+    .attr("x", 6)
     .attr("transform", "rotate(-90)")
     .text("# of Buildings");
 
-    var bar = svg.selectAll(".bar")
+  var bar = svg.selectAll(".bar")
     .data(data)
     .enter().append("g")
     .attr("class", "bar")
     .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
 
-    bar.append("rect")
+  bar.append("rect")
     .attr("x", 1)
     .attr("width", x(data[0].dx) - 1)
     .attr("height", function(d) { return height - y(d.y); });
 
-    svg.append("g")
+  svg.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
     .call(xAxis);
 
-    svg.append("g")
+  svg.append("g")
     .attr("class", "y axis")
     .call(yAxis);
 
@@ -517,5 +507,5 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
 
     </div>
   </footer>
-
+  
   </html>
