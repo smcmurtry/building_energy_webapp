@@ -250,16 +250,17 @@ function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization,
 
       google.maps.event.addListener(marker, 'click', function(e) {
 
-        $("#"+this.index+"r").toggleClass('selected');
-        infowindow.setContent(this.title);
-        infowindow.open(map, this);
+        // infowindow.setContent(this.title);
+        // infowindow.open(map, this);
         if (this.zIndex == 1) {
+          deselect_previous();
           var scroller = oTable.fnSettings().nTable.parentNode;                                              
           $(scroller).scrollTo( $("#"+this.index+"r"), 1 );
           on_select(this, Master, DimCity, DimOperationType, dists);
         } else {
           on_deselect(this);
         }
+        $("#"+this.index+"r").toggleClass('selected');
       });
     markers[sensorId+"r"] = marker;
     }
@@ -279,11 +280,21 @@ function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization,
         if ($(this).hasClass('selected')) { 
           on_deselect(m); 
         } else {
+          deselect_previous();
           on_select(m, Master, DimCity, DimOperationType, dists);
         }
         $("#" + id).toggleClass('selected');
     });
   });
+}
+
+function deselect_previous() {
+  // deselct all previously selected
+  var selected = d3.selectAll(".selected")[0][0];
+  if (typeof selected != "undefined") {
+    $("#" + selected.id).toggleClass('selected');
+    on_deselect(markers[selected.id]);
+  }
 }
 
 function on_select(marker, Master, DimCity, DimOperationType, dists) {
@@ -507,5 +518,5 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
 
     </div>
   </footer>
-  
+
   </html>
