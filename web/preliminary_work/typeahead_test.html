@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Public Building Energy Consumption in Ontario</title>
+
+<link rel="stylesheet" href="../resources/typeahead.css">
+<link rel="stylesheet" href="../energy_consumption.css">
+
+<style>
+
+#multiple-datasets .search-category {
+  margin: 0 20px 5px 20px;
+  padding: 3px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+</style>
+
+<script src="../resources/d3.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+
+<script src="../resources/typeahead.bundle.min.js"></script>
+<script src="../resources/queue.js"></script>
+
+<script>
+
+
+
+var data_path = "../../data/", // or building_energy/ ?
+    grey_pin_path = '../resources/images/grey_pin.png',
+    green_pin_path = '../resources/images/green_pin.png';
+
+queue()
+    .defer(d3.csv, data_path + "dim_city.csv")
+    .defer(d3.csv, data_path + "dim_organization.csv")
+    .defer(d3.csv, data_path + "dim_operation_type.csv")
+    .defer(d3.csv, data_path + "master_short.csv")
+    .await(ready);
+
+function ready(error, DimCity, DimOrganization, DimOperationType, Master) {
+
+  var organization = new Bloodhound({
+    local: DimOrganization,
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('organization')
+  });
+
+  var operation_type = new Bloodhound({
+    local: DimOperationType,
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('operation_type')
+  });
+
+  $('#multiple-datasets .typeahead').typeahead({
+    highlight: true
+  },
+  {
+    name: 'organization',
+    display: 'organization',
+    source: organization,
+    templates: {
+      header: '<h3 class="search-category">Organization</h3>'
+    }
+  },
+  {
+    name: 'operation_type',
+    display: 'operation_type',
+    source: operation_type,
+    templates: {
+      header: '<h3 class="search-category">Building Type</h3>'
+    }
+  });
+}
+//from http://twitter.github.io/typeahead.js/examples/
+
+
+  </script>
+
+  <body>
+    <div id='container'>
+      <h1 id="title">Public Building Energy Consumption in Ontario</h1>
+      <div id="intro">
+        <p>This page allows you to explore the energy consumption of public buildings in Ontario. It is intended to highlight the best and worst performing buildings and help organizations identify good candidates for retrofit. It is also for individuals to see how the public buildings near them compare to others in Ontario. </p>
+
+        <p>To get started, start searching for an organization (e.g. City of Toronto) or type of building type (e.g. Public Libraries). Then select the buildings you are interested in from the results list or by clicking a pin on the map. Once selected, an energy report for that building will appear below the map. </p>
+
+        <p>The energy efficiency of each building is ranked in two ways: in comparison to buildings of the same type, and in comparison to buildings owned by the same organization. </p>
+      </div>
+
+      <div id="multiple-datasets">
+        <input class="typeahead form-control" type="text" placeholder="Search for a building">
+      </div>
+
+      <h2 id="search-title"></h2>
+      <div id="map-and-list">
+        <div id="results-container">
+          <table id="results-table" class="display" cellspacing="0">
+            <thead>
+              <tr> <th>Organization Rank</th> <th>Building Type Rank</th> <th>Building Name</th> </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div id="map_canvas"></div>
+      </div>
+
+    </div>
+  </body>
+
+  <footer>
+    <div id="footnote">
+
+      <p>Note: ekWh stands for equivalent kilowatt hours, which includes heating, cooling and other electrical energy use. sqft stands for square feet of floor area. </p>
+
+      <p>This work uses utility data for 2012, and was made possible by the Government of Ontario's <a class="my-link" href="https://www.ontario.ca/open-data">Open Data Catalogue</a>. </p>
+
+      <p>For the raw data this app uses, <a class='my-link' href="https://www.ontario.ca/data/energy-use-and-greenhouse-gas-emissions-broader-public-sector">click here</a>.</p>
+
+      <p>Created by <a class='my-link' href="http://stephenmcmurtry.org/">Stephen McMurtry</a>, &copy; 2015. </p>
+
+    </div>
+  </footer>
+
+  </html>
