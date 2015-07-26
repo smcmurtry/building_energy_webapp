@@ -84,6 +84,12 @@ function ready(error, DimCity, DimOrganization, DimOperationType, Master) {
     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('operation_type')
   });
 
+  var building_type = new Bloodhound({
+    local: Master,
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('operation_name')
+  });
+
   $('.typeahead').typeahead({
     highlight: true
   },
@@ -102,7 +108,16 @@ function ready(error, DimCity, DimOrganization, DimOperationType, Master) {
     templates: {
       header: '<h3 class="search-category">Building Type</h3>'
     }
-  });
+  },
+  {
+    name: 'operation_name',
+    display: 'operation_name',
+    source: building_type,
+    templates: {
+      header: '<h3 class="search-category">Building Name</h3>'
+    }
+  }
+  );
   
   var dists = get_dists(Master);
 
@@ -115,6 +130,9 @@ function ready(error, DimCity, DimOrganization, DimOperationType, Master) {
     } else if (suggestion.hasOwnProperty('operation_type')) {
       rows = Master.filter( function(obj) { return obj.dim_operation_type == +suggestion.dim_operation_type; });
       hash_fn.set_url_hash({type:1, dim_id: +suggestion.dim_operation_type, building_id:0});
+    } else if (suggestion.hasOwnProperty('operation_name')) {
+      rows = Master.filter(function(obj) { return obj.dim_organization == suggestion.dim_organization; })
+      hash_fn.set_url_hash({type:1, dim_id: +suggestion.dim_operation_type, building_id:suggestion.index});
     }
     do_everything(rows, Master, DimCity, DimOperationType, DimOrganization, dists);
 
@@ -356,6 +374,7 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
 
   var x = d3.scale.linear()
     .domain([0, 100.]) //100., d3.max(values)])
+    .clamp(true)
     .range([0, width]);
 
   // Generate a histogram using twenty uniformly-spaced bins.

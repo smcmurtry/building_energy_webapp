@@ -16,7 +16,7 @@ body {
   color: black;
 }
 
-#search-div, #footnote, #title, #intro, #text-and-radio {
+#search-div, #footnote, #title, #intro {
   width:1000px;
   margin:0px auto;
   padding:15px;
@@ -35,7 +35,7 @@ body {
 
 #map-and-list {
   width: 1000px;
-  height: 500px;
+  height: 525px;
   overflow: hidden;
   margin: 0px auto;
   margin-bottom: 50px;
@@ -137,3 +137,22 @@ label {
 .right-report, .left-report{
   height: 320px;
 }
+
+#results-table tbody {
+  width:490px;
+}
+
+#results-table tbody tr td:nth-child(1){
+  width: 15%;
+}
+#results-table tbody tr td:nth-child(2){
+  width: 30%;
+}
+#results-table tbody tr td:nth-child(3){
+  width: 55%;
+}
+
+.dataTables_scrollBody {
+  height: 400px;
+}
+
