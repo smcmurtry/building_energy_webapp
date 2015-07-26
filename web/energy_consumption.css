@@ -16,7 +16,7 @@ body {
   color: black;
 }
 
-#search-div, #footnote, #title, #intro {
+#search-div, #footnote, #title, #intro, #results-title {
   width:1000px;
   margin:0px auto;
   padding:15px;

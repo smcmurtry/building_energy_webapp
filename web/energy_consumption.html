@@ -40,7 +40,10 @@ comma_format = d3.format("0,000");
 zero_format_int = d3.format("06d");
 zero_format_float = d3.format('07.0r');
 var markers = {},
-    oTable;
+    oTable,
+    cat_id,
+    type,
+    building_id;
 
 function initialize_autocomplete(searchable_array) {
   $(function() {$( "#search-bar" ).autocomplete({ source: searchable_array }); });
@@ -123,28 +126,38 @@ function ready(error, DimCity, DimOrganization, DimOperationType, Master) {
 
   $('.typeahead').bind('typeahead:select', function(ev, suggestion) {
     // suggestion is the bound object
-    var rows, building_id;
+    var rows;
     if (suggestion.hasOwnProperty('organization')) {
+      cat_id = suggestion.dim_organization;
+      type = 0;
       rows = Master.filter( function(obj) { return obj.dim_organization == +suggestion.dim_organization; });
-
       var min_val = d3.min(rows, function(d) { return +d.org_rank; });
       var min_row = rows.filter(function(d) { return +d.org_rank == +min_val; })[0];
       building_id = min_row.index;
-
+      var organization_row = DimOrganization.filter(function( obj ) { return obj.dim_organization == suggestion.dim_organization; })[0];
+      d3.select("#results-title").text('Showing results for: ' + organization_row.organization + " (Organization)" )
 
     } else if (suggestion.hasOwnProperty('operation_type')) {
+      cat_id = suggestion.dim_operation_type;
+      type = 1;
       rows = Master.filter( function(obj) { return obj.dim_operation_type == +suggestion.dim_operation_type; });
-      
       var min_val = d3.min(rows, function(d) { return +d.op_type_rank; });
       var min_row = rows.filter(function(d) { return +d.op_type_rank == +min_val; })[0];
       building_id = min_row.index;
+      var operation_row = DimOperationType.filter(function( obj ) { return obj.dim_operation_type == suggestion.dim_operation_type; })[0];
+      d3.select("#results-title").text('Showing results for: ' + operation_row.operation_type + " (Building Type)");
 
     } else if (suggestion.hasOwnProperty('operation_name')) {
+      cat_id = suggestion.dim_organization;
+      type = 0;
       rows = Master.filter(function(obj) { return obj.dim_organization == suggestion.dim_organization; })
       building_id = suggestion.index;
+      var organization_row = DimOrganization.filter(function( obj ) { return obj.dim_organization == suggestion.dim_organization; })[0];
+
+      d3.select("#results-title").text('Showing results for: ' + organization_row.organization + " (Organization)" )
 
     }
-    hash_fn.set_url_hash({type:1, dim_id: +suggestion.dim_operation_type, building_id:building_id});
+    hash_fn.set_url_hash(cat_id, type, building_id);
     do_everything(rows, Master, DimCity, DimOperationType, DimOrganization, dists);
     select_building(building_id, Master, DimCity, DimOperationType, dists);
   });
@@ -238,12 +251,9 @@ function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization,
           var scroller = oTable.fnSettings().nTable.parentNode;                                              
           $(scroller).scrollTo( $("#"+this.index+"r"), 1 );
           on_select(this, Master, DimCity, DimOperationType, dists);
-          hash_fn.set_url_hash({building_id:this.index});
-        } else {
-          on_deselect(this);
-          hash_fn.set_url_hash({building_id:0});
-        }
-        $("#"+this.index+"r").toggleClass('selected');
+          hash_fn.set_url_hash(cat_id, type, this.index);
+          $("#"+this.index+"r").toggleClass('selected');
+        } 
       });
       markers[sensorId+"r"] = marker;
     }
@@ -260,15 +270,12 @@ function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization,
       id = $(this)[0].id;
       m = markers[id];
       // before class is toggled
-      if ($(this).hasClass('selected')) { 
-        on_deselect(m);
-        hash_fn.set_url_hash({building_id:0});
-      } else {
+      if (!$(this).hasClass('selected')) { 
         deselect_previous();
         on_select(m, Master, DimCity, DimOperationType, dists);
-        hash_fn.set_url_hash({building_id:id.slice(0, id.length-1)}); // removing the 'r' from the end
+        hash_fn.set_url_hash(cat_id, type, id.slice(0, id.length-1)); // removing the 'r' from the end
+        $("#" + id).toggleClass('selected');
       }
-      $("#" + id).toggleClass('selected');
     });
   });
 }
@@ -470,47 +477,36 @@ function select_building(building_id, Master, DimCity, DimOperationType, dists) 
 //---------------- hash stuff ---------------------------------------------------------------------------------
 var hash_fn = {
 
-  set_url_hash: function(arg) {
-    if (arg.hasOwnProperty('dim_id') && arg.hasOwnProperty('type')) {
-      window.location.hash = arg.dim_id + '+' + arg.type + '+' + arg.building_id;
-    } else {
-      var hash_state = window.location.hash.split('+');
-      window.location.hash = hash_state[0] + '+' + hash_state[1] + '+' + arg.building_id;
-    }
+  set_url_hash: function(dim_id, type, building_id) {
+    window.location.hash = dim_id + '+' + type + '+' + building_id;
   },
 
   go_to_hash_state: function(Master, DimCity, DimOperationType, DimOrganization, hash_state) {
     // returns true if successful
     if (typeof hash_state === 'undefined') { hash_state = window.location.hash.split('+'); }
     else { hash_state = hash_state.split('+'); }
-    var dim_id = hash_state[0].slice(1, hash_state[0].length),
-        type = hash_state[1],
-        building_id = hash_state[2],
-        dists = get_dists(Master),
-        rows,
-        search_term;
-
-    if (type == 0) {
-      rows = Master.filter( function(obj) { return obj.dim_organization == +dim_id; });
-      search_term = DimOrganization.filter(function(obj) { return obj.dim_organization == +dim_id; })[0].organization;
-    } else if (type == 1) {
-      rows = Master.filter( function(obj) { return obj.dim_operation_type == +dim_id; });
-      search_term = DimOperationType.filter(function(obj) { return obj.dim_operation_type == +dim_id; })[0].operation_type;
-    }
+    cat_id = hash_state[0].slice(1, hash_state[0].length);
+    type = hash_state[1];
+    building_id = hash_state[2];
+    var dists = get_dists(Master),
+        rows;
 
     try {
-      do_everything(rows, Master, DimCity, DimOperationType, DimOrganization, dists);
-      $('.typeahead').typeahead('val', search_term);      
-    } 
-    catch(err) { return false; }
+      if (type == 0) {
+        rows = Master.filter( function(obj) { return obj.dim_organization == +cat_id; });
+        var organization = DimOrganization.filter(function(obj) { return obj.dim_organization == +cat_id; })[0].organization;
+        do_everything(rows, Master, DimCity, DimOperationType, DimOrganization, dists);
+        select_building(building_id, Master, DimCity, DimOperationType, dists);
+        d3.select("#results-title").text('Showing results for: ' + organization + " (Organization)" )
 
-    if (+building_id == 0) { return true; }
-    else {
-      try { 
-          select_building(building_id, Master, DimCity, DimOperationType, dists);
+      } else if (type == 1) {
+        rows = Master.filter( function(obj) { return obj.dim_operation_type == +cat_id; });
+        var operation_type = DimOperationType.filter(function(obj) { return obj.dim_operation_type == +cat_id; })[0].operation_type;
+        do_everything(rows, Master, DimCity, DimOperationType, DimOrganization, dists);
+        d3.select("#results-title").text('Showing results for: ' + operation_type + " (Building Type)");
       }
-      catch(err) { return false; }
     }
+    catch(err) { return false; }
     return true;
   },
 
@@ -535,7 +531,7 @@ var hash_fn = {
       <div id="search-div">
         <input class="typeahead form-control" type="text" placeholder="Search for a building, organization, or type of building">
       </div>
-
+      <div id="results-title"></div>
       <div id="map-and-list">
         <div id="results-container">
           <table id="results-table" class="display" cellspacing="0">
