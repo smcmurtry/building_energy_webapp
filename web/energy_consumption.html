@@ -123,19 +123,30 @@ function ready(error, DimCity, DimOrganization, DimOperationType, Master) {
 
   $('.typeahead').bind('typeahead:select', function(ev, suggestion) {
     // suggestion is the bound object
-    var rows;
+    var rows, building_id;
     if (suggestion.hasOwnProperty('organization')) {
       rows = Master.filter( function(obj) { return obj.dim_organization == +suggestion.dim_organization; });
-      hash_fn.set_url_hash({type:0, dim_id: +suggestion.dim_organization, building_id:0});
+
+      var min_val = d3.min(rows, function(d) { return +d.org_rank; });
+      var min_row = rows.filter(function(d) { return +d.org_rank == +min_val; })[0];
+      building_id = min_row.index;
+
+
     } else if (suggestion.hasOwnProperty('operation_type')) {
       rows = Master.filter( function(obj) { return obj.dim_operation_type == +suggestion.dim_operation_type; });
-      hash_fn.set_url_hash({type:1, dim_id: +suggestion.dim_operation_type, building_id:0});
+      
+      var min_val = d3.min(rows, function(d) { return +d.op_type_rank; });
+      var min_row = rows.filter(function(d) { return +d.op_type_rank == +min_val; })[0];
+      building_id = min_row.index;
+
     } else if (suggestion.hasOwnProperty('operation_name')) {
       rows = Master.filter(function(obj) { return obj.dim_organization == suggestion.dim_organization; })
-      hash_fn.set_url_hash({type:1, dim_id: +suggestion.dim_operation_type, building_id:suggestion.index});
-    }
-    do_everything(rows, Master, DimCity, DimOperationType, DimOrganization, dists);
+      building_id = suggestion.index;
 
+    }
+    hash_fn.set_url_hash({type:1, dim_id: +suggestion.dim_operation_type, building_id:building_id});
+    do_everything(rows, Master, DimCity, DimOperationType, DimOrganization, dists);
+    select_building(building_id, Master, DimCity, DimOperationType, dists);
   });
   
   if (window.location.hash) {
@@ -446,7 +457,15 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
     .attr("y1", y(0))      // y position of the first end of the line
     .attr("x2", x(one_en_intensity_ekWh_sqft))     // x position of the second end of the line
     .attr("y2", 0);
-  };
+};
+
+function select_building(building_id, Master, DimCity, DimOperationType, dists) {
+  m = markers[building_id+'r']; 
+  on_select(m, Master, DimCity, DimOperationType, dists);
+  $("#" + building_id + 'r').toggleClass('selected');
+  var scroller = $('#results-table').dataTable().fnSettings().nTable.parentNode;                                              
+  $(scroller).scrollTo( $("#"+building_id+"r"), 1 );
+}
 
 //---------------- hash stuff ---------------------------------------------------------------------------------
 var hash_fn = {
@@ -488,12 +507,7 @@ var hash_fn = {
     if (+building_id == 0) { return true; }
     else {
       try { 
-          m = markers[building_id+'r']; 
-          on_select(m, Master, DimCity, DimOperationType, dists);
-          $("#" + building_id + 'r').toggleClass('selected');
-          var scroller = $('#results-table').dataTable().fnSettings().nTable.parentNode;                                              
-          $(scroller).scrollTo( $("#"+building_id+"r"), 1 );
-
+          select_building(building_id, Master, DimCity, DimOperationType, dists);
       }
       catch(err) { return false; }
     }
@@ -519,7 +533,7 @@ var hash_fn = {
       </div>
       
       <div id="search-div">
-        <input class="typeahead form-control" type="text" placeholder="Search for a building">
+        <input class="typeahead form-control" type="text" placeholder="Search for a building, organization, or type of building">
       </div>
 
       <div id="map-and-list">
