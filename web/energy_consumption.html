@@ -14,7 +14,8 @@
 <script src="resources/jquery.dataTables.min.js"></script>
 <script src="resources/jquery.scrollTo.min.js"></script>
 <script src="resources/string_score.js"></script>
-
+<script src="resources/typeahead.bundle.min.js"></script>
+<script src="resources/queue.js"></script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -25,6 +26,7 @@
   ga('send', 'pageview');
 
 </script>
+
 </head>
 
 <script>
@@ -64,107 +66,109 @@ function initialize_autocomplete(searchable_array) {
   });
 }
 
-d3.csv(data_path + "dim_city.csv", function(DimCity) {
-  d3.csv(data_path + "dim_organization.csv", function(DimOrganization) { 
-    d3.csv(data_path + "dim_operation_type.csv", function(DimOperationType) {
-      var org_array = [];
-      for (var i = DimOrganization.length - 1; i >= 0; i--) {
-        org_array.push(DimOrganization[i].organization);
-      };
+queue()
+    .defer(d3.csv, data_path + "dim_city.csv")
+    .defer(d3.csv, data_path + "dim_organization.csv")
+    .defer(d3.csv, data_path + "dim_operation_type.csv")
+    .defer(d3.csv, data_path + "master_short.csv")
+    .await(ready);
 
-      var op_types = [];
-      for (var i = DimOperationType.length - 1; i >= 0; i--) {
-        op_types.push(DimOperationType[i].operation_type);
-      };
+function ready(error, DimCity, DimOrganization, DimOperationType, Master) {
 
-      initialize_autocomplete(org_array);
+  var org_array = [];
+  for (var i = DimOrganization.length - 1; i >= 0; i--) {
+    org_array.push(DimOrganization[i].organization);
+  };
 
-      // add listeners to the radio button
-      $(function() {
-        $( "input[id=radio1]" ).button()
-          .click(function( event ) {
-            initialize_autocomplete(org_array);
-            $("#search-bar").attr('value', "Enter organization here...");
-          })
-      });
+  var op_types = [];
+  for (var i = DimOperationType.length - 1; i >= 0; i--) {
+    op_types.push(DimOperationType[i].operation_type);
+  };
 
-      $(function() {
-        $( "input[id=radio2]" ).button()
-          .click(function( event ) { 
-            initialize_autocomplete(op_types); 
-            $("#search-bar").attr('value', "Enter building type here...");
-          })
-      });
+  initialize_autocomplete(org_array);
 
-      d3.csv(data_path + "master_short.csv", function(Master) {
-        var dists = get_dists(Master);
-        $(function() {
-          $( "input[id=go-button]" ).button()
-            .click(function( event ) {
-              $('.report').remove();
-              initialize_map();
-              $("#results-table tbody").empty();
-              event.preventDefault();
+  // add listeners to the radio button
+  $(function() {
+    $( "input[id=radio1]" ).button()
+      .click(function( event ) {
+        initialize_autocomplete(org_array);
+        $("#search-bar").attr('value', "Enter organization here...");
+      })
+  });
 
-              var nameInput = document.getElementById('search-bar');
-              var search_term = nameInput.value;
-              var radioButton1 = document.getElementById('radio1');
-              var radioButton2 = document.getElementById('radio2');
-              var rows;
+  $(function() {
+    $( "input[id=radio2]" ).button()
+      .click(function( event ) { 
+        initialize_autocomplete(op_types); 
+        $("#search-bar").attr('value', "Enter building type here...");
+      })
+  });
 
-              if (radioButton1.checked) {
-                var dim_organization_row = DimOrganization.filter( function( obj ) { return obj.organization == search_term; });
-                var dim_org_id,
-                    org_name;
-                if (dim_organization_row.length > 0) {
-                  dim_org_id = dim_organization_row[0].dim_organization; // should be only one result
-                  org_name = dim_organization_row[0].organization;
-                } else {
-                  // I need to search through obj.organization to find the closest entry to the search term.
-                  // hopefully string_score.js will help me do this.
-                  var best_score = 0;
-                  for (var i = DimOrganization.length - 1; i >= 0; i--) {
-                    var score = DimOrganization[i].organization.score(search_term);
-                    if (score > best_score) { 
-                      dim_org_id = DimOrganization[i].dim_organization;
-                      best_score = score;
-                      org_name = DimOrganization[i].organization;
-                    }
-                  }
-                }
-                rows = Master.filter( function( obj ) { return obj.dim_organization == dim_org_id; });
-                $("#search-title").text(org_name);
+  var dists = get_dists(Master);
+  $(function() {
+    $( "input[id=go-button]" ).button()
+      .click(function( event ) {
+        $('.report').remove();
+        initialize_map();
+        $("#results-table tbody").empty();
+        event.preventDefault();
+
+        var nameInput = document.getElementById('search-bar');
+        var search_term = nameInput.value;
+        var radioButton1 = document.getElementById('radio1');
+        var radioButton2 = document.getElementById('radio2');
+        var rows;
+
+        if (radioButton1.checked) {
+          var dim_organization_row = DimOrganization.filter( function( obj ) { return obj.organization == search_term; });
+          var dim_org_id,
+              org_name;
+          if (dim_organization_row.length > 0) {
+            dim_org_id = dim_organization_row[0].dim_organization; // should be only one result
+            org_name = dim_organization_row[0].organization;
+          } else {
+            // I need to search through obj.organization to find the closest entry to the search term.
+            // hopefully string_score.js will help me do this.
+            var best_score = 0;
+            for (var i = DimOrganization.length - 1; i >= 0; i--) {
+              var score = DimOrganization[i].organization.score(search_term);
+              if (score > best_score) { 
+                dim_org_id = DimOrganization[i].dim_organization;
+                best_score = score;
+                org_name = DimOrganization[i].organization;
               }
-              if (radioButton2.checked) {
-                var dim_op_type_row = DimOperationType.filter( function( obj ) { return obj.operation_type == search_term; });
-                var dim_op_type_id,
-                    op_name;
-                if (dim_op_type_row.length > 0) {
-                  dim_op_type_id = dim_op_type_row[0].dim_operation_type; // should be only one result
-                  op_name = dim_op_type_row[0].operation_type;
-                } else {
-                  // I need to search through obj.organization to find the closest entry to the search term.
-                  // hopefully string_score.js will help me do this.
-                  var best_score = 0;
-                  for (var i = DimOperationType.length - 1; i >= 0; i--) {
-                    var score = DimOperationType[i].operation_type.score(search_term);
-                    if (score > best_score) { 
-                      dim_op_type_id = DimOperationType[i].dim_operation_type;
-                      best_score = score;
-                      op_name = DimOperationType[i].operation_type;
-                    }
-                  }
-                }
-                rows = Master.filter( function( obj ) { return obj.dim_operation_type == dim_op_type_id; });
-                $("#search-title").text(op_name);
+            }
+          }
+          rows = Master.filter( function( obj ) { return obj.dim_organization == dim_org_id; });
+          $("#search-title").text(org_name);
+        }
+        if (radioButton2.checked) {
+          var dim_op_type_row = DimOperationType.filter( function( obj ) { return obj.operation_type == search_term; });
+          var dim_op_type_id,
+              op_name;
+          if (dim_op_type_row.length > 0) {
+            dim_op_type_id = dim_op_type_row[0].dim_operation_type; // should be only one result
+            op_name = dim_op_type_row[0].operation_type;
+          } else {
+            // I need to search through obj.organization to find the closest entry to the search term.
+            // hopefully string_score.js will help me do this.
+            var best_score = 0;
+            for (var i = DimOperationType.length - 1; i >= 0; i--) {
+              var score = DimOperationType[i].operation_type.score(search_term);
+              if (score > best_score) { 
+                dim_op_type_id = DimOperationType[i].dim_operation_type;
+                best_score = score;
+                op_name = DimOperationType[i].operation_type;
               }
-              do_everything(rows, Master, DimCity, DimOperationType, DimOrganization, dists);
-          });
-});
-});
-});
-});
-});
+            }
+          }
+          rows = Master.filter( function( obj ) { return obj.dim_operation_type == dim_op_type_id; });
+          $("#search-title").text(op_name);
+        }
+        do_everything(rows, Master, DimCity, DimOperationType, DimOrganization, dists);
+    });
+  });
+}
 
 function initialize_map(){
 
@@ -466,6 +470,63 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
     .attr("x2", x(one_en_intensity_ekWh_sqft))     // x position of the second end of the line
     .attr("y2", 0);
   };
+//---------------- hash stuff ---------------------------------------------------------------------------------
+var hash_fn = {
+  convert_to_slug: function(Text) {
+    return Text.toLowerCase()
+               .replace(/ /g,'-')
+               .replace(/[^\w-]+/g,'');
+  },
+  get_item_slug_dict: function(unique_items) {
+    item_slug_dict = {};
+    for (var i = unique_items.length - 1; i >= 0; i--) {
+      var slug = hash_fn.convert_to_slug(unique_items[i]);
+      item_slug_dict[slug] = unique_items[i];
+    };
+    return item_slug_dict;
+  },
+  set_url_hash: function() {
+    var selected_item = get_selected('#item_selector'),
+    selected_plot_id = get_selected('#plot_variable_selector')['id'],
+    selected_year = closest(get_selected_year(), available_years);
+    window.location.hash = hash_fn.convert_to_slug(selected_item) + '+' + selected_plot_id + '+' + selected_year;
+  },
+  go_to_hash_state: function(all_data, hash_state) {
+    if (typeof hash_state === 'undefined') { hash_state = window.location.hash.split('+'); }
+    else { hash_state = hash_state.split('+'); }
+    var item = item_slug_dict[hash_state[0].substr(1)];
+    var plot_variable_id = plot_variable.filter(function(d) { return d['id'] == hash_state[1] })[0]['id'];
+    var year = hash_state[2];
+    try {
+      hash_fn.select_element(item, '#item_selector', function(d) { return d; });
+      hash_fn.select_element(plot_variable_id, '#plot_variable_selector', function(d) { return d['id']; });
+    } 
+    catch(err) { return false; }
+    update_slider_years(all_data);
+    try { 
+      slider.transition()
+            .duration(0)
+            .call(brush.extent([year, year]))      
+            .call(brush.event);
+    }
+    catch(err) { return false; }
+    return true;
+  },
+  reset_hash: function() {
+    history.pushState('', document.title, window.location.pathname);
+    populate_dropdown("#item_selector", unique_items, function(d) { return capitalizeFirstLetter(d); }, function(d) { return d; } );
+    update_slider_years(data);
+    pauseAction();
+  },
+  select_element: function(value_to_select, selector_id, accessor_fn) {
+    var index_to_select = d3.select(selector_id)
+                            .selectAll('option')
+                            .filter(function(d) { return accessor_fn(d) == value_to_select; })
+                            .property('index');
+    d3.select(selector_id)
+      .property('selectedIndex', index_to_select);
+  }
+} 
 
   </script>
 

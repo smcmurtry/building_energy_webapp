@@ -52,7 +52,7 @@ function ready(error, DimCity, DimOrganization, DimOperationType, Master) {
     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('operation_type')
   });
 
-  $('#multiple-datasets .typeahead').typeahead({
+  $('.typeahead').typeahead({
     highlight: true
   },
   {
@@ -71,6 +71,16 @@ function ready(error, DimCity, DimOrganization, DimOperationType, Master) {
       header: '<h3 class="search-category">Building Type</h3>'
     }
   });
+  // d3.select('.typeahead').on("change", function() {
+  //   console.log("hi")
+  // })
+  $('.typeahead').bind('typeahead:select', function(ev, suggestion) {
+    console.log(suggestion);
+    console.log($('.typeahead').typeahead('val'))
+  });
+
+
+  // var myVal = $('.typeahead').typeahead('val');
 }
 //from http://twitter.github.io/typeahead.js/examples/
 
