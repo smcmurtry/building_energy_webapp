@@ -4,8 +4,8 @@
 <head>
 <title>Public Building Energy Consumption in Ontario</title>
 <link rel="stylesheet" href="resources/jquery.dataTables.css">
-<link rel="stylesheet" href="energy_consumption.css">
 <link rel="stylesheet" href="resources/typeahead.css">
+<link rel="stylesheet" href="energy_consumption.css">
 
 <script src="resources/d3.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
@@ -108,20 +108,20 @@ function ready(error, DimCity, DimOrganization, DimOperationType, Master) {
   var dists = get_dists(Master);
 
   $('.typeahead').bind('typeahead:select', function(ev, suggestion) {
-    console.log(suggestion);
+    // console.log(suggestion);
     // suggestion is the bound object
     var rows;
     if (suggestion.hasOwnProperty('organization')) {
       rows = Master.filter( function(obj) { return obj.dim_organization == +suggestion.dim_organization; });
-      $("#search-title").text(suggestion.organization);
     } else if (suggestion.hasOwnProperty('operation_type')) {
       rows = Master.filter( function(obj) { return obj.dim_operation_type == +suggestion.dim_operation_type; });      
-      $("#search-title").text(suggestion.operation_type);
     }
 
     do_everything(rows, Master, DimCity, DimOperationType, DimOrganization, dists);
 
   });
+  // set the search text like this:
+  // $('.typeahead').typeahead('val', 'City of Peterborough');
 }
 
 function initialize_map(){
@@ -493,11 +493,10 @@ var hash_fn = {
         <p>The energy efficiency of each building is ranked in two ways: in comparison to buildings of the same type, and in comparison to buildings owned by the same organization. </p>
       </div>
       
-      <div id="multiple-datasets">
+      <div id="search-div">
         <input class="typeahead form-control" type="text" placeholder="Search for a building">
       </div>
 
-      <h2 id="search-title"></h2>
       <div id="map-and-list">
         <div id="results-container">
           <table id="results-table" class="display" cellspacing="0">
