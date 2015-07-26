@@ -33,10 +33,8 @@ var data_path = "../data/", // or building_energy/ ?
     grey_pin_path = 'resources/images/grey_pin.png',
     green_pin_path = 'resources/images/green_pin.png';
     
-
 // from http://stackoverflow.com/questions/19640055/multiple-markers-google-map-api-v3-from-array-of-addresses-and-avoid-over-query
 
-var infowindow = null;
 initialize_map();
 comma_format = d3.format("0,000");
 zero_format_int = d3.format("06d");
@@ -109,7 +107,6 @@ function ready(error, DimCity, DimOrganization, DimOperationType, Master) {
   var dists = get_dists(Master);
 
   $('.typeahead').bind('typeahead:select', function(ev, suggestion) {
-    // console.log(suggestion);
     // suggestion is the bound object
     var rows;
     if (suggestion.hasOwnProperty('organization')) {
@@ -122,10 +119,15 @@ function ready(error, DimCity, DimOrganization, DimOperationType, Master) {
     do_everything(rows, Master, DimCity, DimOperationType, DimOrganization, dists);
 
   });
-      
+  
+  if (window.location.hash) {
+    var success = hash_fn.go_to_hash_state(Master, DimCity, DimOperationType, DimOrganization);
+    if (!success) { 
+      hash_fn.reset_hash();
+    }
 
-  // set the search text like this:
-  // $('.typeahead').typeahead('val', 'City of Peterborough');
+  }       
+
 }
 
 function initialize_map(){
@@ -141,15 +143,14 @@ function initialize_map(){
 
     $('#results-table').dataTable( {
         scrollY:        "435px", // this doesn't include the header
-        //scrollX:        true,
         paging:         false,
         retrieve:       true,
         defaultContent: '',
         sDom: 'lrtp', // removed i=length statement and f=search box
         columns: [
-            { data: { _: 'org_rank.display', sort: 'org_rank.rank' } }, 
-            { data: { _: 'similar_rank.display', sort: 'similar_rank.rank' } },
-            { data: "name"} ]
+          { data: { _: 'org_rank.display', sort: 'org_rank.rank' } }, 
+          { data: { _: 'similar_rank.display', sort: 'similar_rank.rank' } },
+          { data: "name"} ]
     } );
   });
 }
@@ -168,8 +169,6 @@ function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization,
     };
     var map = new google.maps.Map($('#map_canvas')[0], myOptions);
     var latlngbounds = new google.maps.LatLngBounds();
-
-    infowindow = new google.maps.InfoWindow({ content: "holding..." });
 
     var pinImage = new google.maps.MarkerImage(grey_pin_path); 
     markers = {};
@@ -208,16 +207,15 @@ function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization,
       });
 
       google.maps.event.addListener(marker, 'click', function(e) {
-
-        // infowindow.setContent(this.title);
-        // infowindow.open(map, this);
         if (this.zIndex == 1) {
           deselect_previous();
           var scroller = oTable.fnSettings().nTable.parentNode;                                              
           $(scroller).scrollTo( $("#"+this.index+"r"), 1 );
           on_select(this, Master, DimCity, DimOperationType, dists);
+          hash_fn.set_url_hash({building_id:this.index});
         } else {
           on_deselect(this);
+          hash_fn.set_url_hash({building_id:0});
         }
         $("#"+this.index+"r").toggleClass('selected');
       });
@@ -237,10 +235,12 @@ function do_everything(rows, Master, DimCity, DimOperationType, DimOrganization,
       m = markers[id];
       // before class is toggled
       if ($(this).hasClass('selected')) { 
-        on_deselect(m); 
+        on_deselect(m);
+        hash_fn.set_url_hash({building_id:0});
       } else {
         deselect_previous();
         on_select(m, Master, DimCity, DimOperationType, dists);
+        hash_fn.set_url_hash({building_id:id.slice(0, id.length-1)}); // removing the 'r' from the end
       }
       $("#" + id).toggleClass('selected');
     });
@@ -429,41 +429,55 @@ function plot_hist(values, one_en_intensity_ekWh_sqft, div_tag) {
 //---------------- hash stuff ---------------------------------------------------------------------------------
 var hash_fn = {
   set_url_hash: function(arg) {
-    window.location.hash = arg.dim_id + '+' + arg.type + '+' + arg.building_id;
+    if (arg.hasOwnProperty('dim_id') && arg.hasOwnProperty('type')) {
+      window.location.hash = arg.dim_id + '+' + arg.type + '+' + arg.building_id;
+    } else {
+      var hash_state = window.location.hash.split('+');
+      window.location.hash = hash_state[0] + '+' + hash_state[1] + '+' + arg.building_id;
+    }
   },
   go_to_hash_state: function(Master, DimCity, DimOperationType, DimOrganization, hash_state) {
     if (typeof hash_state === 'undefined') { hash_state = window.location.hash.split('+'); }
     else { hash_state = hash_state.split('+'); }
-    var dim_id = hash_state[0],
+    var dim_id = hash_state[0].slice(1,hash_state[0].length),
         type = hash_state[1],
         building_id = hash_state[2],
-        rows;
-
+        rows,
+        search_term;
     if (type == 0) {
-      rows = Master.filter( function(obj) { return obj.dim_organization == +suggestion.dim_organization; });
-    } else if (type == 1) {
-      rows = Master.filter( function(obj) { return obj.dim_operation_type == +suggestion.dim_operation_type; });  
-    }
+      rows = Master.filter( function(obj) { return obj.dim_organization == +dim_id; });
+            search_term = DimOrganization.filter(function(obj) { return obj.dim_organization == +dim_id; })[0].organization;
 
+    } else if (type == 1) {
+      rows = Master.filter( function(obj) { return obj.dim_operation_type == +dim_id; });
+      search_term = DimOperationType.filter(function(obj) { return obj.dim_operation_type == +dim_id; })[0].operation_type;
+
+    }
+    var dists = get_dists(Master);
     try {
       do_everything(rows, Master, DimCity, DimOperationType, DimOrganization, dists);
+      $('.typeahead').typeahead('val', search_term);      
     } 
     catch(err) { return false; }
 
-    if (building_id == 0) { return true; }
+    if (+building_id == 0) { return true; }
     else {
       try { 
-          m = markers[building_id]; // +id?
+          m = markers[building_id+'r']; 
           on_select(m, Master, DimCity, DimOperationType, dists);
-          $("#" + building_id).toggleClass('selected');
-          var scroller = oTable.fnSettings().nTable.parentNode;                                              
-          $(scroller).scrollTo( $("#"+this.index+"r"), 1 );
+          $("#" + building_id + 'r').toggleClass('selected');
+          var scroller = $('#results-table').dataTable().fnSettings().nTable.parentNode;                                              
+          $(scroller).scrollTo( $("#"+building_id+"r"), 1 );
+
       }
       catch(err) { return false; }
     }
     return true;
+  },
+  reset_hash: function() {
+    history.pushState('', document.title, window.location.pathname);
   }
-} 
+}
 
   </script>
 
