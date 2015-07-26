@@ -7,6 +7,7 @@ body {
 #footnote {
   font-size: 14px;
   color: grey;
+  margin-top: 50px;
 }
 
 #search-bar { 
@@ -14,36 +15,8 @@ body {
   text-align:left;
   color: black;
 }
-#go-button {
-  color: black;
-}
 
-#radio label { 
-  padding: 0px;
-  border-color: grey;
-  top: 0px;
-}
-
-#search-by {
-  font-size: 20px;
-  padding: .4em 0em;
-  width:150px;
-  float: left;
-}
-
-.ui-state-default {
-  color:lightgrey;
-}
-
-.ui-state-active {
-  color:black;
-}
-
-.ui-widget {
-  text-align:left;
-}
-
-#search-div, #footnote, #title, #intro, #text-and-radio, #search-title {
+#search-div, #footnote, #title, #intro, #text-and-radio {
   width:1000px;
   margin:0px auto;
   padding:15px;
@@ -58,10 +31,7 @@ body {
 
 .typeahead {
   width: 972px;
-
 }
-
-#footnote {margin-top: 50px;}
 
 #map-and-list {
   width: 1000px;
@@ -94,11 +64,6 @@ body {
   padding-bottom: 0px;
 }
 
-.report, 
-.right-report, .left-report{
-  height: 280px;
-}
-
 .right-report, .left-report{
   background-color: white;
 }
@@ -110,21 +75,27 @@ body {
 .small-text {
   font-size: 14px;
 }
+
+.right-report > table {
+  margin-top: 5px;
+}
+
 .right-report {
+  padding-right: 10px;
   width:29%;
   text-align:right;
   float:right;
 }
 
 .left-report {
- width:70%; 
+ width:68%; 
  float:left;
 }
 
 .report {
   width:1000px;
   margin:0 auto;
-  padding-bottom: 100px;
+  padding-bottom: 50px;
 }
 
 .axis text, .x.label, .y.label {
@@ -157,5 +128,12 @@ label {
   right: 10px;
 }
 
-.chart {float: right;}
+.chart {
+  float: right;
+  margin-top: 40px
+}
 
+.report, 
+.right-report, .left-report{
+  height: 320px;
+}
