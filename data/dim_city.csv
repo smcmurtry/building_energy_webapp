@@ -1,1251 +1,1180 @@
 ,dim_City,City
 0,1,Holmesville
-1,2,Rosslyn
-2,3,Alliston
-3,4,Sharbot Lake 
-4,5,LEVACK
-5,6,Metcalfe
-6,1100,MCCREA HEIGHTS
-7,7,Picton
-8,8,Ear Falls
-9,9,Coe Hill
-10,10,Colchester Twp
-11,610,Ottawa
-12,11,Plainville
-13,12,Hilliardton
-14,13,Thamesville
-15,14,Toledo
-16,1099,Peterbrough
-17,15,Rossmore
-18,16,Ulswater
-19,17,Shedden
-20,18,Shelburne
-21,19,Porcupine
-22,20,Elmvale
-23,21,Casselman
-24,23,Garson
-25,24,Kerwood
-26,142,Levack
-27,26,Lions Head
-28,27,Welland
-29,28,Hockley
-30,264,Boulter
-31,640,Paris
-32,420,Meaford
-33,32,Richmond Hill
-34,763,Lakeshore
-35,33,ONAPING FALLS
-36,376,Nairn Centre
-37,35,Grande Pointe
-38,36,Val Therese
-39,37,COLDWATER
-40,39,ST. MARYS
-41,40,Foymount
-42,43,Waterloo
-43,44,MacTier
-44,45,Dundalk
-45,46,Angus
-46,49,St. Mary's
-47,1122,Sundridge
-48,50,Savant Lake
-49,51,Mildand
-50,52,Campbellford
-51,53,Schreiber
-52,54,Kearney
-53,55,Exeter
-54,56,TAVISTOCK
-55,57,Pelee Island
-56,856,Vars
-57,59,Chesley
-58,1118,Mississippi
-59,381,Sydenham
-60,62,Brigden
-61,63,St. Agatha
-62,64,Port Dover
-63,65,Gormley
-64,1056,Harrow
-65,66,Bergland
-66,67,Glen Robertson
-67,68,Port Carling
-68,69,Seeley's Bay`
-69,70,Echo Bay
-70,439,Madawaska 
-71,427,Godfrey
-72,74,Windsor
-73,75,Fisherville
-74,76,Wellesley
-75,975,Morganston
-76,77,Longlac
-77,78,Merlin
-78,79,St-Charles
-79,80,COPPER CLIFF
-80,81,Barwick
-81,82,Harrowsmith
-82,83,Prince Township
-83,84,Innisfil
-84,85,Arnprior
-85,86,DOWLING
-86,87,Lakehurst
-87,88,Merrickville
-88,432,Lucknow
-89,90,"Novar, ON"
-90,91,Kakabeka Falls
-91,92,Burlington
-92,93,Shakespeare
-93,94,Barry's bay
-94,430,Flesherton
-95,96,Kakabeka
-96,97,Shining Tree
-97,99,Townsend
-98,100,Hilton Beach
-99,101,Grand Valley
-100,250,Port Bolster
-101,862,Thorold
-102,103,Sheffield
-103,104,Hammond
-104,1133,Amherstview
-105,105,Roseville
-106,1193,St Clement
-107,107,Rockland
-108,433,Walkerton
-109,110,Sharbot Lake
-110,652,Dunnville
-111,114,Walsh
-112,115,Tupperville
-113,116,Conestogo
-114,117,Sault Ste. Marie
-115,118,East Gwillumbury
-116,119,Maidstone
-117,120,McKellar
-118,121,East Gwillimbury
-119,122,GARSON
-120,123,Springford
-121,124,Murillo
-122,125,Georgina
-123,1016,Etobicoke
-124,126,Geraldton
-125,952,Russell
-126,127,Roseneath
-127,128,Eagle Lake
-128,129,Fraserville
-129,130,Arthur
-130,131,Moonstone
-131,132,Batawa
-132,133,Cargill
-133,134,Chalk River
-134,135,Griffith
-135,136,Kemptville 
-136,138,Borden
-137,139,Baden 
-138,869,Wiarton
-139,141,Tilbury
-140,600,Oakville 
-141,143,Hallville
-142,144,Zurich
-143,145,Stevensville
-144,146,Earlton
-145,147,Verona
-146,148,Holland Centre
-147,149,Cache Bay
-148,150,KEPPEL
-149,152,Plattsville
-150,153,WAHNAPITAE
-151,658,Wheatley
-152,1220,Oro Medonte
-153,155,Burritt's Rapids
-154,156,Green Valley
-155,157,Orleans
-156,158,Grandbend
-157,659,Clarence Creek
-158,161,Port Colborne
-159,271,St Eugene
-160,903,The Blue Mountains
-161,163,Conmee
-162,164,Porquis
-163,165,Balmertown
-164,166,South River
-165,167,Canton
-166,168,Richmond
-167,1071,Aylmer
-168,170,Amaranth
-169,171,Cardinal
-170,172,Alberton
-171,173,Crediton
-172,174,Thedford
-173,818,Rainy River
-174,175,Centreville
-175,176,Combermerre
-176,875,Little Current
-177,1131,Chelsey
-178,179,White River
-179,180,Aurora 
-180,876,Sault Ste Marie
-181,183,Seymour
-182,184,Winchester Springs
-183,1229,Rannoch
-184,185,Tamworth
-185,444,Trout Creek
-186,188,Pembroke 
-187,1084,Carleton Place
-188,1135,Kincardine
-189,190,Joyceville
-190,1234,"Williamstown, Ont"
-191,192,Willow Beach
-192,877,St. Thomas 
-193,193,Chaput Hughes
-194,194,Brighton
-195,195,Sebringville
-196,196,Chatsworth
-197,197,Serpent River
-198,198,Glencoe
-199,199,Ridgeway
-200,200,Vanier
-201,201,Wilkesport
-202,347,CHELMSFORD
-203,204,Walford
-204,1078,Selby
-205,207,Blackstock
-206,208,Innerkip
-207,210,Millhaven
-208,211,Atikokan
-209,212,Millgrove
-210,213,Palgrave
-211,214,Westbrook
-212,563,Pickering
-213,216,Flinton
-214,217,Bruce Mines
-215,978,Waverley
-216,219,Moose Creek
-217,220,Dungannon
-218,221,Binbrook
-219,222,St. Pauls
-220,223,Sheguiandah
-221,224,Huron Park
-222,257,Goderich
-223,226,Vittoria
-224,1083,Kemptville
-225,227,Bath
-226,228,South Buxton
-227,229,Fournier
-228,230,Bornholm
-229,231,FALCONBRIDGE
-230,232,Onondaga
-231,233,Battersea
-232,451,Brampton
-233,235,Spring Bay
-234,237,kenora
-235,239,Chelmsford
-236,240,Foresters Falls
-237,241,Sharon
-238,242,St. Andrews West
-239,1154,Wilno
-240,672,Pembroke
-241,187,Willowdale
-242,1238,St. Davids
-243,246,Fenwick
-244,888,Teeswater
-245,202,Belgrave
-246,248,Hensall
-247,215,Charlton Station
-248,1015,Philipsburg
-249,251,Peats Point
-250,252,Brockville
-251,253,La Salette
-252,260,Hearst
-253,1034,Harwood
-254,255,Jarvis
-255,256,Wallacetown
-256,258,Eagle
-257,259,Smooth Rock Ralls
-258,1246,Sandfield
-259,261,Dresden
-260,262,Val Caron
-261,1227,New Liskeard
-262,651,Selkirk
-263,992,Mt. Pleasant
-264,892,HANMER
-265,266,Lynden
-266,334,Clayton
-267,268,Springwater
-268,269,Jordan
-269,270,Marionville
-270,273, Ste-Anne-de-Prescott
-271,1086,Smithville
-272,274,Hanover
-273,275,Tobermory
-274,160,Ullswater
-275,277,Mississauga
-276,278, South Mountain
-277,279,Stirling
-278,280,Paisley
-279,443,Caledon
-280,282,Oshawa
-281,283,Buckhorn
-282,284,St. Eugene
-283,285,Orwell
-284,286,Londesboro
-285,287,Stoney Creek
-286,288,Egremont
-287,1090,Hornepayne
-288,289,Plevna
-289,654,Waterdown
-290,291,Maxwell
-291,1217,Wendover
-292,292,Cloyne
-293,1091,Elizabethtown
-294,294,Holland Landing
-295,297,Junctionville
-296,298,FInch
-297,302,Kenilworth
-298,303,Marathon
-299,688,Almonte
-300,305,Wilmot
-301,306,Ennismore
-302,307,Peterborough
-303,308,Fingal
-304,309,Elginburg
-305,310,South Porcupine
-306,312,Wyoming
-307,316,Carrying Place
-308,299,Douro
-309,318,Foots Bay
-310,319,Sturgeon Falls
-311,320,Perth
-312,321,Magnetawan
-313,245,Englehart
-314,734,Kinmount
-315,324,Canfield
-316,325,Inwood
-317,326,Mildmay
-318,327,Ayr
-319,328,Wilmot Township
-320,329,Victoria Harbour
-321,693,Killaloe
-322,332,Gooderham
-323,333,Kearns
-324,335,Thornloe
-325,336,Avonmore 
-326,337,Delhi
-327,338,Mattawa
-328,339,Port Elgin
-329,340,Port Sydnet
-330,1181,Virgil
-331,341,Corruna
-332,342,North Easthope
-333,343,Whitney
-334,344,Killarney
-335,345,Barry's Bay
-336,205,Shanty Bay
-337,348,Port Sydney
-338,313,Howe Island
-339,350,St. Joachim
-340,351,Petawawa 
-341,469,Corbeil
-342,355,Moira
-343,356,STRATHROY
-344,357,Baxter 
-345,358,Port Loring
-346,359,CAPREOL
-347,360,Green River
-348,361,Gordon
-349,691,Clearview
-350,362,Marmora
-351,699,Queensville
-352,364,Rostock
-353,366,Kitchener
-354,367,Dwight
-355,346,Inkerman
-356,369,Gore Bay
-357,911,Beaverton
-358,700,Armstrong
-359,371,Courtright
-360,372,Ignace
-361,373,Midhurst
-362,374,Newton
-363,301,Oxford Mills 
-364,151,Severn Bridge
-365,378,Bancroft
-366,379,Beamsville
-367,380,Port Perry
-368,1075,Kicardine
-369,1061,Laurentian Valley
-370,382,Pickle Lake
-371,383,Brucefield
-372,1073,Sweaburg
-373,912,Fort Frances
-374,38,Cardinal 
-375,73,Portland 
-376,388,Grimsby
-377,389,Bright's Grove
-378,390,Kapuskasing
-379,857,Allanburg
-380,391,Ramore
-381,392,AZILDA
-382,393,Cavan
-383,395,Blue Mountains
-384,649,Tay
-385,397,Damascus
-386,398,Chesterville
-387,399,LIVELY
-388,113,Port Burwell
-389,401,Burford
-390,402,Belmore
-391,1039,Escott
-392,404,Wooler
-393,1107,Scarborough
-394,406,Lakefield
-395,917,Virginiatown
-396,408,Holstien
-397,409,Shannonville
-398,410,Dorchester
-399,1173,Smooth Rock Falls
-400,411,Claremont
-401,412,Welcome
-402,413,Otterville
-403,218,Young's Point
-404,415,Keewatin
-405,416,Alban
-406,417,Wolfe Island
-407,418,Orillia
-408,419,Wingham
-409,331,Port McNIcoll
-410,34,Hillier
-411,423,Campbellville
-412,424,Haileybury
-413,425,Chatham
-414,293,INNERKIP
-415,72,Bloomingdale
-416,428,Haley Station
-417,95,Kleinburg
-418,102,Emeryville
-419,108,Verner
-420,434,St Cathariness
-421,435,Castleton
-422,711,Moosonee
-423,437,Caistor Centre
-424,137,Walters Falls
-425,726,Bourget
-426,712,Fullarton
-427,593,Bothwell
-428,487,Mount Elgin
-429,442,Woodham
-430,575,Monkton
-431,387,Courtice 
-432,186,Crystal Falls
-433,445,Maxville
-434,972,Lion's Head
-435,446,Cambridge
-436,447,Clinton
-437,449,Parkhill
-438,48,Gratton
-439,234,Orangeville
-440,489,Oxford Mills
-441,681,Hepworth
-442,254,Hagersville
-443,238,Erin
-444,1066,KirkField
-445,456,Foldens
-446,457,Brantford
-447,1085,Dorion
-448,459,L'Original
-449,1205,Milton
-450,461,Clifford
-451,943,Coniston
-452,463,Washago
-453,465,Ontario
-454,466,Douro-Dummer
-455,1151,Consecon
-456,493,Barrhaven
-457,732,Monkland
-458,472,Wasaga Beach
-459,475,Lucan
-460,476,Granton
-461,477,Longlac Ward
-462,495,Fonthill
-463,479,Waterford
-464,1046,Ridgeville
-465,480,Gowanstown
-466,1120,Perth Road
-467,481,Newbury
-468,482,Smiths Falls
-469,483,BEAVER LAKE
-470,485,Cochenour
-471,486,"Glen Walter, Ont"
-472,441,Amherst Island
-473,488,Winchester
-474,452,Meadowvale
-475,490,Bailieboro
-476,491,Azilda
-477,492,Lombardy 
-478,470,Baysville ON
-479,494,Foleyet
-480,478,Bluevale
-481,496,St. Williams
-482,497,Central Elgin
-483,498,Sutton West
-484,499,Barrie
-485,501,South Huron
-486,502,Glen Morris
-487,504,Hanmer
-488,505,White Lake
-489,552,Laird Township
-490,507,Sauble Beach
-491,508,Hawkesville
-492,191,Havelock
-493,510,Markham
-494,511,Embrun
-495,178,St Thomas
-496,513,Vineland
-497,727,Missanabie
-498,515,Kirkland Lake
-499,517,Hampton
-500,353,McDonalds Corner
-501,519,Haliburton
-502,935,Port Stanley
-503,521,Dutton
-504,522,Burk's Falls
-505,523,Enterprise
-506,524,Stouffville
-507,525,RR3 Dunville
-508,729,Winchester 
-509,527,Bolton
-510,529,Phelpston
-511,530,Hastings
-512,471,Bayfield
-513,533,Gores Landing
-514,534,Copper Cliff
-515,535,Plantagenet
-516,536,Concord
-517,537,L'Orignal
-518,1126,Comber
-519,314,Ingleside 
-520,540,Gogama
-521,541,Auburn
-522,934,halton hills
-523,542,Gorrie
-524,544,Lively
-525,545,Thessalon
-526,112,Chesterville 
-527,547,Mattice
-528,548,Gravenhurst
-529,1216,Wellington
-530,938,Stoney Point
-531,550,Brudenell
-532,551,St-Pascal
-533,450,St. Clair Beach
-534,553,Kingsville
-535,554,Floradale
-536,555,Limehouse
-537,556,Lavigne
-538,1129,Sutton
-539,557,Seaforth
-540,558,Parham
-541,559,Beardmore
-542,560,Douglas
-543,561,Wyevale
-544,484,Capreol
-545,236,Kirkton
-546,564,Collins
-547,565,Westport
-548,0,St. Jacobs
-549,569,Demorestville
-550,570,windsor
-551,571,Torrance
-552,42,Odessa
-553,573,Maryhill
-554,982,Niagara on the Lake
-555,546,Baden
-556,512,Sleeman
-557,577,Alton
-558,578,Cayuga
-559,579,Linwood
-560,580,Grafton
-561,581,Seeleys Bay
-562,583,Stroud
-563,584,O'Connor Township
-564,586,Long Sault 
-565,587,Rockton
-566,421,Quinte West
-567,589,Moose Factory
-568,590,Coleman Township
-569,591,Amherstburg
-570,592,North Easthop
-571,209,Downsview
-572,25,Port Severn
-573,516,WhiteChurch
-574,597,"Burk's Falls, Ontario"
-575,740,St. Marys
-576,1055,VAL THERESE
-577,601,Port Hope
-578,602,Ingleside
-579,603,Nanticoke
-580,604,Selwyn Township
-581,605,Newtonville
-582,946,Uxbridge
-583,607,Coboconck
-584,608,Nobleton
-585,609,Clandeboye
-586,518,Atwood
-587,611,Bowmanville
-588,612,Lefroy
-589,613,Prescott
-590,614,Inverary
-591,615,Freelton
-592,272,Charlton
-593,617,Trenton
-594,744,Millbrook
-595,619,Deep River
-596,620,Erieau
-597,621,Lakeside
-598,622,Goulais River
-599,623,Kingston
-600,1170,HICKSON
-601,1130,Hawkestone
-602,626,River Canard
-603,627,Elmira
-604,629,Ivanhoe
-605,692,Opasatika
-606,1171,Woodslee
-607,630,Milford Bay
-608,746,"Bradford, Ontario"
-609,182,Copenhagen
-610,634,Ompah
-611,635,Breslau
-612,637,Tichborne
-613,638,Conesotogo
-614,639,Rosseau
-615,30,Union
-616,641,Tara
-617,642,Maple Leaf
-618,643,Stayner
-619,644,Drumbo
-620,994,Saint-Bernardin
-621,1108,Braeside
-622,646,Campden
-623,647,Emsdale
-624,951,St-Isidore-de-Prescott
-625,98,Fauquier
-626,650,La Salle
-627,106,Chamberlain
-628,111,Formosa
-629,653,SEVERN BRIDGE
-630,60,Woodview
-631,1189,VAL CARON
-632,655,Stittsville
-633,657,Rutherglen
-634,154,Fairground
-635,159,St. Ann's
-636,660,Ipperwash
-637,661,Maynooth
-638,662,Penetanguishene
-639,663,Walton
-640,664,York
-641,665,Neustadt
-642,666,Whitby
-643,667,Hamilton
-644,669,Coldwater
-645,753,Iroquois Falls
-646,671,Carrick
-647,244,Belle River
-648,673,Brougham
-649,674,Selwyn
-650,675,Beachville
-651,676,King City
-652,677,Ayton
-653,678,Glen Orchard
-654,723,Southampton
-655,679,Straffordville
-656,680,Dublin
-657,281,Oakville
-658,682,Dryden
-659,683,Jackson's Point
-660,684,Stella
-661,686,Webbwood
-662,687,Gorham
-663,304,Nipissing
-664,689,Noelville
-665,317,Wroxeter
-666,594,Woodville
-667,296,Camlachie
-668,330,Rodney
-669,694,Niagara Falls
-670,695,Cookstown
-671,203,Gloucester
-672,697,Wellington North
-673,698,Cumberland Beach
-674,737,callander
-675,363,Roche's Point
-676,1138,Craigleith
-677,370,Brgden
-678,701,Madsen
-679,702,Redbridge
-680,703,Thunder Bay
-681,704,LaSalle
-682,706,Hawkesbury
-683,707,Bright
-684,1008,Durham
-685,708,Wawa
-686,709,Belle Valleé
-687,796,Bradshaw
-688,436,North Buxton
-689,690,Holstein
-690,713,Pointe-aux-Roches
-691,263,WIARTON
-692,715,Deseronto
-693,315,Kintore
-694,717,Wainfleet
-695,71,Seeley's Bay
-696,759,Niagara-on-the-Lake
-697,720,Pelham
-698,721,Dashwood
-699,722,Apsley
-700,464,Ansnorveldt
-701,724,Whitevale
-702,725,Hartington
-703,322,Warwick
-704,514,Ramara
-705,728,Dowling
-706,526,Glen Alda
-707,311,ALBEMARLE
-708,731,Williamstown
-709,733,Arkona
-710,735,Petawawa
-711,736,Chapleau
-712,574,Evansville
-713,739,SUDBURY
-714,598,Ft Albany
-715,741,Tavistock
-716,742,Vanastra
-717,636,Haliburton 
-718,696,Sudbury
-719,745,Bridgenorth
-720,631,Mt. Elgin
-721,747,Aurora
-722,748,Georgian Bluffs
-723,749,North York
-724,750,Grand Bend
-725,751,Nestor Falls
-726,752,Hillsburgh
-727,1163,Melancthon
-728,670,Caistorville
-729,1156,Tiverton
-730,754,Dyno
-731,755,Flamborough
-732,756,Fenlon Falls
-733,757,Leamington
-734,758,Minden
-735,719,Renfrew ON
-736,295,King
-737,761,South Mountain 
-738,762,Horneypayne
-739,429,Addison
-740,764,Spencerville
-741,765,Little Britian
-742,766,Warminster
-743,767,Nowich
-744,768,River Valley
-745,769,RR #3 Hanover
-746,770,Battersea 
-747,771,Milverton & Shakespeare
-748,772,Loretto
-749,773,B racebridge
-750,774,Cochrane
-751,775,Kenora
-752,776,Lasalle
-753,777,McDougall
-754,778,Burnstown
-755,780,Halton Hills
-756,781,Ethel
-757,783,Nottawa
-758,1168,Florence
-759,873,Curran
-760,1230,Wilfrid
-761,786,Westmeath
-762,787,Ballinafad
-763,788,Priceville
-764,789,Owen Sound
-765,790,Manilla
-766,791,Stratford
-767,792,Temagami
-768,793,Caistor 
-769,794,Thornhill
-770,795,Langton
-771,710,Keswick
-772,798,Lefaivre
-773,799,Ft. Albany
-774,800,Tillsonburg
-775,802,Ardoch
-776,462,Staffa
-777,1063,Oil City
-778,805,Delaware
-779,1169,Arden
-780,806,Malahide Township
-781,807,Nobel
-782,808,NAUGHTON
-783,290,New Hamburg
-784,810,Eagle River
-785,1042,Algonquin Highlands
-786,860,Cobalt
-787,812,Birr
-788,813,Devlin
-789,1200,Athens
-790,814,Cobden
-791,815,Highgate
-792,22,Avonton
-793,817,Golden Lake
-794,568,Carp
-795,1174,Point Edward
-796,820,Renfrew
-797,821,Vankleek Hill
-798,1215,Shuniah
-799,822,Winona
-800,823,Ajax
-801,949,Vaughan
-802,824,Mansfield
-803,825,Beeton
-804,826,Highland Grove
-805,979,Foxboro
-806,827,Simcoe
-807,828,Schomberg
-808,829,Cobourg
-809,830,Oil Springs
-810,831,Toronto
-811,89,Bradford West Gwillimbury
-812,833,Astorville
-813,1001,Alexandria
-814,834,St. Thomas
-815,835,Princeton
-816,836,Blind River
-817,837,Cannington
-818,838,Emo
-819,384,Burgessville
-820,840,Ameliasburgh
-821,841,Ancaster
-822,842,Thorne
-823,843,Wallaceburg
-824,844,Whitefish
-825,625,Talbotville
-826,47,Hickson
-827,847,Callandar
-828,848,Bracebridge
-829,849,Port Coborne
-830,1233,Admaston
-831,850,East Garafraxa
-832,851,ST. Catharines
-833,852,Milverton
-834,853,Elgin
-835,779,Dorset
-836,855,Mornington
-837,58,Mt. Brydges
-838,531,Field
-839,460,Guelph/Eramosa
-840,782,Egbert
-841,349,Campbellcroft
-842,861,Northbrook
-843,705,Clarington
-844,538,Enniskillen
-845,109,Salem
-846,865,Snow Road
-847,866,St. George
-848,867,Palmer Rapids
-849,868,Minett
-850,140,Round Lake
-851,396,Round Lake Centre
-852,628,West Lincoln
-853,872,Lanark 
-854,874,Elora
-855,177,Ailsa Craig
-856,181,Ravenna
-857,1247,Everett
-858,854,Brussels
-859,1182,Wyebridge
-860,879,Cheney
-861,880,Nepean
-862,881,Clarksburg
-863,882,Harriston
-864,883,Morrisburg
-865,884,Shallow Lake
-866,885,Cottam
-867,886,CONISTON
-868,887,Long Saul
-869,474,Centreton
-870,41,Williamsford
-871,891,Palmeston
-872,265,Heidelberg
-873,893,Denfield
-874,894,Brinston
-875,895,Georgetown
-876,896,Kagawong
-877,897,Norwich
-878,898,Huntsville
-879,899,Greenbank
-880,900,Vernonville
-881,901,Mount Hope
-882,902,Warkworth
-883,832,Providence Bay
-884,904,Ardbeg
-885,1185,Springfield
-886,906,Cobourg Ontario
-887,907,Strathroy
-888,908,AYLMER
-889,801,Watford
-890,910,Eganville
-891,585,Avening
-892,928,Pefferlaw
-893,385,Kimberley
-894,913,Niagara-On-The-Lake
-895,914,Pt. Edward
-896,29,Brechin
-897,916,Elk Lake
-898,407,Alma
-899,918,Calabogie
-900,919,Dubreuilville
-901,532,Goodwood
-902,1104,South Bruce
-903,921,Nipigon
-904,922,Blyth
-905,458,Camborne
-906,924,Embro
-907,1237,St Clements
-908,925,Courtland
-909,926,Quadeville
-910,927,BelleRiver
-911,915,Ingersoll
-912,929,Callander
-913,930,Mitchell
-914,931,North Dumfries
-915,932,Markdale
-916,247,Middlesex Centre
-917,422,Collingwood 
-918,562,Corunna
-919,936,Beachburg
-920,937,Val Rita
-921,549,Woodbridge
-922,939,Port Franks
-923,940,Zorra
-924,864,Unionville
-925,942,Frankville
-926,567,1
-927,944,East York
-928,606,McDonalds Corners
-929,859,St Charles
-930,948,Courtice
-931,797,Carlisle
-932,950,Red Lake
-933,648,Hardwood Lake
-934,909,DUTTON
-935,953,Tecumseh
-936,954,Mountain
-937,955,Harlowe
-938,956,Arva
-939,995,Schumacher
-940,738,Williamsburg
-941,959,Jellicoe Rural
-942,960,Virginia
-943,961,Ballantrae
-944,962,Woolwich
-945,923,Temiskaming Shores
-946,964,St.-Charles
-947,965,Honey Harbour
-948,966,Thornbury
-949,967,North Lancaster
-950,276,Dunchurch
-951,969,Milford
-952,970,Mindemoya
-953,971,Timmins
-954,785,Dereham Centre
-955,973,Iroquois
-956,162,Ajax 
-957,804,Yarker
-958,998,Listowel
-959,977,Essa
-960,871,Massey
-961,963,Creemore
-962,980,Marysville
-963,981,Newcastle
-964,1208,Rosemont
-965,368,Corbyville
-966,983,Thornton
-967,984,Greenwood
-968,985,Merrickville 
-969,543,Sunnidale Corners
-970,685,Bobcaygeon
-971,988,Singhampton
-972,989,Lk. St. Peter
-973,1202,Elliot Lake
-974,599,Sioux Narrows
-975,760,BLEZARD VALLEY
-976,1236,Dymond
-977,300,Madawaska
-978,920,Keene
-979,993,Wilberforce
-980,947,Anten Mills
-981,957,North Middlesex
-982,996,Varna
-983,997,Dunedin
-984,976,Appin
-985,999,Terra Cotta
-986,1000,Lisle
-987,595,Caledonia
-988,1002,Guelph
-989,1003,Iron Bridge
-990,1004,Belmont
-991,1005,Bloomfield
-992,528,Kemble
-993,1204,Tottenham
-994,1007,Troy
-995,189,Garden Hill
-996,1009,London
-997,1010,Long Sault
-998,1011,Saugeen Shores
-999,1012,Lyn
-1000,596,Brights Grove
-1001,1014,Elmwood
-1002,454,North Bay
-1003,520,"Kemptville, ON"
-1004,809,Forest
-1005,1018,Petrolia
-1006,1019,Lafontaine
-1007,1020,Orono
-1008,1021,Colchester N Twp
-1009,1022,McKerrow
-1010,1178,St-Albert
-1011,375,Newburgh
-1012,1024,Moonbeam
-1013,1026,Val Gagne
-1014,716,Thorndale
-1015,1027,Tiny
-1016,1028,Blenheim
-1017,1029,Acton
-1018,890,St-Isidore
-1019,1031,Melrose
-1020,1006,Teeterville
-1021,1033,Alfred
-1022,582,Finch
-1023,1035,McArthurs Mills
-1024,1036,Westport 
-1025,1038,Ridgetown
-1026,440,Fort Stewart
-1027,1041,Palmerston
-1028,1043,Lyndhurst
-1029,1044,Brentwood
-1030,1045,Caramat Rural
-1031,539,Holtyre
-1032,1080,Strickland
-1033,1047,Zephyr
-1034,1048,Upsala
-1035,1049,Terrace Bay
-1036,1206,Gananoque
-1037,31,Newmarket
-1038,1051,Colborne 
-1039,986,Crystal Beach
-1040,1053,Toronto ON
-1041,1054,Desbarats
-1042,61,Brockton
-1043,870,"568, rue Lessard"
-1044,1057,Port Lambton
-1045,1058,Belle Vallee
-1046,1059,Eden
-1047,1060,Paincourt
-1048,1062,Sandfort
-1049,633,Mine Centre
-1050,1064,Parry Sound
-1051,1065,Sprucedale
-1052,889,Utopia
-1053,1067,Ripley
-1054,1069,Maberly
-1055,1102,Lambeth
-1056,1070,ONAPING
-1057,169,Nilestown
-1058,1072,New Dundee
-1059,438,Combermere
-1060,1074,Brownsville
-1061,506,Township of Hamilton
-1062,206,Newington
-1063,403,Municipality of Bayham
-1064,431,Longford Mills
-1065,1013,Desboro
-1066,1079,Windermere
-1067,816,St. Clements
-1068,1081,Mactier
-1069,1150,Lansdowne
-1070,1082,SKEAD
-1071,968,Huron East
-1072,249,Essex
-1073,386,Chute-à-Blondeau
-1074,668,Port Rowan
-1075,1087,St Catharines
-1076,1088,Cameron
-1077,1089,St. Catharines
-1078,354,WASHAGO
-1079,811,Mount Forest
-1080,1092,Morrisburg 
-1081,1093,Nakina Ward
-1082,1094,Villa Nova
-1083,323,Feversham
-1084,1096,New Tecumseth
-1085,1097,Midland
-1086,1098,ORILLIA
-1087,718,Ilderton
-1088,352,West Grey
-1089,656,Fenelon Falls
-1090,863,Hunstville
-1091,1103,Woodstock
-1092,365,Glenburnie
-1093,1105,Port Carling 
-1094,987,Bonfield
-1095,1106,Dundas
-1096,405,Tweed
-1097,1017,Warren
-1098,858,Prince Albert
-1099,958,Rockwood
-1100,225,Welland 
-1101,1111,"Lancaster, Ont"
-1102,1112,Elk lake
-1103,1113,M'Chigeeng
-1104,448,Fordwich
-1105,1115,Fort Erie
-1106,1116,Riverdrive Park
-1107,1117,Mountain Grove
-1108,473,"Emsdale, ON"
-1109,1119,Bala
-1110,945,Monetville
-1111,1095,St-Pascal-Baylon
-1112,1121,STRATFORD
-1113,803,Bainsville 
-1114,1123,Denbigh
-1115,1124,Alvinston
-1116,616,Lindsay
-1117,1037,Hillsdale
-1118,1127,Kettleby
-1119,1128,Bradford
-1120,1023,Pointe au Baril
-1121,990,Mono
-1122,566,Barriefield
-1123,1132,Norwood
-1124,576,MT. BRYDGES
-1125,1134,Waubaushene
-1126,377,Utterson
-1127,1136,Sioux Lookout
-1128,1137,Marathon 
-1129,933,Alexandria 
-1130,1139,Powassan
-1131,1140,Belleville
-1132,1141,Port McNicoll
-1133,1142,McGregor
-1134,1143,Severn
-1135,1144,Bond Head
-1136,1145,Mt Forest
-1137,1146,North Augusta
-1138,1147,Cherry Valley
-1139,1148,Stratton
-1140,1149,Mallorytown
-1141,414,Mulmur
-1142,1194,Mount Albert
-1143,500,Baysville
-1144,1152,Scugog
-1145,1153,Simcoe Island
-1146,1155,Beardmore Ward
-1147,455,Pelee Isl. 
-1148,1249,Warsaw
-1149,624,Colgan
-1150,394,Springbrook
-1151,1157,Pakenham
-1152,1158,AMABEL
-1153,1159,New Lowell
-1154,1160,Britt
-1155,1161,Komoka
-1156,1162,Mountain 
-1157,1030,Crysler
-1158,1164,Vermilion Bay
-1159,1165,Whitchurch-Stouffville
-1160,1166,Kanata
-1161,509,SearchmontP6A2K
-1162,1167,Bryanston
-1163,784,SEVERN TOWNSHIP
-1164,1076,Baxter
-1165,1032,Manitouwadge
-1166,1025,Salford
-1167,1172,MT BRYDGES
-1168,1176,Oro
-1169,400,Frankford
-1170,819,Oakwood
-1171,1175,Pelee Isl.
-1172,1050,West Lorne
-1173,730,WHITEFISH
-1174,1177,Hudson
-1175,974,Brooklin
-1176,1179,Owe Sound
-1177,1180,MELBOURNE
-1178,714,Niagara On The Lake
-1179,453,Erinsville
-1180,878,Ruscom Station
-1181,1183,Espanola
-1182,1184,Swastika
-1183,905,Moorefield
-1184,1186,Weston
-1185,1187,Thamesford
-1186,1188,Morpeth
-1187,645,Athens 
-1188,1101,Scotland
-1189,1190,Dunnvile
-1190,1191,Manitowaning
-1191,1192,Sarnia
-1192,467,Dalkeith
-1193,1195,Cornwall
-1194,1196,Tory Hill
-1195,1241,Brodhagen
-1196,1197,Wardsville
-1197,1198,Matheson
-1198,1199,Avonmore
-1199,267,Centralia
-1200,1201,Berwick
-1201,1040,Vienna
-1202,1203,Udora
-1203,503,Omemee
-1204,618,Johnstown
-1205,743,Algoma Mills
-1206,1207,Madoc
-1207,839,Pain Court
-1208,1209,Markstay
-1209,1210,Nakina
-1210,1211,Navan
-1211,1212,Drayton
-1212,1213,Fergus
-1213,1214,Bewdley
-1214,426,Mooretown
-1215,1125,Manotick
-1216,1052,Morewood 
-1217,1077,Melbourne
-1218,1218,Bonnechere Valley
-1219,1219,Georgian Bay
-1220,1068,Maitland
-1221,1221,Collingwood
-1222,1222,Derby
-1223,1223,Minesing
-1224,1224,Sombra
-1225,1225,Greensville
-1226,1226,Treadwell
-1227,632,Attawapiskat
-1228,1228,Baltimore
-1229,1109,Limoges
-1230,1110,Bethany
-1231,1231,Geraldton Ward
-1232,1232,Napanee
-1233,845,Oro Station
-1234,1235,Richards Landing
-1235,846,Connaught
-1236,588,Port Alma
-1237,243,Morson
-1238,1239,Duntroon
-1239,1240,Sunderland
-1240,941,Lanark
-1241,572,Ruthven
-1242,1242,Spanish
-1243,1243,Cardiff
-1244,1244,Red Rock
-1245,991,Harley
-1246,1245,Oakland
-1247,468,Gilmour
-1248,1248,Maple
-1249,1114,Pinewood
+1,3,Alliston
+2,4,Sharbot Lake 
+3,5,LEVACK
+4,6,Metcalfe
+5,7,Picton
+6,8,Ear Falls
+7,9,Coe Hill
+8,10,Colchester Twp
+9,568,Ottawa
+10,11,Plainville
+11,12,Hilliardton
+12,13,Thamesville
+13,14,Toledo
+14,1034,Peterbrough
+15,15,Rossmore
+16,16,Ulswater
+17,17,Shedden
+18,18,Shelburne
+19,19,Porcupine
+20,20,Elmvale
+21,21,Casselman
+22,22,Garson
+23,23,Kerwood
+24,24,Levack
+25,25,Lions Head
+26,26,Welland
+27,246,Boulter
+28,597,Paris
+29,394,Meaford
+30,30,Richmond Hill
+31,352,Nairn Centre
+32,32,Grande Pointe
+33,33,Val Therese
+34,34,COLDWATER
+35,36,ST. MARYS
+36,37,Foymount
+37,40,Waterloo
+38,41,MacTier
+39,42,Dundalk
+40,43,Angus
+41,46,St. Mary's
+42,1057,Sundridge
+43,47,Savant Lake
+44,48,Campbellford
+45,49,Schreiber
+46,50,Kearney
+47,51,Exeter
+48,52,TAVISTOCK
+49,53,Pelee Island
+50,802,Vars
+51,55,Chesley
+52,357,Sydenham
+53,58,Brigden
+54,59,St. Agatha
+55,60,Port Dover
+56,61,Gormley
+57,991,Harrow
+58,62,Bergland
+59,63,Glen Robertson
+60,2,Port McNIcoll
+61,65,Seeley's Bay`
+62,66,Echo Bay
+63,414,Madawaska 
+64,401,Godfrey
+65,70,Windsor
+66,71,Fisherville
+67,72,Wellesley
+68,915,Morganston
+69,73,Longlac
+70,74,Merlin
+71,75,St-Charles
+72,76,COPPER CLIFF
+73,77,Barwick
+74,78,Harrowsmith
+75,79,Prince Township
+76,80,Innisfil
+77,81,Arnprior
+78,82,DOWLING
+79,83,Lakehurst
+80,84,Merrickville
+81,407,Lucknow
+82,85,"Novar, ON"
+83,86,Kakabeka Falls
+84,87,Burlington
+85,88,Shakespeare
+86,89,Barry's bay
+87,405,Flesherton
+88,91,Kakabeka
+89,92,Shining Tree
+90,93,Hilton Beach
+91,94,Grand Valley
+92,234,Port Bolster
+93,808,Thorold
+94,96,Sheffield
+95,97,Hammond
+96,1068,Amherstview
+97,98,Roseville
+98,1122,St Clement
+99,100,Rockland
+100,408,Walkerton
+101,103,Sharbot Lake
+102,609,Dunnville
+103,107,Walsh
+104,108,Tupperville
+105,657,Conestogo
+106,110,Sault Ste. Marie
+107,111,East Gwillumbury
+108,112,Maidstone
+109,113,McKellar
+110,114,East Gwillimbury
+111,115,GARSON
+112,116,Springford
+113,117,Murillo
+114,118,Georgina
+115,954,Etobicoke
+116,119,Geraldton
+117,120,Roseneath
+118,121,Eagle Lake
+119,122,Fraserville
+120,123,Arthur
+121,124,Moonstone
+122,125,Batawa
+123,126,Cargill
+124,127,Chalk River
+125,128,Griffith
+126,129,Kemptville 
+127,131,Borden
+128,132,Baden 
+129,815,Wiarton
+130,134,Tilbury
+131,135,Hallville
+132,136,Zurich
+133,137,Stevensville
+134,138,Earlton
+135,139,Verona
+136,140,Holland Centre
+137,141,Cache Bay
+138,142,KEPPEL
+139,143,Plattsville
+140,144,WAHNAPITAE
+141,615,Wheatley
+142,1149,Oro Medonte
+143,146,Burritt's Rapids
+144,147,Green Valley
+145,148,Orleans
+146,149,Grandbend
+147,616,Clarence Creek
+148,152,Port Colborne
+149,253,St Eugene
+150,154,Conmee
+151,155,Porquis
+152,156,Balmertown
+153,157,South River
+154,158,Canton
+155,159,Richmond
+156,1006,Nilestown
+157,161,Amaranth
+158,162,Cardinal
+159,163,Alberton
+160,164,Crediton
+161,165,Thedford
+162,166,Centreville
+163,167,Combermerre
+164,820,Little Current
+165,1066,Chelsey
+166,170,White River
+167,171,Aurora 
+168,821,Sault Ste Marie
+169,173,Seymour
+170,174,Winchester Springs
+171,1158,Rannoch
+172,175,Tamworth
+173,418,Trout Creek
+174,177,Pembroke 
+175,1019,Carleton Place
+176,1131,Elliot Lake
+177,1070,Kincardine
+178,179,Joyceville
+179,1163,"Williamstown, Ont"
+180,822,St. Thomas 
+181,182,Brighton
+182,183,Sebringville
+183,184,Chatsworth
+184,185,Serpent River
+185,186,Glencoe
+186,187,Ridgeway
+187,188,Vanier
+188,189,Wilkesport
+189,469,Omemee
+190,191,Walford
+191,1013,Selby
+192,1011,Newington
+193,193,Blackstock
+194,194,Innerkip
+195,196,Millhaven
+196,197,Atikokan
+197,198,Millgrove
+198,199,Palgrave
+199,200,Westbrook
+200,527,Pickering
+201,202,Flinton
+202,203,Bruce Mines
+203,918,Waverley
+204,205,Moose Creek
+205,206,Binbrook
+206,207,St. Pauls
+207,208,Sheguiandah
+208,209,Huron Park
+209,240,Goderich
+210,211,Vittoria
+211,1018,Kemptville
+212,212,Bath
+213,213,South Buxton
+214,214,Fournier
+215,215,Bornholm
+216,216,FALCONBRIDGE
+217,217,Onondaga
+218,218,Battersea
+219,425,Brampton
+220,220,Spring Bay
+221,221,kenora
+222,223,Chelmsford
+223,224,Foresters Falls
+224,225,Sharon
+225,226,St. Andrews West
+226,628,Pembroke
+227,1167,St. Davids
+228,230,Fenwick
+229,832,Teeswater
+230,231,Belgrave
+231,232,Hensall
+232,201,Charlton Station
+233,953,Philipsburg
+234,235,Brockville
+235,236,La Salette
+236,243,Hearst
+237,1060,Manotick
+238,238,Jarvis
+239,239,Wallacetown
+240,275,INNERKIP
+241,242,Smooth Rock Ralls
+242,1175,Sandfield
+243,244,Dresden
+244,245,Val Caron
+245,1156,New Liskeard
+246,608,Selkirk
+247,931,Mt. Pleasant
+248,835,HANMER
+249,248,Lynden
+250,313,Clayton
+251,250,Springwater
+252,251,Jordan
+253,252,Marionville
+254,255, Ste-Anne-de-Prescott
+255,1021,Smithville
+256,256,Hanover
+257,257,Tobermory
+258,151,Ullswater
+259,259,Mississauga
+260,260, South Mountain
+261,261,Stirling
+262,262,Paisley
+263,417,Caledon
+264,264,Oshawa
+265,265,Buckhorn
+266,266,St. Eugene
+267,267,St. Williams
+268,268,Londesboro
+269,269,Stoney Creek
+270,270,Egremont
+271,1025,Hornepayne
+272,271,Plevna
+273,611,Waterdown
+274,273,Maxwell
+275,274,Cloyne
+276,276,Holland Landing
+277,279,WhiteChurch
+278,283,Kenilworth
+279,284,Marathon
+280,644,Almonte
+281,286,Mississippi
+282,287,Ennismore
+283,288,Peterborough
+284,289,Fingal
+285,290,Elginburg
+286,291,South Porcupine
+287,293,Wyoming
+288,296,Carrying Place
+289,280,Douro
+290,298,Foots Bay
+291,299,Sturgeon Falls
+292,300,Perth
+293,301,Magnetawan
+294,229,Englehart
+295,690,Kinmount
+296,304,Canfield
+297,305,Inwood
+298,306,Mildmay
+299,307,Ayr
+300,308,Lakeshore
+301,309,Victoria Harbour
+302,649,Killaloe
+303,312,Gooderham
+304,314,Thornloe
+305,315,Avonmore 
+306,316,Delhi
+307,317,Mattawa
+308,318,Port Elgin
+309,319,Corruna
+310,320,North Easthope
+311,321,Whitney
+312,322,Killarney
+313,323,Barry's Bay
+314,190,Gloucester
+315,326,Port Sydney
+316,327,Campbellcroft
+317,328,St. Joachim
+318,329,Petawawa 
+319,1035,West Grey
+320,333,Moira
+321,334,STRATHROY
+322,335,Port Loring
+323,336,CAPREOL
+324,337,Green River
+325,647,Clearview
+326,338,Marmora
+327,339,Merrickville 
+328,340,Rostock
+329,342,Kitchener
+330,343,Dwight
+331,324,Inkerman
+332,345,Gore Bay
+333,853,Beaverton
+334,656,Armstrong
+335,347,Courtright
+336,348,Ignace
+337,349,Midhurst
+338,350,Newton
+339,282,Oxford Mills 
+340,311,Severn Bridge
+341,354,Bancroft
+342,355,Beamsville
+343,356,Port Perry
+344,997,Laurentian Valley
+345,358,Pickle Lake
+346,359,Brucefield
+347,1008,Sweaburg
+348,854,Fort Frances
+349,35,Cardinal 
+350,69,Portland 
+351,364,Grimsby
+352,365,Bright's Grove
+353,366,Kapuskasing
+354,803,Allanburg
+355,367,Ramore
+356,368,AZILDA
+357,369,Cavan
+358,371,Blue Mountains
+359,372,Tay
+360,373,Damascus
+361,374,Chesterville
+362,375,LIVELY
+363,106,Port Burwell
+364,377,Burford
+365,378,Wooler
+366,1042,Scarborough
+367,380,Lakefield
+368,859,Virginiatown
+369,526,Corunna
+370,383,Shannonville
+371,384,Dorchester
+372,385,Claremont
+373,386,Welcome
+374,387,Otterville
+375,204,Young's Point
+376,389,Keewatin
+377,390,Alban
+378,391,Wolfe Island
+379,392,Orillia
+380,393,Wingham
+381,64,Port Carling
+382,31,Hillier
+383,397,Campbellville
+384,398,Haileybury
+385,399,Chatham
+386,68,Bloomingdale
+387,402,Haley Station
+388,90,Kleinburg
+389,95,Emeryville
+390,101,Verner
+391,409,St Cathariness
+392,410,Castleton
+393,667,Moosonee
+394,412,Caistor Centre
+395,130,Walters Falls
+396,682,Bourget
+397,668,Fullarton
+398,537,Monkton
+399,363,Courtice 
+400,176,Crystal Falls
+401,419,Maxville
+402,420,Cambridge
+403,421,Clinton
+404,423,Parkhill
+405,45,Gratton
+406,219,Orangeville
+407,458,Oxford Mills
+408,637,Hepworth
+409,237,Hagersville
+410,241,Erin
+411,1002,KirkField
+412,429,Foldens
+413,430,Brantford
+414,1020,Dorion
+415,432,L'Original
+416,1134,Milton
+417,434,Clifford
+418,885,Coniston
+419,436,Washago
+420,438,Ontario
+421,439,Douro-Dummer
+422,1085,Consecon
+423,688,Monkland
+424,443,Wasaga Beach
+425,445,Lucan
+426,446,Granton
+427,447,Longlac Ward
+428,464,Fonthill
+429,449,Waterford
+430,981,Ridgeville
+431,450,Gowanstown
+432,1055,Perth Road
+433,451,Newbury
+434,452,Smiths Falls
+435,382,Bothwell
+436,455,Cochenour
+437,456,Amherst Island
+438,457,Winchester
+439,426,Meadowvale
+440,459,Bailieboro
+441,460,Azilda
+442,461,Lombardy 
+443,462,Barrhaven
+444,463,Foleyet
+445,448,Bluevale
+446,465,Sutton West
+447,466,Barrie
+448,468,Glen Morris
+449,470,Hanmer
+450,471,White Lake
+451,472,Laird Township
+452,473,Sauble Beach
+453,474,Hawkesville
+454,180,Havelock
+455,476,Markham
+456,477,Embrun
+457,169,St Thomas
+458,479,Vineland
+459,683,Missanabie
+460,192,Shanty Bay
+461,876,halton hills
+462,331,McDonalds Corner
+463,484,Haliburton
+464,877,Port Stanley
+465,486,Dutton
+466,487,Burk's Falls
+467,488,Enterprise
+468,489,Stouffville
+469,490,RR3 Dunville
+470,685,Winchester 
+471,492,Bolton
+472,494,Phelpston
+473,495,Hastings
+474,442,Bayfield
+475,498,Gores Landing
+476,499,Copper Cliff
+477,500,Plantagenet
+478,501,Concord
+479,502,L'Orignal
+480,1061,Comber
+481,294,Ingleside 
+482,505,Gogama
+483,506,Auburn
+484,507,Gorrie
+485,509,Lively
+486,510,Thessalon
+487,105,Chesterville 
+488,512,Mattice
+489,513,Gravenhurst
+490,1145,Wellington
+491,880,Stoney Point
+492,515,Brudenell
+493,404,Thornhill
+494,424,St. Clair Beach
+495,517,Kingsville
+496,518,Floradale
+497,519,Limehouse
+498,520,Lavigne
+499,1064,Sutton
+500,521,Seaforth
+501,522,Parham
+502,523,Beardmore
+503,524,Douglas
+504,525,Wyevale
+505,454,Capreol
+506,475,SearchmontP6A2K
+507,528,Collins
+508,529,Westport
+509,0,St. Jacobs
+510,532,Demorestville
+511,533,windsor
+512,534,Torrance
+513,39,Odessa
+514,536,Maryhill
+515,922,Niagara on the Lake
+516,511,Baden
+517,478,Sleeman
+518,539,Alton
+519,540,Cayuga
+520,541,Linwood
+521,542,Grafton
+522,543,Seeleys Bay
+523,544,Stroud
+524,545,O'Connor Township
+525,547,Long Sault 
+526,548,Rockton
+527,395,Quinte West
+528,550,Moose Factory
+529,551,Coleman Township
+530,552,Amherstburg
+531,553,North Easthop
+532,195,Downsview
+533,556,Caledonia
+534,481,Kirkland Lake
+535,557,Brights Grove
+536,558,"Burk's Falls, Ontario"
+537,696,St. Marys
+538,990,VAL THERESE
+539,561,Port Hope
+540,562,Ingleside
+541,563,Selwyn Township
+542,564,Newtonville
+543,888,Uxbridge
+544,566,Coboconck
+545,567,Nobleton
+546,483,Atwood
+547,569,Bowmanville
+548,570,Lefroy
+549,571,Prescott
+550,572,Inverary
+551,573,Freelton
+552,254,Charlton
+553,575,Trenton
+554,700,Millbrook
+555,577,Deep River
+556,578,Erieau
+557,579,Komoka
+558,580,Goulais River
+559,581,Kingston
+560,1074,Belleville
+561,1065,Hawkestone
+562,584,River Canard
+563,585,Elmira
+564,587,Ivanhoe
+565,648,Opasatika
+566,1101,Woodslee
+567,588,Milford Bay
+568,589,Attawapiskat
+569,591,Ompah
+570,592,Breslau
+571,453,BEAVER LAKE
+572,594,Tichborne
+573,595,Conesotogo
+574,596,Rosseau
+575,28,Union
+576,598,Tara
+577,599,Maple Leaf
+578,600,Stayner
+579,601,Drumbo
+580,933,Saint-Bernardin
+581,1043,Braeside
+582,603,Campden
+583,604,Emsdale
+584,893,St-Isidore-de-Prescott
+585,606,Fauquier
+586,607,La Salle
+587,99,Chamberlain
+588,104,Formosa
+589,610,SEVERN BRIDGE
+590,56,Woodview
+591,1119,VAL CARON
+592,612,Stittsville
+593,614,Rutherglen
+594,145,Fairground
+595,150,St. Ann's
+596,617,Escott
+597,618,Maynooth
+598,619,Penetanguishene
+599,620,York
+600,621,Neustadt
+601,622,Whitby
+602,623,Hamilton
+603,222,Keswick
+604,708,Iroquois Falls
+605,627,Carrick
+606,228,Belle River
+607,629,Brougham
+608,630,Selwyn
+609,631,Beachville
+610,632,King City
+611,633,Ayton
+612,634,Glen Orchard
+613,679,Southampton
+614,635,Straffordville
+615,636,Dublin
+616,263,Oakville
+617,638,Dryden
+618,639,Jackson's Point
+619,640,Stella
+620,642,Webbwood
+621,643,Gorham
+622,285,Nipissing
+623,645,Noelville
+624,297,Wroxeter
+625,555,Woodville
+626,278,Camlachie
+627,310,Rodney
+628,650,Niagara Falls
+629,651,Cookstown
+630,325,CHELMSFORD
+631,653,Wellington North
+632,654,Cumberland Beach
+633,655,Queensville
+634,1072,Craigleith
+635,346,Brgden
+636,658,Redbridge
+637,659,Thunder Bay
+638,660,LaSalle
+639,662,Hawkesbury
+640,663,Bright
+641,946,Durham
+642,664,Wawa
+643,665,Belle Valleé
+644,666,Bradshaw
+645,411,North Buxton
+646,646,Holstein
+647,669,Pointe-aux-Roches
+648,670,WIARTON
+649,671,Deseronto
+650,295,Kintore
+651,673,Wainfleet
+652,67,Seeley's Bay
+653,713,Niagara-on-the-Lake
+654,676,Pelham
+655,677,Dashwood
+656,678,Apsley
+657,437,Ansnorveldt
+658,680,Whitevale
+659,681,Hartington
+660,302,Warwick
+661,480,Ramara
+662,684,Dowling
+663,491,Glen Alda
+664,292,ALBEMARLE
+665,687,Williamstown
+666,689,Arkona
+667,691,Petawawa
+668,692,Chapleau
+669,693,Evansville
+670,695,SUDBURY
+671,559,Ft Albany
+672,697,Tavistock
+673,698,Vanastra
+674,593,Haliburton 
+675,652,Sudbury
+676,701,Bridgenorth
+677,702,Mt. Elgin
+678,703,Aurora
+679,717,Georgian Bluffs
+680,704,North York
+681,705,Grand Bend
+682,706,Nestor Falls
+683,707,Hillsburgh
+684,1095,Melancthon
+685,626,Caistorville
+686,1089,Tiverton
+687,709,Flamborough
+688,710,Fenlon Falls
+689,711,Leamington
+690,712,Minden
+691,675,Renfrew ON
+692,277,King
+693,715,South Mountain 
+694,716,Horneypayne
+695,403,Addison
+696,718,Spencerville
+697,719,Little Britian
+698,720,Warminster
+699,721,Nowich
+700,722,River Valley
+701,723,Battersea 
+702,724,Loretto
+703,725,Cochrane
+704,726,Kenora
+705,727,Lasalle
+706,728,McDougall
+707,729,Burnstown
+708,731,Halton Hills
+709,732,Ethel
+710,734,Nottawa
+711,1026,Mount Forest
+712,1099,Florence
+713,736,Curran
+714,1159,Wilfrid
+715,737,Westmeath
+716,738,Ballinafad
+717,739,Priceville
+718,740,Owen Sound
+719,741,Manilla
+720,742,Stratford
+721,743,Temagami
+722,744,Caistor 
+723,516,St-Pascal
+724,746,Langton
+725,747,Carlisle
+726,748,Lefaivre
+727,749,Tillsonburg
+728,750,Ardoch
+729,435,Staffa
+730,999,Oil City
+731,753,Delaware
+732,754,Nobel
+733,755,NAUGHTON
+734,272,New Hamburg
+735,757,Harwood
+736,758,Algonquin Highlands
+737,1103,Smooth Rock Falls
+738,759,Devlin
+739,1129,Athens
+740,760,Cobden
+741,761,Highgate
+742,762,St. Clements
+743,763,Golden Lake
+744,531,Carp
+745,1104,Point Edward
+746,766,Renfrew
+747,767,Vankleek Hill
+748,1144,Shuniah
+749,768,Winona
+750,769,Ajax
+751,770,Mansfield
+752,771,Beeton
+753,772,Highland Grove
+754,919,Foxboro
+755,773,Simcoe
+756,774,Schomberg
+757,775,Cobourg
+758,776,Oil Springs
+759,777,Toronto
+760,109,Bradford West Gwillimbury
+761,779,Astorville
+762,1010,Kicardine
+763,780,St. Thomas
+764,781,Princeton
+765,782,Blind River
+766,783,Cannington
+767,784,Emo
+768,360,Burgessville
+769,786,Ameliasburgh
+770,787,Ancaster
+771,788,Thorne
+772,789,Wallaceburg
+773,790,Whitefish
+774,583,Talbotville
+775,44,Hickson
+776,793,Callandar
+777,794,Bracebridge
+778,795,Port Coborne
+779,1162,Admaston
+780,796,East Garafraxa
+781,797,ST. Catharines
+782,798,Milverton
+783,799,Elgin
+784,730,Dorset
+785,801,Mornington
+786,54,Mt. Brydges
+787,496,Field
+788,433,Guelph/Eramosa
+789,733,Egbert
+790,806,Cobalt
+791,807,Northbrook
+792,661,Clarington
+793,503,Enniskillen
+794,102,Salem
+795,811,Snow Road
+796,812,St. George
+797,813,Palmer Rapids
+798,814,Minett
+799,133,Round Lake
+800,416,Round Lake Centre
+801,586,West Lincoln
+802,818,Lanark 
+803,819,Elora
+804,168,Ailsa Craig
+805,172,Ravenna
+806,1176,Everett
+807,800,Brussels
+808,1112,Wyebridge
+809,824,Nepean
+810,825,Clarksburg
+811,826,Harriston
+812,827,Morrisburg
+813,828,Shallow Lake
+814,829,Cottam
+815,830,CONISTON
+816,831,Long Saul
+817,444,Centreton
+818,38,Williamsford
+819,247,Heidelberg
+820,836,Denfield
+821,837,Brinston
+822,838,Georgetown
+823,839,Kagawong
+824,840,Norwich
+825,841,Huntsville
+826,842,Greenbank
+827,843,Vernonville
+828,844,Mount Hope
+829,845,Warkworth
+830,778,Providence Bay
+831,846,Ardbeg
+832,1115,Springfield
+833,848,Cobourg Ontario
+834,849,Strathroy
+835,851,Watford
+836,852,Eganville
+837,546,Avening
+838,870,Pefferlaw
+839,361,Kimberley
+840,855,Niagara-On-The-Lake
+841,856,Pt. Edward
+842,27,Brechin
+843,858,Elk Lake
+844,381,Alma
+845,860,Calabogie
+846,861,Dubreuilville
+847,497,Goodwood
+848,1039,South Bruce
+849,863,Nipigon
+850,864,Blyth
+851,431,Camborne
+852,866,Embro
+853,867,Courtland
+854,868,Quadeville
+855,869,BelleRiver
+856,857,Ingersoll
+857,871,Callander
+858,872,Mitchell
+859,873,North Dumfries
+860,874,Markdale
+861,482,Hampton
+862,396,Collingwood 
+863,878,Beachburg
+864,879,Val Rita
+865,514,Woodbridge
+866,625,Coldwater
+867,881,Port Franks
+868,882,Zorra
+869,810,Unionville
+870,884,Frankville
+871,549,Port Alma
+872,886,East York
+873,565,McDonalds Corners
+874,805,St Charles
+875,890,Courtice
+876,891,Vaughan
+877,892,Red Lake
+878,605,Hardwood Lake
+879,894,Russell
+880,895,Tecumseh
+881,896,Harlowe
+882,897,Arva
+883,898,Beardmore Ward
+884,694,Williamsburg
+885,900,Jellicoe Rural
+886,901,Virginia
+887,902,Ballantrae
+888,865,Temiskaming Shores
+889,904,St.-Charles
+890,905,Honey Harbour
+891,906,Thornbury
+892,907,North Lancaster
+893,258,Dunchurch
+894,909,Milford
+895,910,Mindemoya
+896,911,Timmins
+897,912,Lion's Head
+898,153,Ajax 
+899,752,Yarker
+900,937,Listowel
+901,917,Essa
+902,817,Massey
+903,903,Creemore
+904,920,Marysville
+905,921,Newcastle
+906,1137,Rosemont
+907,344,Corbyville
+908,923,Thornton
+909,924,Greenwood
+910,508,Sunnidale Corners
+911,641,Bobcaygeon
+912,927,Singhampton
+913,928,Lk. St. Peter
+914,1094,Mountain 
+915,560,Sioux Narrows
+916,714,BLEZARD VALLEY
+917,1165,Dymond
+918,281,Madawaska
+919,862,Keene
+920,939,Alexandria
+921,889,Anten Mills
+922,554,Whitchurch-Stouffville
+923,935,Varna
+924,936,Dunedin
+925,916,Appin
+926,938,Terra Cotta
+927,932,Wilberforce
+928,940,Guelph
+929,941,Iron Bridge
+930,942,Belmont
+931,943,Bloomfield
+932,493,Kemble
+933,945,Troy
+934,178,Garden Hill
+935,947,London
+936,948,Long Sault
+937,949,Saugeen Shores
+938,950,Lyn
+939,951,Desboro
+940,952,Elmwood
+941,428,North Bay
+942,485,"Kemptville, ON"
+943,756,Forest
+944,956,Petrolia
+945,957,Lafontaine
+946,958,Orono
+947,959,Colchester N Twp
+948,960,McKerrow
+949,1108,St-Albert
+950,351,Newburgh
+951,962,Moonbeam
+952,964,Val Gagne
+953,672,Thorndale
+954,965,Tiny
+955,966,Blenheim
+956,967,Acton
+957,834,St-Isidore
+958,944,Teeterville
+959,970,Alfred
+960,971,Finch
+961,972,McArthurs Mills
+962,973,Westport 
+963,975,Ridgetown
+964,415,Fort Stewart
+965,977,Palmerston
+966,978,Lyndhurst
+967,979,Brentwood
+968,980,Caramat Rural
+969,504,Holtyre
+970,982,Zephyr
+971,983,Upsala
+972,984,Terrace Bay
+973,1135,Gananoque
+974,29,Newmarket
+975,986,Colborne 
+976,925,Crystal Beach
+977,988,Toronto ON
+978,989,Desbarats
+979,57,Brockton
+980,816,"568, rue Lessard"
+981,992,Port Lambton
+982,993,Port Severn
+983,994,Belle Vallee
+984,995,Eden
+985,996,Paincourt
+986,998,Sandfort
+987,590,Mine Centre
+988,1000,Parry Sound
+989,1001,Sprucedale
+990,833,Utopia
+991,1003,Ripley
+992,1037,Lambeth
+993,1005,ONAPING
+994,160,Aylmer
+995,1007,New Dundee
+996,413,Combermere
+997,1009,Brownsville
+998,181,Township of Hamilton
+999,745,Maberly
+1000,1146,Wendover
+1001,406,Longford Mills
+1002,1014,Windermere
+1003,1015,Strickland
+1004,1016,Mactier
+1005,1084,Lansdowne
+1006,1017,SKEAD
+1007,908,Huron East
+1008,233,Essex
+1009,362,Chute-à-Blondeau
+1010,624,Port Rowan
+1011,1022,St Catharines
+1012,1023,Cameron
+1013,1024,St. Catharines
+1014,332,WASHAGO
+1015,764,Rainy River
+1016,1027,Morrisburg 
+1017,1028,Nakina Ward
+1018,1029,Villa Nova
+1019,303,Feversham
+1020,1031,New Tecumseth
+1021,1032,Midland
+1022,1033,ORILLIA
+1023,674,Ilderton
+1024,330,Corbeil
+1025,613,Fenelon Falls
+1026,809,Hunstville
+1027,1038,Woodstock
+1028,341,Glenburnie
+1029,1040,Port Carling 
+1030,926,Bonfield
+1031,1041,Dundas
+1032,379,Tweed
+1033,955,Warren
+1034,804,Prince Albert
+1035,899,Rockwood
+1036,210,Welland 
+1037,1046,"Lancaster, Ont"
+1038,1047,Elk lake
+1039,1048,M'Chigeeng
+1040,422,Fordwich
+1041,1050,Fort Erie
+1042,1051,Riverdrive Park
+1043,1052,Mountain Grove
+1044,1053,"Emsdale, ON"
+1045,1054,Bala
+1046,887,Monetville
+1047,1030,St-Pascal-Baylon
+1048,1056,STRATFORD
+1049,1157,Baltimore
+1050,751,Bainsville 
+1051,1058,Denbigh
+1052,1059,Alvinston
+1053,574,Lindsay
+1054,974,Hillsdale
+1055,1062,Kettleby
+1056,1063,Bradford
+1057,961,Pointe au Baril
+1058,929,Mono
+1059,530,Barriefield
+1060,1067,Norwood
+1061,538,MT. BRYDGES
+1062,1069,Waubaushene
+1063,353,Utterson
+1064,1071,Sioux Lookout
+1065,875,Alexandria 
+1066,1073,Powassan
+1067,582,HICKSON
+1068,1075,Port McNicoll
+1069,1076,McGregor
+1070,1077,Severn
+1071,1078,Bond Head
+1072,1079,Mt Forest
+1073,1080,North Augusta
+1074,1081,Cherry Valley
+1075,1082,Stratton
+1076,1083,Mallorytown
+1077,388,Mulmur
+1078,1123,Mount Albert
+1079,467,Baysville
+1080,1086,Scugog
+1081,1087,Simcoe Island
+1082,1088,Wilno
+1083,1178,Warsaw
+1084,370,Springbrook
+1085,1090,Pakenham
+1086,1091,AMABEL
+1087,1092,New Lowell
+1088,1093,Britt
+1089,934,Schumacher
+1090,968,Crysler
+1091,1096,Vermilion Bay
+1092,1097,Kanata
+1093,1098,Bryanston
+1094,735,SEVERN TOWNSHIP
+1095,1100,Arden
+1096,969,Manitouwadge
+1097,963,Salford
+1098,1102,MT BRYDGES
+1099,1106,Oro
+1100,376,Frankford
+1101,765,Oakwood
+1102,1105,Pelee Isl.
+1103,985,West Lorne
+1104,686,WHITEFISH
+1105,1107,Hudson
+1106,914,Brooklin
+1107,1109,Owe Sound
+1108,1110,MELBOURNE
+1109,1111,Virgil
+1110,427,Erinsville
+1111,823,Ruscom Station
+1112,1113,Espanola
+1113,1114,Swastika
+1114,847,Moorefield
+1115,1116,Weston
+1116,1117,Thamesford
+1117,1118,Morpeth
+1118,602,Athens 
+1119,1036,Scotland
+1120,1120,Manitowaning
+1121,1121,Sarnia
+1122,440,Dalkeith
+1123,1124,Cornwall
+1124,1125,Tory Hill
+1125,1170,Brodhagen
+1126,1126,Wardsville
+1127,1127,Matheson
+1128,1128,Avonmore
+1129,249,Centralia
+1130,1130,Berwick
+1131,976,Vienna
+1132,1132,Udora
+1133,1133,Tottenham
+1134,576,Johnstown
+1135,699,Algoma Mills
+1136,1136,Madoc
+1137,785,Pain Court
+1138,1138,Markstay
+1139,1139,Nakina
+1140,1140,Navan
+1141,1141,Drayton
+1142,1142,Fergus
+1143,1143,Bewdley
+1144,400,Mooretown
+1145,987,Morewood 
+1146,1012,Melbourne
+1147,1147,Bonnechere Valley
+1148,1148,Georgian Bay
+1149,1004,Maitland
+1150,1150,Collingwood
+1151,1151,Derby
+1152,1152,Minesing
+1153,1153,Sombra
+1154,1154,Greensville
+1155,1155,Treadwell
+1156,913,Iroquois
+1157,850,Howe Island
+1158,1044,Limoges
+1159,1045,Bethany
+1160,1160,Geraldton Ward
+1161,1161,Napanee
+1162,791,Oro Station
+1163,1164,Richards Landing
+1164,792,Connaught
+1165,1166,St Clements
+1166,227,Morson
+1167,1168,Duntroon
+1168,1169,Sunderland
+1169,883,Lanark
+1170,535,Ruthven
+1171,1171,Spanish
+1172,1172,Cardiff
+1173,1173,Red Rock
+1174,930,Harley
+1175,1174,Oakland
+1176,441,Gilmour
+1177,1177,Maple
+1178,1049,Pinewood

@@ -70,7 +70,7 @@ queue()
     .defer(d3.csv, data_path + "dim_city.csv")
     .defer(d3.csv, data_path + "dim_organization.csv")
     .defer(d3.csv, data_path + "dim_operation_type.csv")
-    .defer(d3.csv, data_path + "master_short.csv")
+    .defer(d3.csv, data_path + "master_final.csv")
     .await(ready);
 
 function ready(error, DimCity, DimOrganization, DimOperationType, Master) {
